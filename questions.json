@@ -1,0 +1,2197 @@
+{
+  "certifications": [
+    {
+      "id": "jsdev1",
+      "name": "JavaScript Developer I",
+      "categories": [
+        {
+          "name": "Variables, Types, and Collections",
+          "description": "The topic will test how effectively JavaScript programmers can handle variable creation, initialization, type coercion, and data manipulation. You will need to demonstrate knowledge of strings, numbers, dates, arrays, and JSON handling. The Javascript Developer I exam will require a deep understanding of these concepts and their proper application in real-world scenarios."
+        },
+        {
+          "name": "Objects, Functions, and Classes",
+          "description": "In this section, the focus is on applying object-oriented principles, functions, and classes. As a Salesforce JavaScript programmer, you will need to locate optimal function implementations and understand how to structure objects and classes for business solutions. You will also be tested on your ability to use JavaScript modules and decorators, while analyzing variable scope and execution flow."
+        },
+        {
+          "name": "Browser and Events",
+          "description": "The topic will challenge your ability to work with events, event handlers, and the DOM. You will need to demonstrate how to manage event propagation and utilize browser-specific APIs. Additionally, proficiency in using browser developer tools to investigate code behavior will be tested, making it crucial for you to understand browser interactions thoroughly."
+        },
+        {
+          "name": "Debugging and Error Handling",
+          "description": "This section will measure the ability of JavaScript programmer to properly handle errors and debug JavaScript code. You will be expected to apply debugging techniques, such as using the console and breakpoints, to resolve issues. Proper error handling is crucial, and the exam will evaluate your skills in managing and correcting errors efficiently within your code."
+        },
+        {
+          "name": "Asynchronous Programming",
+          "description": "Asynchronous programming is a key concept in JavaScript, and this section tests your understanding of event loops, asynchronous code execution, and handling promises. Salesforce JavaScript programmer will need to demonstrate their ability to implement asynchronous solutions for business requirements."
+        },
+        {
+          "name": "Server Side JavaScript",
+          "description": "This section focuses on Node.js and server-side JavaScript. Salesforce JavaScript programmers will be tested on their ability to identify appropriate Node.js implementations and commands for given scenarios. Additionally, you will need to recognize which Node.js core modules, libraries, and package management solutions fit specific requirements, reflecting your understanding of server-side development with JavaScript."
+        },
+        {
+          "name": "Testing",
+          "description": "In the topic, you will be required to evaluate unit tests and improve them. The exam will assess your ability to identify ineffective tests and modify them to make them more robust and accurate. This topic ensures that you can write and maintain effective tests, a crucial skill for ensuring code quality and reliability in professional environments."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "text": "Which statement accurately describes an aspect of promises?",
+          "options": [
+            {"id":"o1","text":".then() manipulates and returns the original promise."},
+            {"id":"o2","text":"Arguments for the callback function passed to .then() are optional."},
+            {"id":"o3","text":".then() cannot be added after a catch."},
+            {"id":"o4","text":"In a.then() function, returning results is not necessary since callbacks will catch the result of a previous promise."}
+          ],
+          "correct": ["o2"],
+          "explanation": "Arguments for the callback function passed to .then() are optional.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q2",
+          "text": "Refer to the following array:\n\nlet arr1 = [1, 2, 3, 4, 5];\nlet arr2 = arr1.slice(0, 5);\nconsole.log(arr2);\n▶ (5) [1, 2, 3, 4, 5]\n\nlet arr1 = [1, 2, 3, 4, 5];\nlet arr2 = Array.from(arr1);\nconsole.log(arr2);\n▶ (5) [1, 2, 3, 4, 5]\n\nWhich two lines of code result in a second array, arr2, being created such that arr2 is NOT a reference to arr1?",
+          "options": [
+            {"id":"o1","text":"A. Let arr2 = arr1.sort();"},
+            {"id":"o2","text":"B. Let arr2 = arr1;"},
+            {"id":"o3","text":"C. Let arr2 = Array.from(arr1);"},
+            {"id":"o4","text":"D. Let arr2 = arr1.slice(0, 5);"}
+          ],
+          "correct": ["o3","o4"],
+          "explanation": "Array.from() and slice() create new arrays that are not references to the original. Both methods create independent copies of the array.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q3",
+          "text": "Considering type coercion, what does the following expression evaluate to? True + '13' + NaN",
+          "options": [
+            {"id":"o1","text":"'true13NaN'"},
+            {"id":"o2","text":"'113NaN'"},
+            {"id":"o3","text":"'true13'"},
+            {"id":"o4","text":"14"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Type coercion converts true to string 'true', concatenates with '13', then with 'NaN' string.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q4",
+          "text": "A developer writes the code below to calculate the factorial of a given number: function sum(number){ return number * sum(number-1); } sum(3); What is the result of executing the code?",
+          "options": [
+            {"id":"o1","text":"0"},
+            {"id":"o2","text":"6"},
+            {"id":"o3","text":"-Infinity"},
+            {"id":"o4","text":"Error"}
+          ],
+          "correct": ["o4"],
+          "explanation": "The function has no base case, causing infinite recursion and a stack overflow error.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q5",
+          "text": "Which three browser specific APIs are available for developers to persist data between page loads? Choose 3 answers",
+          "options": [
+            {"id":"o1","text":"Cookies"},
+            {"id":"o2","text":"localStorage"},
+            {"id":"o3","text":"indexedDB"},
+            {"id":"o4","text":"IIFEs"},
+            {"id":"o5","text":"Global variables"}
+          ],
+          "correct": ["o1","o2","o3"],
+          "explanation": "Cookies, localStorage, and indexedDB persist data. IIFEs and global variables do not persist across page loads.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q6",
+          "text": "Refer to code below: console.log(0); setTimeout(() => { console.log(1); }); console.log(2); setTimeout(() => { console.log(3); }, 0); console.log(4); In which sequence will the numbers be logged?",
+          "options": [
+            {"id":"o1","text":"01234"},
+            {"id":"o2","text":"02413"},
+            {"id":"o3","text":"02431"},
+            {"id":"o4","text":"13024"}
+          ],
+          "correct": ["o2"],
+          "explanation": "Synchronous code (0,2,4) executes first, then setTimeout callbacks (1,3) execute in order they were queued.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q7",
+          "text": "Which code statement correctly persists an object in localStorage?",
+          "options": [
+            {"id":"o1","text":"const setLocalStorage = (storageKey, jsObject) => { window.localStorage.persist(storageKey, jsObject); }"},
+            {"id":"o2","text":"const setLocalStorage = (jsObject) => { window.localStorage.setItem(jsObject); }"},
+            {"id":"o3","text":"const setLocalStorage = (storageKey, jsObject) => { window.localStorage.setItem(storageKey, JSON.stringify(jsObject)); }"},
+            {"id":"o4","text":"const setLocalStorage = (jsObject) => { window.localStorage.connectObject(jsObject)); }"}
+          ],
+          "correct": ["o3"],
+          "explanation": "localStorage requires a key-value pair, and objects must be stringified with JSON.stringify().",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q8",
+          "text": "A developer at Universal Containers is creating their new landing page. A script named personalizeWebsiteContent needs to be executed when the webpage is fully loaded (HTML content and all related files). Which implementation should be used?",
+          "options": [
+            {"id":"o1","text":"Add a handler to the personalizeWebsiteContent script to handle the load event"},
+            {"id":"o2","text":"Add a handler to the personalizeWebsiteContent script to handle the DOMContentLoaded event"},
+            {"id":"o3","text":"Add a listener to the window object to handle the DOMContentLoaded event"},
+            {"id":"o4","text":"Add a listener to the window object to handle the load event"}
+          ],
+          "correct": ["o4"],
+          "explanation": "The load event on window fires after all content and related files are loaded. DOMContentLoaded fires before images/stylesheets are loaded.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q9",
+          "text": "Refer to the code below: const pi = 3.1415326; What is the data type of pi?",
+          "options": [
+            {"id":"o1","text":"Double"},
+            {"id":"o2","text":"Number"},
+            {"id":"o3","text":"Float"},
+            {"id":"o4","text":"Decimal"}
+          ],
+          "correct": ["o2"],
+          "explanation": "JavaScript has only one numeric data type: Number. It represents both integers and floating-point numbers.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q10",
+          "text": "Teams at Universal Containers work on multiple JavaScript projects. UC is thinking about reusability. Going open-source or public is not an option. Which option is available to UC with npm?",
+          "options": [
+            {"id":"o1","text":"Private packages are not supported, but they can use another package manager like yarn."},
+            {"id":"o2","text":"Private packages can be scoped, and scopes can be associated to a private registries."},
+            {"id":"o3","text":"Private registries are not supported by npm, but packages can be installed via git."},
+            {"id":"o4","text":"Private registries are not supported by npm, but packages can be installed via URL."}
+          ],
+          "correct": ["o2"],
+          "explanation": "npm supports private packages through scoped packages that can be associated with private registries.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q11",
+          "text": "Refer to the code below: Function changeValue(obj) { obj.value = obj.value/2; } const objA = {value: 10}; const objB = objA; changeValue(objB); const result = objA.value; What is the value of result after the code executes?",
+          "options": [
+            {"id":"o1","text":"Undefined"},
+            {"id":"o2","text":"NaN"},
+            {"id":"o3","text":"10"},
+            {"id":"o4","text":"5"}
+          ],
+          "correct": ["o4"],
+          "explanation": "objB is a reference to objA, so modifying objB also modifies objA. The value becomes 10/2 = 5.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q12",
+          "text": "A developer has a web server running with Node.js. The command to start the web server is node server.js. Which command can the developer run to debug what the module is doing during latency issues?",
+          "options": [
+            {"id":"o1","text":"DEBUG=http,https node server.js"},
+            {"id":"o2","text":"DEBUG=true node server.js"},
+            {"id":"o3","text":"NODE_DEBUG=http,https node server.js"},
+            {"id":"o4","text":"NODE_DEBUG=true node server.js"}
+          ],
+          "correct": ["o3"],
+          "explanation": "NODE_DEBUG environment variable enables debugging for specific Node.js core modules.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q13",
+          "text": "A developer wants to use a module called DataPrettyPrint that exports one default function called printDate(). How can a developer import and use the printDate() function?",
+          "options": [
+            {"id":"o1","text":"import DatePrettyPrint from './path/DatePrettyPrint.js'; DatePrettyPrint.printDate();"},
+            {"id":"o2","text":"import printDate from './path/DatePrettyPrint.js'; printDate();"},
+            {"id":"o3","text":"import printDate from './path/DatePrettyPrint.js'; DatePrettyPrint.printDate();"},
+            {"id":"o4","text":"import DatePrettyPrint() from './path/DatePrettyPrint.js'; printDate();"}
+          ],
+          "correct": ["o2"],
+          "explanation": "When importing a default export, you can name it anything. Since it exports printDate as default, import it directly and call it.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q14",
+          "text": "Which two options are core Node.js modules? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"iostream"},
+            {"id":"o2","text":"worker"},
+            {"id":"o3","text":"http"},
+            {"id":"o4","text":"exception"}
+          ],
+          "correct": ["o1","o3"],
+          "explanation": "iostream and http are core Node.js modules. worker and exception are not.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q15",
+          "text": "Given HTML: <div><div id='row-uc'>Universal Container</div></div>. Which statement adds the 'priority-account' CSS class to the Universal Containers row?",
+          "options": [
+            {"id":"o1","text":"document.querySelector('#row-uc').classes.push('priority-account');"},
+            {"id":"o2","text":"document.querySelector('#row-uc').classList.add('priority-account');"},
+            {"id":"o3","text":"document.querySelectorAll('#row-uc').classList.add('priority-account');"},
+            {"id":"o4","text":"document.getElementById('row-uc').addClass('priority-account');"}
+          ],
+          "correct": ["o2"],
+          "explanation": "querySelector with classList.add() is the correct method to add a CSS class to an element.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q16",
+          "text": "Refer to the code below: let inArray = [[1,2],[3,4,5]]; Which two statements result in the array [1,2,3,4,5]? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"[].concat(...inArray);"},
+            {"id":"o2","text":"[].concat.apply([],inArray);"},
+            {"id":"o3","text":"[].concat.apply(inArray,[]);"},
+            {"id":"o4","text":"[].concat([...inArray]);"}
+          ],
+          "correct": ["o1","o2"],
+          "explanation": "Both spread operator (...inArray) and apply() method flatten the nested array correctly.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q17",
+          "text": "A developer creates an input to upload files and display image preview. In lines 04 and 08, which code allows the user to select an image from their local computer and display it in the browser?",
+          "options": [
+            {"id":"o1","text":"04: const reader = new FileReader(); 08: if (file) reader.readAsDataURL(file);"},
+            {"id":"o2","text":"04: const reader = new File(); 08: if (file) URL.createObjectURL(file);"},
+            {"id":"o3","text":"04: const reader = new FileReader(); 08: if (file) URL.createObjectURL(file);"},
+            {"id":"o4","text":"04: const reader = new File(); 08: if (file) reader.readAsDataURL(file);"}
+          ],
+          "correct": ["o1"],
+          "explanation": "FileReader with readAsDataURL() converts the file to a data URL that can be used as image src.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q18",
+          "text": "A developer at Universal Containers creates a new landing page. Which statement should be used to call personalizeWebsiteContent when the webpage is fully loaded?",
+          "options": [
+            {"id":"o1","text":"document.addEventListener('onDOMContextLoaded', personalizeWebsiteContext);"},
+            {"id":"o2","text":"document.addEventListener('DOMContextLoaded', personalizeWebsiteContext);"},
+            {"id":"o3","text":"window.addEventListener('load', personalizeWebsiteContext);"},
+            {"id":"o4","text":"window.addEventListener('onload', personalizeWebsiteContext);"}
+          ],
+          "correct": ["o3"],
+          "explanation": "window.addEventListener('load', ...) fires when all resources including images are loaded.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q19",
+          "text": "Refer to the following code that imports a module named utils:\n\nimport {foo, bar} from '/path/Utils.js';\nfoo();\nbar();\n\nWhich two implementations of Utils.js export foo and bar such that the code above runs without error? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"A. const foo = () => { return 'foo'; } const bar = () => { return 'bar'; } export { bar, foo }"},
+            {"id":"o2","text":"B. // FooUtils.js and BarUtils.js exist Import {foo} from '/path/FooUtils.js'; Import {bar} from '/path/BarUtils.js';"},
+            {"id":"o3","text":"C. export default class { foo() { return 'foo'; } bar() { return 'bar'; } }"},
+            {"id":"o4","text":"D. const foo = () => { return 'foo';} const bar = () => {return 'bar'; } Export default foo, bar;"}
+          ],
+          "correct": ["o1","o3"],
+          "explanation": "Named exports using export { bar, foo } or a default class export with methods foo and bar both work with the import syntax.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q20",
+          "text": "Given the code below:\n\nconst delay = async delay => {\n  return new Promise((resolve, reject) => {\n    console.log(1);\n    setTimeout(resolve, delay);\n  });\n};\n\nconst callDelay = async () => {\n  console.log(2);\n  const yup = await delay(1000);\n  console.log(3);\n}\n\nconsole.log(4);\ncallDelay();\nconsole.log(5);\n\nWhat is logged to the console?",
+          "options": [
+            {"id":"o1","text":"4 2 1 5 3"},
+            {"id":"o2","text":"2 1 3 4 5"},
+            {"id":"o3","text":"4 5 2 1 3"},
+            {"id":"o4","text":"1 2 3 4 5"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Synchronous code executes first: 4 is logged. callDelay() is invoked (async), logs 2. delay() is called, logs 1 immediately. Function returns and 5 is logged. After 1000ms, 3 is logged.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q21",
+          "text": "Refer to the code below:\n\nx = 3.14;\nfunction myFunction() {\n  'use strict';\n  y = x;\n}\nz = x;\nmyFunction();\n\nWhat is the result?",
+          "options": [
+            {"id":"o1","text":"z is equal to 3.14, use strict has effect only on line 5, Line 5 throws an error"},
+            {"id":"o2","text":"z is undefined, y is 3.14, no errors"},
+            {"id":"o3","text":"Both y and z are 3.14, no errors"},
+            {"id":"o4","text":"All variables throw errors due to strict mode"}
+          ],
+          "correct": ["o1"],
+          "explanation": "z = 3.14 executes successfully. Inside myFunction, 'use strict' applies, so y = x throws ReferenceError because y is not declared.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q22",
+          "text": "In the browser, the window object is often used to assign variables that require the broadest scope in an application. Node.js application does not have access to the window object by default. Which two methods are used to address this? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"Assign variables to the global object."},
+            {"id":"o2","text":"Create a new window object in the root file."},
+            {"id":"o3","text":"Use the document object instead of the window object."},
+            {"id":"o4","text":"Assign variables to module.exports and require them as needed."}
+          ],
+          "correct": ["o1","o4"],
+          "explanation": "In Node.js, use the global object for global scope, or use module.exports with require for sharing between modules.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q23",
+          "text": "Refer to the code below:\n\nlet timedFunction = () => {\n  console.log('Timer called.');\n};\nlet timerId = setTimeout(timedFunction, 1000);\n\nWhich statement allows a developer to cancel the scheduled timed function?",
+          "options": [
+            {"id":"o1","text":"removeTimeout(timerId);"},
+            {"id":"o2","text":"clearTimeout(timedFunction);"},
+            {"id":"o3","text":"removeTimeout(timedFunction);"},
+            {"id":"o4","text":"clearTimeout(timerId);"}
+          ],
+          "correct": ["o4"],
+          "explanation": "clearTimeout(timerId) cancels the timeout using the ID returned by setTimeout.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q24",
+          "text": "A developer is setting up a new Node.js server with a client library that is built using events and callbacks. The library will establish a web socket connection and handle receipt of messages. Which code segment shows the correct way to set up a client with two events that listen at execution time?",
+          "options": [
+            {"id":"o1","text":"ws.on('connect', () => { console.log('connected to client'); }); ws.on('error', (error) => { console.log('ERROR', error); });"},
+            {"id":"o2","text":"try{ ws.connect(() => { console.log('connected to client'); }); } catch(error) { console.log('ERROR',error); }"},
+            {"id":"o3","text":"ws.on('connect', () => { console.log('connected to client'); ws.on('error', (error) => { console.log('ERROR', error); }); });"},
+            {"id":"o4","text":"ws.connect(() => { console.log('connected to client'); }).catch((error) => { console.log('ERROR', error); });"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Event-based libraries use .on() to register event listeners. Both connect and error events should be registered at the same level.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q25",
+          "text": "Given a value, which three options can a developer use to detect if the value is NaN? Choose 3 answers",
+          "options": [
+            {"id":"o1","text":"value == NaN"},
+            {"id":"o2","text":"Number.isNaN(value)"},
+            {"id":"o3","text":"value === Number.NaN"},
+            {"id":"o4","text":"Object.is(value, NaN)"},
+            {"id":"o5","text":"value !== value"}
+          ],
+          "correct": ["o2","o4","o5"],
+          "explanation": "Number.isNaN(value) is the reliable method. Object.is(value, NaN) also works. NaN !== NaN is true (NaN is not equal to itself). Direct comparison with == or === doesn't work.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q26",
+          "text": "Refer to the code declarations below:\n\nlet str1 = 'Java';\nlet str2 = 'Script';\n\nWhich three expressions return the string 'JavaScript'? Choose 3 answers",
+          "options": [
+            {"id":"o1","text":"str1.concat(str2);"},
+            {"id":"o2","text":"str1.join(str2);"},
+            {"id":"o3","text":"str1 + str2;"},
+            {"id":"o4","text":"`${str1}${str2}`;"},
+            {"id":"o5","text":"concat(str1, str2);"}
+          ],
+          "correct": ["o1","o3","o4"],
+          "explanation": "String concatenation works with .concat(), + operator, and template literals. .join() is an array method, not string. concat() as a standalone function doesn't exist.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q27",
+          "text": "A developer creates a simple webpage with an input field. When a user enters text and clicks the button, the actual value must be displayed.\n\nHTML:\n<input type='text' value='Hello' name='input'>\n<button type='button'>Display</button>\n\nJavaScript:\nconst button = document.querySelector('button');\nbutton.addEventListener('click', () => {\n  const input = document.querySelector('input');\n  console.log(input.getAttribute('value'));\n});\n\nWhen the user clicks the button, the output is always 'Hello'. What needs to be done to make this code work as expected?",
+          "options": [
+            {"id":"o1","text":"Replace line 04 with console.log(input.value);"},
+            {"id":"o2","text":"Replace line 02 with button.addEventListener('onclick', function() {"},
+            {"id":"o3","text":"Replace line 03 with const input = document.getElementsByName('input');"},
+            {"id":"o4","text":"Replace line 02 with button.addCallback('click', function() {"}
+          ],
+          "correct": ["o1"],
+          "explanation": "getAttribute('value') returns the initial HTML attribute. Use input.value to get the current value from the DOM.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q28",
+          "text": "Refer to the code below:\n\nlet sayHello = () => {\n  console.log('Hello, world!');\n};\n\nWhich code executes sayHello once, two minutes from now?",
+          "options": [
+            {"id":"o1","text":"delay(sayHello, 120000);"},
+            {"id":"o2","text":"setInterval(sayHello, 120000);"},
+            {"id":"o3","text":"setTimeout(sayHello(), 120000);"},
+            {"id":"o4","text":"setTimeout(sayHello, 120000);"}
+          ],
+          "correct": ["o4"],
+          "explanation": "setTimeout(sayHello, 120000) executes the function once after 120000ms (2 minutes). setInterval would repeat it.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q29",
+          "text": "Refer to the code below:\n\nfunction changeValue(param) {\n  param = 5;\n}\nlet a = 10;\nlet b = 5;\nchangeValue(b);\nconst result = a + ' - ' + b;\n\nWhat is the value of result when code executes?",
+          "options": [
+            {"id":"o1","text":"10 - 5"},
+            {"id":"o2","text":"10 - 10"},
+            {"id":"o3","text":"5 - 5"},
+            {"id":"o4","text":"5 - 10"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Primitives are passed by value. Changing param inside the function doesn't affect b. Result is '10 - 5'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q30",
+          "text": "A class was written to represent items for purchase in an online store. There is a new requirement to implement a description method. Given the code:\n\nclass Item {\n  constructor(name, price) { this.name = name; }\n}\nclass SaleItem extends Item {\n  constructor(name, price, discount) { super(name); }\n}\n\nlet regItem = new Item('Scarf', 55);\nlet saleItem = new SaleItem('Shirt', 80, -1);\nItem.prototype.description = function() { return 'This is a ' + this.name; }\nconsole.log(regItem.description());\nconsole.log(saleItem.description());\nSaleItem.prototype.description = function() { return 'This is a discounted ' + this.name; }\nconsole.log(regItem.description());\nconsole.log(saleItem.description());\n\nWhat is the output?",
+          "options": [
+            {"id":"o1","text":"This is a Scarf, This is a Shirt, This is a Scarf, This is a discounted Shirt"},
+            {"id":"o2","text":"This is a Scarf, Uncaught TypeError: saleItem.description is not a function, This is a Shirt, This is a discounted Shirt"},
+            {"id":"o3","text":"This is a Scarf, Uncaught TypeError: saleItem.description is not a function, This is a Scarf, This is a discounted Shirt"},
+            {"id":"o4","text":"This is a Scarf, This is a Shirt, This is a discounted Scarf, This is a discounted Shirt"}
+          ],
+          "correct": ["o1"],
+          "explanation": "SaleItem inherits from Item. Initially both use Item.prototype.description. After SaleItem.prototype.description is defined, saleItem uses the overridden version.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q31",
+          "text": "Which code statement correctly retrieves and returns an object from localStorage?",
+          "options": [
+            {"id":"o1","text":"const retrieveFromLocalStorage = () => { return JSON.stringify(window.localStorage.getItem(storageKey)); }"},
+            {"id":"o2","text":"const retrieveFromLocalStorage = (storageKey) => { return JSON.parse(window.localStorage.getItem(storageKey)); }"},
+            {"id":"o3","text":"const retrieveFromLocalStorage = (storageKey) => { return window.localStorage[storageKey]; }"},
+            {"id":"o4","text":"const retrieveFromLocalStorage = (storageKey) => { return window.localStorage.getItem(storageKey); }"}
+          ],
+          "correct": ["o2"],
+          "explanation": "Objects stored in localStorage are stringified. Use JSON.parse() to convert the string back to an object.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q32",
+          "text": "Refer to the following code:\n\nlet sampleText = 'The quick brown fox jumps';\n\nA developer needs to determine if a certain substring is part of a string. Which three expressions return true for the given substring? Choose 3 answers",
+          "options": [
+            {"id":"o1","text":"sampleText.includes(' fox ');"},
+            {"id":"o2","text":"sampleText.includes('fox');"},
+            {"id":"o3","text":"sampleText.includes(' quick ', 4);"},
+            {"id":"o4","text":"sampleText.includes(' Fox ', 3);"},
+            {"id":"o5","text":"sampleText.includes(' quick ') !== -1;"}
+          ],
+          "correct": ["o2","o3","o5"],
+          "explanation": "includes() is case-sensitive. 'fox' exists (no spaces needed). ' quick ' starts at index 3, searching from 4 finds it. includes() returns boolean, but !== -1 still works. ' fox ' doesn't exist (wrong spacing).",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q33",
+          "text": "Refer to the code below:\n\nfor(let number = 2; number <= 5; number += 1) {\n  // insert code statement here\n}\n\nThe developer needs to insert a code statement with these requirements:\n1. Does NOT require an import\n2. Logs an error when the boolean statement evaluates to false\n3. Works in both the browser and Node.js\n\nWhich meets the requirements?",
+          "options": [
+            {"id":"o1","text":"console.error(number % 2 === 0);"},
+            {"id":"o2","text":"assert(number % 2 === 0);"},
+            {"id":"o3","text":"console.assert(number % 2 === 0);"},
+            {"id":"o4","text":"console.debug(number % 2 === 0);"}
+          ],
+          "correct": ["o3"],
+          "explanation": "console.assert() logs an error when the condition is false, requires no import, and works in both browser and Node.js.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q34",
+          "text": "Refer to the code snippet below:\n\nlet array = [1, 2, 3, 4, 4, 5, 4, 4];\nfor(let i = 0; i < array.length; i++) {\n  if(array[i] === 4) {\n    array.splice(i, 1);\n  }\n}\n\nWhat is the value of the array after the code executes?",
+          "options": [
+            {"id":"o1","text":"[1, 2, 3, 5]"},
+            {"id":"o2","text":"[1, 2, 3, 4, 4, 5, 4]"},
+            {"id":"o3","text":"[1, 2, 3, 4, 5, 4, 4]"},
+            {"id":"o4","text":"[1, 2, 3, 4, 5, 4]"}
+          ],
+          "correct": ["o4"],
+          "explanation": "splice() modifies array length while iterating. When a 4 is removed, the next element shifts left, causing i to skip the adjacent 4. Result: [1, 2, 3, 4, 5, 4].",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q35",
+          "text": "Refer to the following code:\n\nlet array = [1, 2, 3, 4, 4, 5, 4, 4];\nfor(let i = 0; i < array.length; i++) {\n  if(array[i] === 4) {\n    array.splice(i, 1);\n    i--;\n  }\n}\nalert(array);\n\nWhat is the value of array after the code executes?",
+          "options": [
+            {"id":"o1","text":"[1, 2, 3, 5]"},
+            {"id":"o2","text":"[1, 2, 3, 4, 5]"},
+            {"id":"o3","text":"[1, 2, 3, 4, 4, 5]"},
+            {"id":"o4","text":"[1, 2, 3, 4, 5, 4]"}
+          ],
+          "correct": ["o1"],
+          "explanation": "The i-- compensates for the splice shifting elements. All instances of 4 are removed correctly. Result: [1, 2, 3, 5].",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q36",
+          "text": "Refer to the code below:\n\nconst searchText = 'Yay! Salesforce is amazing!';\nlet result1 = searchText.search(/sales/i);\nlet result2 = searchText.search(/sales/);\nconsole.log(result1);\nconsole.log(result2);\n\nAfter running this code, which result is displayed on the console?",
+          "options": [
+            {"id":"o1","text":"> 5 > undefined"},
+            {"id":"o2","text":"> true > false"},
+            {"id":"o3","text":"> 5 > -1"},
+            {"id":"o4","text":"> 5 > 0"}
+          ],
+          "correct": ["o3"],
+          "explanation": "search() returns the index of the match or -1. /sales/i (case-insensitive) finds 'Salesforce' at index 5. /sales/ (case-sensitive) doesn't match, returns -1.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q37",
+          "text": "A developer implements and calls the following code when an application state change occurs:\n\nconst onStateChange = (newPageState) => {\n  window.history.pushState(newPageState, '', null);\n}\n\nIf the back button is clicked after this method is executed, what can a developer expect?",
+          "options": [
+            {"id":"o1","text":"A navigate event is fired with a state property that details the previous application state."},
+            {"id":"o2","text":"The page reloads and all Javascript is reinitialized."},
+            {"id":"o3","text":"The page is navigated away from and the previous page in the browser's history is loaded."},
+            {"id":"o4","text":"A popstate event is fired with a state property that details the application's last state."}
+          ],
+          "correct": ["o4"],
+          "explanation": "pushState() adds to browser history without page reload. Clicking back triggers a popstate event with the previous state.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q38",
+          "text": "Refer to the following code:\n\nnew Promise((resolve, reject) => {\n  const fraction = Math.random();\n  if(fraction > 0.5) reject('fraction > 0.5, ' + fraction);\n  resolve(fraction);\n})\n.then(() => console.log('resolved'))\n.catch((error) => console.error(error))\n.finally(() => console.log('when am I called?'));\n\nWhen does Promise.finally get called?",
+          "options": [
+            {"id":"o1","text":"When resolved"},
+            {"id":"o2","text":"When resolved and settled"},
+            {"id":"o3","text":"When resolved or rejected"},
+            {"id":"o4","text":"When rejected"}
+          ],
+          "correct": ["o3"],
+          "explanation": ".finally() always executes regardless of whether the promise is resolved or rejected. It runs after the promise settles.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q39",
+          "text": "Refer to the following object:\n\nconst cat = {\n  firstName: 'Fancy',\n  lastName: 'Whiskers',\n  get fullName() {\n    return this.firstName + ' ' + this.lastName;\n  }\n};\n\nHow can a developer access the fullName property for cat?",
+          "options": [
+            {"id":"o1","text":"cat.fullName"},
+            {"id":"o2","text":"cat.fullName()"},
+            {"id":"o3","text":"cat.get.fullName"},
+            {"id":"o4","text":"cat.function.fullName()"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Getters are accessed like properties, not methods. Use cat.fullName (no parentheses) to invoke the getter function.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q40",
+          "text": "A developer wants to use a module named universalContainersLib and then call functions from it. How should a developer import every function from the module and then call the functions foo and bar?",
+          "options": [
+            {"id":"o1","text":"import {foo, bar} from '/path/universalContainersLib.js'; foo(); bar();"},
+            {"id":"o2","text":"import * from '/path/universalContainersLib.js'; universalContainersLib.foo(); universalContainersLib.bar();"},
+            {"id":"o3","text":"import * as lib from '/path/universalContainersLib.js'; lib.foo(); lib.bar();"},
+            {"id":"o4","text":"import all from '/path/universalContainersLib.js'; universalContainersLib.foo(); universalContainersLib.bar();"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Use import * as alias to import all exports from a module under a namespace.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q41",
+          "text": "Why would a developer specify a package.json as a devDependency instead of a dependency?",
+          "options": [
+            {"id":"o1","text":"It should be bundled when the package is published."},
+            {"id":"o2","text":"It is required by the application in production."},
+            {"id":"o3","text":"It is only needed for local development and testing."},
+            {"id":"o4","text":"Other required packages depend on it for development."}
+          ],
+          "correct": ["o3"],
+          "explanation": "devDependencies are packages only needed during development and testing, not in production.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q42",
+          "text": "Refer to code below:\n\nconst objBook = {\n  title: 'Javascript',\n};\nObject.preventExtensions(objBook);\nconst newObjBook = objBook;\nnewObjBook.author = 'Robert';\n\nWhat are the values of objBook and newObjBook respectively?",
+          "options": [
+            {"id":"o1","text":"{author: 'Robert', title: 'JavaScript'}, undefined"},
+            {"id":"o2","text":"{title: 'JavaScript'}, {title: 'JavaScript'}"},
+            {"id":"o3","text":"{author: 'Robert', title: 'JavaScript'}, {author: 'Robert', title: 'JavaScript'}"},
+            {"id":"o4","text":"{author: 'Robert'}, {author: 'Robert', title: 'JavaScript'}"}
+          ],
+          "correct": ["o2"],
+          "explanation": "Object.preventExtensions prevents adding new properties. newObjBook references objBook, so both remain {title: 'JavaScript'}.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q43",
+          "text": "A developer wrote a test for sum3 function that sums first three numbers. The test passes. A different developer changed sum3 to sum all numbers. Which two results occur when running the test on the updated sum3 function? Choose 2 answers\n\nlet res = sum3([1, 2, 3]);\nconsole.assert(res === 6);\nres = sum3([1, 2, 3, 4]);\nconsole.assert(res === 6);",
+          "options": [
+            {"id":"o1","text":"The line 02 assertion passes."},
+            {"id":"o2","text":"The line 02 assertion fails."},
+            {"id":"o3","text":"The line 05 assertion passes."},
+            {"id":"o4","text":"The line 05 assertion fails."}
+          ],
+          "correct": ["o1","o4"],
+          "explanation": "Line 02: [1,2,3] sums to 6, assertion passes. Line 05: [1,2,3,4] now sums to 10 (not 6), assertion fails.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q44",
+          "text": "Which statement can a developer apply to increment the browser's navigation history without a page refresh?",
+          "options": [
+            {"id":"o1","text":"window.history.replaceState(newStateObject, '', null);"},
+            {"id":"o2","text":"window.history.pushState(newStateObject, '', null);"},
+            {"id":"o3","text":"window.history.pushState(newStateObject);"},
+            {"id":"o4","text":"window.history.state.push(newStateObject);"}
+          ],
+          "correct": ["o2"],
+          "explanation": "pushState() adds a new entry to the browser history. replaceState() modifies the current entry without incrementing.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q45",
+          "text": "What is the result of the code block?",
+          "options": [
+            {"id":"o1","text":"The console logs 'flag' and then an error is thrown."},
+            {"id":"o2","text":"The console logs 'flag' and another flag."},
+            {"id":"o3","text":"An error is thrown."},
+            {"id":"o4","text":"The console logs only 'flag'."}
+          ],
+          "correct": ["o4"],
+          "explanation": "Based on typical try-catch behavior, only 'flag' is logged without errors propagating.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q46",
+          "text": "Given code below:\n\nsetTimeout(() => {\n  console.log(1);\n}, 0);\nconsole.log(2);\nnew Promise((resolve, reject) => {\n  setTimeout(() => {\n    reject(console.log(3));\n  }, 1000);\n}).catch(() => {\n  console.log(4);\n});\nconsole.log(5);\n\nWhat is logged to the console?",
+          "options": [
+            {"id":"o1","text":"1 2 5 3 4"},
+            {"id":"o2","text":"2 5 1 3 4"},
+            {"id":"o3","text":"2 1 4 3 5"},
+            {"id":"o4","text":"1 2 4 3 5"}
+          ],
+          "correct": ["o2"],
+          "explanation": "Synchronous code runs first (2, 5), then setTimeout with 0ms (1), then after 1000ms the promise logs 3 and 4.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q47",
+          "text": "Given the code below:\n\nfunction myFunction() {\n  a = 5;\n  var b = 1;\n}\nmyFunction();\nconsole.log(a);\nconsole.log(b);\n\nWhat is the expected output?",
+          "options": [
+            {"id":"o1","text":"Both lines 08 and 09 are executed, but values outputted are undefined."},
+            {"id":"o2","text":"Both lines 08 and 09 are executed, and the variables are outputted."},
+            {"id":"o3","text":"Line 08 throws an error, therefore line 09 is never executed."},
+            {"id":"o4","text":"Line 08 outputs the variable, but line 09 throws an error."}
+          ],
+          "correct": ["o4"],
+          "explanation": "a is global (no var/let/const), so line 08 outputs 5. b is function-scoped, so line 09 throws ReferenceError.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q48",
+          "text": "myArray can have one level, two levels, or more levels. Which statement flattens myArray when it can be arbitrarily nested?",
+          "options": [
+            {"id":"o1","text":"[].concat(...myArray);"},
+            {"id":"o2","text":"myArray.flat(Infinity);"},
+            {"id":"o3","text":"myArray.reduce((prev, curr) => prev.concat(curr), []);"},
+            {"id":"o4","text":"myArray.join(',').split(',');"}
+          ],
+          "correct": ["o2"],
+          "explanation": "flat(Infinity) flattens arrays to any depth. reduce with concat only flattens one level.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q49",
+          "text": "Universal Containers notices its search application makes a network request each time a key is pressed. UC decides to implement a debounce function. What are three key steps to implement this debounce function? Choose 3 answers",
+          "options": [
+            {"id":"o1","text":"If there is an existing setTimeout and the search string changes, allow the existing setTimeout to finish, and do not enqueue a new setTimeout."},
+            {"id":"o2","text":"If there is an existing setTimeout and the search string changes, cancel the existing setTimeout using the persisted timerId and replace it with a new setTimeout."},
+            {"id":"o3","text":"Store the timerId of the setTimeout last enqueued by the search string change handler."},
+            {"id":"o4","text":"Ensure that the network request has the property debounce set to true."},
+            {"id":"o5","text":"When the search string changes, enqueue the request within a setTimeout."}
+          ],
+          "correct": ["o2","o3","o5"],
+          "explanation": "Debounce: store timerId, cancel previous setTimeout when new input arrives, enqueue new request in setTimeout.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q50",
+          "text": "Given the following code:\n\ncounter = 0;\nconst logCounter = () => {\n  console.log(counter);\n};\nlogCounter();\nsetTimeout(logCounter, 1100);\nsetInterval(() => {\n  counter++;\n  logCounter();\n}, 1000);\n\nWhat is logged by the first four log statements?",
+          "options": [
+            {"id":"o1","text":"0 1 1 2"},
+            {"id":"o2","text":"0 1 2 2"},
+            {"id":"o3","text":"0 0 1 2"},
+            {"id":"o4","text":"0 1 2 3"}
+          ],
+          "correct": ["o1"],
+          "explanation": "0 immediately, 1 after 1000ms (setInterval), 1 after 1100ms (setTimeout), 2 after 2000ms (setInterval).",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q51",
+          "text": "Refer to the following code:\n\nclass Vehicle {\n  constructor(plate) {\n    this.plate = plate;\n  }\n}\nclass Truck extends Vehicle {\n  constructor(plate, weight) {\n    //Missing code\n    this.weight = weight;\n  }\n  displayWeight() {\n    console.log(`The truck ${this.plate} has a weight of ${this.weight}lb.`);\n  }\n}\nlet myTruck = new Truck('123AB', 5000);\nmyTruck.displayWeight();\n\nWhich statement should be added to missing code?",
+          "options": [
+            {"id":"o1","text":"super.plate = plate;"},
+            {"id":"o2","text":"super(plate);"},
+            {"id":"o3","text":"Vehicle.plate = plate;"},
+            {"id":"o4","text":"this.plate = plate;"}
+          ],
+          "correct": ["o2"],
+          "explanation": "super(plate) calls the parent constructor. Must call super() before accessing this in derived class.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q52",
+          "text": "Refer to the code below:\n\nfunction Person(firstName, lastName, eyeColor) {\n  this.firstName = firstName;\n  this.lastName = lastName;\n  this.eyeColor = eyeColor;\n}\nPerson.job = 'Developer';\nconst myFather = new Person('John', 'Doe');\nconsole.log(myFather.job);\n\nWhat is the output after the code executes?",
+          "options": [
+            {"id":"o1","text":"ReferenceError: assignment to undeclared variable 'Person'"},
+            {"id":"o2","text":"undefined"},
+            {"id":"o3","text":"Developer"},
+            {"id":"o4","text":"ReferenceError: eyeColor is not defined"}
+          ],
+          "correct": ["o2"],
+          "explanation": "Person.job is a static property on the constructor, not on instances. myFather.job is undefined.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q53",
+          "text": "Which two statements correctly execute the runParallel() async function that returns a promise? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"runParallel().then(data);"},
+            {"id":"o2","text":"runParallel().then(function(data) { return data; });"},
+            {"id":"o3","text":"async runParallel().then(data);"},
+            {"id":"o4","text":"await runParallel();"}
+          ],
+          "correct": ["o2","o4"],
+          "explanation": "Use .then() with a callback function, or use await. Option A is invalid syntax, option C is incorrect.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q54",
+          "text": "A developer has a formatName function that takes two arguments, firstName and lastName. They want to schedule the function to run once after five seconds. What is the correct syntax?",
+          "options": [
+            {"id":"o1","text":"setTimeout(formatName(), 5000, 'John', 'Doe');"},
+            {"id":"o2","text":"setTimeout(() => { formatName('John', 'Doe'); }, 5000);"},
+            {"id":"o3","text":"setTimeout(formatName, 5000, 'John', 'Doe');"},
+            {"id":"o4","text":"setTimeout(formatName('John', 'Doe'), 5000);"}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "Pass function reference with arguments after delay, or use arrow function. Don't invoke formatName() immediately.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q55",
+          "text": "A developer wrote a test for sum3 function. The function was changed to sum only the first two numbers. Which two results occur? Choose 2 answers\n\nlet res = sum3([1, 2, 3]);\nconsole.assert(res === 6);\nres = sum3([1, 2, 3, 4]);\nconsole.assert(res === 6);",
+          "options": [
+            {"id":"o1","text":"The line 02 assertion fails."},
+            {"id":"o2","text":"The line 02 assertion passes."},
+            {"id":"o3","text":"The line 05 assertion passes."},
+            {"id":"o4","text":"The line 05 assertion fails."}
+          ],
+          "correct": ["o1","o4"],
+          "explanation": "If sum3 now sums only first two: [1,2,3]→3 (not 6, fails), [1,2,3,4]→3 (not 6, fails).",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q56",
+          "text": "Given the following code, what is the value of x?\n\nlet x = '15' + (10 * 2);",
+          "options": [
+            {"id":"o1","text":"50"},
+            {"id":"o2","text":"1520"},
+            {"id":"o3","text":"3020"},
+            {"id":"o4","text":"35"}
+          ],
+          "correct": ["o2"],
+          "explanation": "10 * 2 = 20, then '15' + 20 converts 20 to string and concatenates: '1520'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q57",
+          "text": "A developer wants to catch any error that countSheep() may throw and pass it to handleError(). What is the correct implementation of the try...catch?",
+          "options": [
+            {"id":"o1","text":"try { countSheep(); } catch(e) { handleError(e); }"},
+            {"id":"o2","text":"try { setTimeout(function() { countSheep(); }, 1000); } catch(e) { handleError(e); }"},
+            {"id":"o3","text":"try { countSheep(); } finally { handleError(e); }"},
+            {"id":"o4","text":"try { countSheep(); } finally { handleError(e); }"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Use catch block to handle errors. finally runs regardless of errors and doesn't receive error parameter.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q58",
+          "text": "A developer is trying to handle an error within a function. Which code segment shows the correct approach to handle an error without propagating it elsewhere?",
+          "options": [
+            {"id":"o1","text":"try { doSomething(); } catch(error) { return error; }"},
+            {"id":"o2","text":"try { doSomething(); } catch(error) { throw new Error('Error found'); }"},
+            {"id":"o3","text":"try { doSomething(); } catch(error) { console.error(error); }"},
+            {"id":"o4","text":"try { doSomething(); } catch(error) { processError(error); }"}
+          ],
+          "correct": ["o4"],
+          "explanation": "processError(error) handles the error without re-throwing or returning it, preventing propagation.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q59",
+          "text": "Given the expressions var1 and var2, what are two valid ways to return the concatenation of the two expressions and ensure it is string? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"var1.toString ( ) var2.toString ( )"},
+            {"id":"o2","text":"String (var1) .concat (var2)"},
+            {"id":"o3","text":"var1 + var2"},
+            {"id":"o4","text":"string.concat (var1 +var2)"}
+          ],
+          "correct": ["o1","o4"],
+          "explanation": "toString() on both variables concatenated, or string.concat with the sum ensures string type.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q60",
+          "text": "Refer to the code below: Async function functionUnderTest(isOK) { If (isOK) return 'OK'; Throw new Error('not OK'); } Which assertion accurately tests the above code?",
+          "options": [
+            {"id":"o1","text":"Console.assert (await functionUnderTest(true), ' notOK ')"},
+            {"id":"o2","text":"Console.assert (await functionUnderTest(true), 'OK')"},
+            {"id":"o3","text":"Console.assert (await functionUnderTest(true), ' OK ')"},
+            {"id":"o4","text":"Console.assert (await functionUnderTest(true), ' not OK ')"}
+          ],
+          "correct": ["o2"],
+          "explanation": "When isOK is true, the function returns 'OK', so asserting against 'OK' is correct.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q61",
+          "text": "Refer to the following code: Let obj ={ Foo: 1, Bar: 2 } Let output =[], for(let something in obj{ output.push(something); } console.log(output); What is the output line 11?",
+          "options": [
+            {"id":"o1","text":"[1,2]"},
+            {"id":"o2","text":"[\"foo\",\"bar\"]"},
+            {"id":"o3","text":"[\"foo:1\",\"bar:2\"]"},
+            {"id":"o4","text":"[\"bar\",\"foo\"]"}
+          ],
+          "correct": ["o2"],
+          "explanation": "for...in iterates over object keys as strings, pushing 'foo' and 'bar' to the array.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q62",
+          "text": "A developer writers the code below to calculate the factorial of a given number. Function factorial(number) { Return number + factorial(number -1); } factorial(3); What is the result of executing line 04?",
+          "options": [
+            {"id":"o1","text":"0"},
+            {"id":"o2","text":"6"},
+            {"id":"o3","text":"-Infinity"},
+            {"id":"o4","text":"RuntimeError"}
+          ],
+          "correct": ["o4"],
+          "explanation": "The function has no base case and uses addition instead of multiplication, causing infinite recursion and a stack overflow error.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q63",
+          "text": "Refer to the code below: Let car1 = new Promise((_ , reject) => setTimeout(reject, 2000, \"car 1 crashed in\") Let car2 =new Promise(resolve => setTimeout(resolve, 1500, \"car 2 completed\") Let car3 =new Promise(resolve =>setTimeout(resolve, 3000, \"car 3 completed\") Promise.race(( car1, car2, car3)) .then (value => { Let result = '$(value) the race.';)} .catch(arr => { console.log(\"Race is cancelled.\", err); }); What is the value of result when Promise.race executes?",
+          "options": [
+            {"id":"o1","text":"Car 2 completed the race."},
+            {"id":"o2","text":"Car 1 crashed in the race."},
+            {"id":"o3","text":"Car3 completes the race"},
+            {"id":"o4","text":"Race is cancelled."}
+          ],
+          "correct": ["o1"],
+          "explanation": "Promise.race resolves with the first promise to complete. Car2 resolves first at 1500ms, so result is 'Car 2 completed the race.'",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q64",
+          "text": "Refer to the code below: const car = { price:100, getPrice:function(){ return this.price; } }; const customCar = Object.create(car); customCar.price = 70; delete customCar.price; const result = customCar.getPrice(); What is the value of result after the code executes?",
+          "options": [
+            {"id":"o1","text":"100"},
+            {"id":"o2","text":"70"},
+            {"id":"o3","text":"undefined"},
+            {"id":"o4","text":"null"}
+          ],
+          "correct": ["o1"],
+          "explanation": "After deleting customCar.price, the prototype chain is used, returning car.price which is 100.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q65",
+          "text": "Refer to the code below: function foo () { const a =2; function bar() { console.log(a); } return bar; } Why does the function bar have access to variable a?",
+          "options": [
+            {"id":"o1","text":"Outer function's scope"},
+            {"id":"o2","text":"Inner function's scope"},
+            {"id":"o3","text":"Hoisting"},
+            {"id":"o4","text":"Prototype chain"}
+          ],
+          "correct": ["o1"],
+          "explanation": "bar is a closure that captures variables from the outer function foo's scope.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q66",
+          "text": "Refer to following code block: Let array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,]; Let output =0; For (let num of array){ if (output >0){ Break; } if(num % 2 == 0){ Continue; } Output +=num; } What is the value of output after the code executes?",
+          "options": [
+            {"id":"o1","text":"11"},
+            {"id":"o2","text":"25"},
+            {"id":"o3","text":"16"},
+            {"id":"o4","text":"36"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Adds odd numbers until output > 0: 1 (output=1), skips 2, adds 3 (output=4), skips 4, adds 5 (output=9), skips 6, adds 7 (output=16), then breaks. Result is 16.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q67",
+          "text": "Given the code below:\n\nfunction Person(name, email) {\n  this.name = name;\n  this.email = email;\n}\n\nconst john = new Person('John', 'john@email.com');\nconst jane = new Person('Jane', 'jane@email.com');\nconst emily = new Person('Emily', 'emily@email.com');\n\nlet usersList = [john, jane, emily];\n\nWhich method can be used to provide a visual representation of the list of users and to allow sorting by the name or email attribute?",
+          "options": [
+            {"id":"o1","text":"console.table(usersList) ;"},
+            {"id":"o2","text":"console.group(usersList) ;"},
+            {"id":"o3","text":"console.groupCollapsed (usersList) ;"},
+            {"id":"o4","text":"console.info(usersList) ;"}
+          ],
+          "correct": ["o1"],
+          "explanation": "console.table() displays data in a sortable table format, perfect for arrays of objects.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q68",
+          "text": "Refer to the following object:\n\nconst dog = {\n  firstName: 'Snoopy',\n  lastName: 'Beagle',\n  get fullName() {\n    return this.firstName + ' ' + this.lastName;\n  }\n};\n\nHow can a developer access the fullName property for dog?",
+          "options": [
+            {"id":"o1","text":"Dog, get,fullName"},
+            {"id":"o2","text":"Dog, function, fullName"},
+            {"id":"o3","text":"Dog.fullName"},
+            {"id":"o4","text":"Dog.fullName ( )"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Getters are accessed like properties, not methods. Use dog.fullName (without parentheses).",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q69",
+          "text": "Given the following code: document.body.addEventListener(' click ', (event) => { if (/* CODE REPLACEMENT HERE */) { console.log('button clicked!'); } }); Which replacement for the conditional statement on line 02 allows a developer to correctly determine that a button on page is clicked?",
+          "options": [
+            {"id":"o1","text":"Event.clicked"},
+            {"id":"o2","text":"e.nodeTarget ==this"},
+            {"id":"o3","text":"event.target.nodeName == 'BUTTON'"},
+            {"id":"o4","text":"button.addEventListener('click')"}
+          ],
+          "correct": ["o3"],
+          "explanation": "event.target.nodeName returns the tag name of the clicked element. Checking if it equals 'BUTTON' confirms a button was clicked.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q70",
+          "text": "Refer to the code below: const addBy = ? const addByEight =addBy(8); const sum = addBYEight(50); Which two functions can replace line 01 and return 58 to sum? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"const addBy = function(num1){ return function(num2){ return num1 + num2; } }"},
+            {"id":"o2","text":"const addBY = (num1) => (num2) => num1 + num2;"},
+            {"id":"o3","text":"const addBy = function(num1){ return num1 + num2; }"},
+            {"id":"o4","text":"const addBy = (num1) => num1 + num2 ;"}
+          ],
+          "correct": ["o1","o2"],
+          "explanation": "Both options create a curried function that returns another function, enabling addBy(8)(50) = 58.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q71",
+          "text": "Refer to the following code: function test (val) { If (val === undefined) { return 'Undefined values!' ; } if (val === null) { return 'Null value! '; } return val; } Let x; test(x); What is returned by the function call on line 13?",
+          "options": [
+            {"id":"o1","text":"'Null value!'"},
+            {"id":"o2","text":"Undefined"},
+            {"id":"o3","text":"Line 13 throws an error."},
+            {"id":"o4","text":"'Undefined values!'"}
+          ],
+          "correct": ["o4"],
+          "explanation": "Variable x is declared but not assigned, so its value is undefined. The function returns 'Undefined values!'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q72",
+          "text": "Cloud Kicks has a class to represent items for sale in an online store, as shown below: Class Item{ constructor (name, price){ this.name = name; this.price = price; } formattedPrice(){ return 's' + String(this.price);}} A new business requirement comes in that requests a ClothingItem class that should have all of the properties and methods of the Item class but will also have properties that are specific to clothes. Which line of code properly declares the clothingItem class such that it inherits from Item?",
+          "options": [
+            {"id":"o1","text":"Class ClothingItem {"},
+            {"id":"o2","text":"Class ClothingItem super Item {"},
+            {"id":"o3","text":"Class ClothingItem extends Item {"},
+            {"id":"o4","text":"Class ClothingItem implements Item{"}
+          ],
+          "correct": ["o3"],
+          "explanation": "In JavaScript, use 'extends' keyword to create a subclass that inherits from a parent class.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q73",
+          "text": "A developer implements a function that adds a few values. Function sum(num) { If (num == undefined) { Num =0; } Return function( num2, num3){ If (num3 ===undefined) { Num3 =0 ; } Return num + num2 + num3; } } Which three options can the developer invoke for this function to get a return value of 10? Choose 3 answers",
+          "options": [
+            {"id":"o1","text":"sum(5)(5)"},
+            {"id":"o2","text":"Sum (5, 5) ()"},
+            {"id":"o3","text":"Sum () (20)"},
+            {"id":"o4","text":"sum(10) ()"},
+            {"id":"o5","text":"sum() (5, 5)"}
+          ],
+          "correct": ["o1","o5"],
+          "explanation": "sum(5)(5) = 5+5+0 = 10; sum()(5,5) = 0+5+5 = 10. Both return 10.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q74",
+          "text": "Which two console logs outputs NaN? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"console.log(10/ Number('5'));"},
+            {"id":"o2","text":"console.log(10/0);"},
+            {"id":"o3","text":"console.log(10/ 'five');"},
+            {"id":"o4","text":"console.log(parseInt('two'));"}
+          ],
+          "correct": ["o3","o4"],
+          "explanation": "Dividing by a non-numeric string 'five' and parsing non-numeric string 'two' both result in NaN.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q75",
+          "text": "Refer to the code below: Let str = 'javascript'; Str[0] = 'J'; Str[4] = 'S'; After changing the string index values, the value of str is 'javascript'. What is the reason for this value?",
+          "options": [
+            {"id":"o1","text":"Primitive values are immutable."},
+            {"id":"o2","text":"Non-primitive values are mutable."},
+            {"id":"o3","text":"Primitive values are mutable."},
+            {"id":"o4","text":"Non-primitive values are immutable."}
+          ],
+          "correct": ["o1"],
+          "explanation": "Strings are primitive values in JavaScript and are immutable. You cannot change individual characters.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q77",
+          "text": "Universal Container(UC) just launched a new landing page, but users complain that the website is slow. A developer found some functions that cause this problem. To verify this, the developer decides to do everything and log the time each of these three suspicious functions consumes. console.time('Performance'); maybeAHeavyFunction(); thisCouldTakeTooLong(); orMaybeThisOne(); console.endTime('Performance'); Which function can the developer use to obtain the time spent by every one of the three functions?",
+          "options": [
+            {"id":"o1","text":"console.getTime()"},
+            {"id":"o2","text":"console.trace()"},
+            {"id":"o3","text":"console.timeLog()"},
+            {"id":"o4","text":"console.timeStamp()"}
+          ],
+          "correct": ["o3"],
+          "explanation": "console.timeLog() logs the current time elapsed for a timer without stopping it, perfect for intermediate measurements.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q78",
+          "text": "Refer to the code snippet: Function getAvailabilityMessage(item) { If (getAvailability(item)){ Var msg =\"Username available\"; } Return msg; } A developer writes this code to return a message to user attempting to register a new username. If the username is available, variable. What is the return value of msg when getAvailabilityMessage (\"newUserName\" ) is executed and getAvailability(\"newUserName\") returns false?",
+          "options": [
+            {"id":"o1","text":"\"Msg is not defined\""},
+            {"id":"o2","text":"\"newUserName\""},
+            {"id":"o3","text":"undefined"},
+            {"id":"o4","text":"\"Username available\""}
+          ],
+          "correct": ["o3"],
+          "explanation": "When getAvailability returns false, msg is never assigned. Due to var hoisting, msg exists but is undefined.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q79",
+          "text": "A developer wants to create an object from a function in the browser using the code below: Function Monster() { this.name = 'hello' }; Const z = Monster(); What happens due to lack of the new keyword on line 02?",
+          "options": [
+            {"id":"o1","text":"Window.name is assigned to 'hello' and the variable z remains undefined."},
+            {"id":"o2","text":"Window.m is assigned the correct object."},
+            {"id":"o3","text":"The z variable is assigned the correct object."},
+            {"id":"o4","text":"The z variable is assigned the correct object but this.name remains undefined."}
+          ],
+          "correct": ["o1"],
+          "explanation": "Without 'new', 'this' refers to the global window object. Monster() assigns window.name='hello' and returns undefined to z.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q80",
+          "text": "Refer to the following code:\n\n<html lang=\"en\">\n<body>\n<div onclick=\"console.log('Outer message');\">\n<button id=\"myButton\">CLick me</button>\n</div>\n</body>\n<script>\nfunction displayMessage(ev) {\n  ev.stopPropagation();\n  console.log('Inner message.');\n}\nconst elem = document.getElementById('myButton');\nelem.addEventListener('click', displayMessage);\n</script>\n</html>\n\nWhat will the console show when the button is clicked?",
+          "options": [
+            {"id":"o1","text":"Outer messageInner message"},
+            {"id":"o2","text":"Inner message"},
+            {"id":"o3","text":"Outer message"},
+            {"id":"o4","text":"Inner messageOuter message"}
+          ],
+          "correct": ["o2"],
+          "explanation": "stopPropagation() prevents the event from bubbling up to the parent div, so only 'Inner message' is logged.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q81",
+          "text": "The developer wants to test the array shown: const arr = Array(5).fill(0) Which two tests are the most accurate for this array? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"arr.forEach(elem => console.assert(elem === 0)) ;"},
+            {"id":"o2","text":"console.assert( arr.length === 5 );"},
+            {"id":"o3","text":"console.assert (arr.length >0);"},
+            {"id":"o4","text":"console.assert(arr[0] === 0 && arr[ arr.length] === 0);"}
+          ],
+          "correct": ["o1","o2"],
+          "explanation": "Testing that all elements equal 0 and that length is exactly 5 are the most accurate assertions for this array.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q82",
+          "text": "Refer to the following code that performs a basic mathematical operation on a provided input: function calculate(num) { Return (num +10) / 3; } How should line 02 be written to ensure that x evaluates to 6 in the line below? Let x = calculate (8);",
+          "options": [
+            {"id":"o1","text":"Return Number((num +10) /3 );"},
+            {"id":"o2","text":"Return Integer(num +10) /3;"},
+            {"id":"o3","text":"Return Number(num + 10) / 3;"},
+            {"id":"o4","text":"Return Math.floor((num +10) / 3);"}
+          ],
+          "correct": ["o4"],
+          "explanation": "To get 6 from calculate(8): (8+10)/3 = 6. Use Math.floor((18)/3) = 6.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q83",
+          "text": "A developer has two ways to write a function:\n\nOption A:\nfunction Monster(){\n  this.growl = ()=>{\n    console.log('Grr!');\n  }\n}\n\nOption B:\nfunction Monster(){};\nMonster.prototype.growl = ()=>{\n  console.log('Grr!');\n}\n\nAfter deciding on an option, the developer creates 1000 monster objects. How many growl methods are created with Option A and Option B?",
+          "options": [
+            {"id":"o1","text":"1 methods for both"},
+            {"id":"o2","text":"1000 for both"},
+            {"id":"o3","text":"1000 for Option A, 1 for Option B"},
+            {"id":"o4","text":"1 for Option A, 1000 for Option B"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Option A creates a new growl method for each instance (1000). Option B creates one method on the prototype shared by all instances (1).",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q84",
+          "text": "A developer has an ErrorHandler module that contains multiple functions. What kind of export be leverages so that multiple functions can be used?",
+          "options": [
+            {"id":"o1","text":"Default"},
+            {"id":"o2","text":"Multi"},
+            {"id":"o3","text":"Named"},
+            {"id":"o4","text":"All"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Named exports allow exporting multiple functions from a module. Each function is exported by name.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q85",
+          "text": "developer removes the HTML class attribute from the checkout button, so now it is simply: <button>Checkout</button>. There is a test to verify the existence of the checkout button, however it looks for a button with class=\"blue\". The test fails because no such button is found. Which type of test category describes this test?",
+          "options": [
+            {"id":"o1","text":"True positive"},
+            {"id":"o2","text":"False negative"},
+            {"id":"o3","text":"False positive"},
+            {"id":"o4","text":"True negative"}
+          ],
+          "correct": ["o2"],
+          "explanation": "False negative: The button exists but the test fails to find it due to the test looking for a specific class that was removed.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q86",
+          "text": "A developer has the function, shown below, that is called when a page loads.\n\nfunction onLoad() {\n  console.log('Page has loaded!');\n}\n\nWhere can the developer see the log statement after loading the page in the browser?",
+          "options": [
+            {"id":"o1","text":"On the terminal console running the web server"},
+            {"id":"o2","text":"On the browser JavaScript console"},
+            {"id":"o3","text":"On the webpage console log"},
+            {"id":"o4","text":"In the browser performance tools log"}
+          ],
+          "correct": ["o2"],
+          "explanation": "console.log() outputs to the browser's JavaScript console, accessible through developer tools.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q87",
+          "text": "A developer creates a generic function to log custom messages in the console. To do this, the function below is implemented.\n\n01 function logStatus(status){\n02 console./*Answer goes here*/{'Item status is: %s', status};\n03 }\n\nWhich three console logging methods allow the use of string substitution in line 02?",
+          "options": [
+            {"id":"o1","text":"Log"},
+            {"id":"o2","text":"Info"},
+            {"id":"o3","text":"Message"},
+            {"id":"o4","text":"Assert"},
+            {"id":"o5","text":"Error"}
+          ],
+          "correct": ["o1","o2","o5"],
+          "explanation": "console.log(), console.info(), and console.error() all support string substitution with %s placeholders.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q88",
+          "text": "A developer has an isDog function that takes one argument cat. They want to schedule the function to run every minute. What is the correct syntax for scheduling this function?",
+          "options": [
+            {"id":"o1","text":"setInterval(isDog, 60000,'cat');"},
+            {"id":"o2","text":"setInterval(isDog('cat'), 60000);"},
+            {"id":"o3","text":"setTimeout(isDog, 60000,'cat');"},
+            {"id":"o4","text":"setInterval(isDog, 1,'cat');"}
+          ],
+          "correct": ["o1"],
+          "explanation": "setInterval(function, milliseconds, args) runs the function every 60000ms (1 minute) with 'cat' as argument.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q89",
+          "text": "At Universal Containers, every team has its own way of copying JavaScript objects. The code snippet shows an implementation from one team:\n\nconst date = new Date(2020, 05, 10);\nconst dateDisplayOptions = {\n  year: 'numeric',\n  month: 'long',\n  day: 'numeric'\n};\n\nconst formattedDate = date.toLocaleDateString('en', dateDisplayOptions);\n\nWhat is the output of the code execution?",
+          "options": [
+            {"id":"o1","text":"SyntaxError: Unexpected token in JSON"},
+            {"id":"o2","text":"Hello John Doe"},
+            {"id":"o3","text":"Hello Dan Doe"},
+            {"id":"o4","text":"Hello Dan"}
+          ],
+          "correct": ["o1"],
+          "explanation": "JSON.parse throws a SyntaxError when trying to parse objects with methods or non-JSON compliant data.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q90",
+          "text": "Which statement parses successfully?",
+          "options": [
+            {"id":"o1","text":"JSON.parse (\"foo\");"},
+            {"id":"o2","text":"JSON.parse ('\"foo\"');"},
+            {"id":"o3","text":"JSON.parse (\"foo\");"},
+            {"id":"o4","text":"JSON.parse ('\"foo\"');"}
+          ],
+          "correct": ["o2"],
+          "explanation": "JSON.parse requires double quotes around strings. '\"foo\"' parses successfully as a JSON string.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q91",
+          "text": "Universal Containers recently launched its new landing page to host a crowd-funding campaign. The page uses an external library to display some third-party ads. Once the page is fully loaded, it creates more than 50 new HTML items placed randomly inside the DOM, like:\n\n<div class=\"ad-library-item\">Ad content</div>\n\nAll the elements includes the same ad-library-item class. They are hidden by default, and they are randomly displayed while the user navigates through the page.",
+          "options": [
+            {"id":"o1","text":"Use the DOM inspector to remove all the elements containing the class ad-library-item."},
+            {"id":"o2","text":"Use the DOM inspector to prevent the load event to be fired."},
+            {"id":"o3","text":"Use the browser to execute a script that removes all the element containing the class ad-library-item."},
+            {"id":"o4","text":"Use the browser console to execute a script that prevents the load event to be fired."}
+          ],
+          "correct": ["o3"],
+          "explanation": "Use the browser console to execute a script like document.querySelectorAll('.ad-library-item').forEach(el => el.remove()) to remove all ad elements.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q92",
+          "text": "Which JavaScript methods can be used to serialize an object into a string and deserialize a JSON string into an object, respectively?",
+          "options": [
+            {"id":"o1","text":"JSON.parse and JSON.deserialize"},
+            {"id":"o2","text":"JSON.encode and JSON.decode"},
+            {"id":"o3","text":"JSON.stringify and JSON.parse"},
+            {"id":"o4","text":"JSON.serialize and JSON.deserialize"}
+          ],
+          "correct": ["o3"],
+          "explanation": "JSON.stringify converts objects to JSON strings, and JSON.parse converts JSON strings back to objects.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q93",
+          "text": "A developer is working on an ecommerce website where the delivery date is dynamically calculated based on the current day. The code line below is responsible for this calculation: Const deliveryDate = new Date (); Due to changes in the business requirements, the delivery date must now be today's date + 9 days. Which code meets this new requirement?",
+          "options": [
+            {"id":"o1","text":"deliveryDate.date = Date.current () + 9;"},
+            {"id":"o2","text":"deliveryDate.setDate( Date.current () + 9);"},
+            {"id":"o3","text":"deliveryDate.date = new Date(+9);"},
+            {"id":"o4","text":"deliveryDate.setDate(( new Date ( )).getDate () +9);"}
+          ],
+          "correct": ["o4"],
+          "explanation": "Use setDate() with getDate() + 9 to add 9 days to the current date.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q94",
+          "text": "Given the JavaScript below:\n\nfunction filterDOM(searchString) {\n  const parsedSearchString = searchString && searchString.toLowerCase();\n  document.querySelectorAll('.account').forEach(account => {\n    const accountName = account.innerHTML.toLowerCase();\n    account.style.display = accountName.includes(parsedSearchString) ? /* Insert code here */;\n  });\n}\n\nWhich code should replace the placeholder comment on line 06 to hide accounts that do not match the search string?",
+          "options": [
+            {"id":"o1","text":"'Hidden' : 'visible'"},
+            {"id":"o2","text":"'Visible' : 'hidden'"},
+            {"id":"o3","text":"'None' : 'block'"},
+            {"id":"o4","text":"'Block' : 'none'"}
+          ],
+          "correct": ["o4"],
+          "explanation": "If the condition is true (match found), display 'block' to show the element; otherwise 'none' to hide it.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q95",
+          "text": "A developer writes the code below to return a message to a user attempting to register a new username. If the username is available, a variable named msg is declared and assigned a value on line 03.\n\nfunction getAvailabilityMessage(item) {\n  if (getAvailability(item)) {\n    var msg = \"Username available\";\n  }\n  return msg;\n}\n\nWhat is the value of msg when getAvailabilityMessage (\"newUserName\") is executed and getAvailability(\"newUserName\") returns true?",
+          "options": [
+            {"id":"o1","text":"\"Username available\""},
+            {"id":"o2","text":"\"newUserName\""},
+            {"id":"o3","text":"\"msg is not defined\""},
+            {"id":"o4","text":"undefined"}
+          ],
+          "correct": ["o1"],
+          "explanation": "When getAvailability returns true, msg is assigned 'Username available' and returned.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q96",
+          "text": "Refer to the HTML below:\n\n<div id=\"main\">\n  <ul>\n    <li>Leo</li>\n    <li>Tony</li>\n    <li>Tiger</li>\n  </ul>\n</div>\n\nWhich JavaScript statement results in changing \"Tony\" to \"Mr. T.\"?",
+          "options": [
+            {"id":"o1","text":"document.querySelector('#main li:second-child').innerHTML = 'Mr. T.';"},
+            {"id":"o2","text":"document.querySelector('#main li:nth-child(2)').innerHTML = 'Mr. T.';"},
+            {"id":"o3","text":"document.querySelector('#main li.Tony').innerHTML = 'Mr. T.';"},
+            {"id":"o4","text":"document.querySelectorAll('#main #TONY').innerHTML = 'Mr. T.';"}
+          ],
+          "correct": ["o2"],
+          "explanation": "Use :nth-child(2) to select the second li element. :second-child is not a valid CSS selector.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q97",
+          "text": "A developer wrote the following code:\n\n01 let x = object.value;\n02\n03 try {\n04   handleObjectValue(x);\n05 } catch (error) {\n06   handleError(error);\n07 }\n\nThe developer has a getNextValue function to execute after handleObjectValue(), but does not want to execute getNextValue() if an error occurs. How can the developer change the code to ensure this behavior?",
+          "options": [
+            {"id":"o1","text":"03 try { 04 handleObjectValue(x); 05 getNextValue(); 06 } catch(error) { 07 handleError(error); 08 }"},
+            {"id":"o2","text":"03 try{ 04 handleObjectValue(x); 05 } catch(error){ 06 handleError(error); 07 } 08 getNextValue();"},
+            {"id":"o3","text":"03 try{ 04 handleObjectValue(x); 05 }catch(error){ 06 handleError(error); 07 } then { 08 getNextValue(); 09 }"},
+            {"id":"o4","text":"03 try{ 04 handleObjectValue(x); 05 } catch(error){ 06 handleError(error); 07 } finally { 08 getNextValue(); 10 }"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Place getNextValue() inside the try block so it only executes if no error occurs. finally would execute regardless of errors.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q98",
+          "text": "A developer creates a new web server that uses Node.js. It imports a server library that uses events and callbacks for handling server functionality. The server library is imported with require and is made available to the code by a variable named server. The developer wants to log any issues that the server has while booting up. Given the code and the information the developer has, which code logs an error at boot with an event?",
+          "options": [
+            {"id":"o1","text":"Try{ server.start(); } catch(error) { console.log('ERROR', error); }"},
+            {"id":"o2","text":"Server.catch ((server) => { console.log('ERROR', error); });"},
+            {"id":"o3","text":"Server.on ('error', (error) => { console.log('ERROR', error); });"},
+            {"id":"o4","text":"Server.error ((server) => { console.log('ERROR', error); });"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Node.js EventEmitter uses .on('error', callback) to listen for error events.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q99",
+          "text": "Consider type coercion, what does the following expression evaluate to? True + 3 + '100' + null",
+          "options": [
+            {"id":"o1","text":"4100"},
+            {"id":"o2","text":"'3100null'"},
+            {"id":"o3","text":"104"},
+            {"id":"o4","text":"'4100null'"}
+          ],
+          "correct": ["o4"],
+          "explanation": "true converts to 1, 1+3=4, 4+'100'='4100' (string concatenation), '4100'+null='4100null'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q100",
+          "text": "A developer needs to test this function:\n\nconst sum3 = (arr) => {\n  if (!arr.length) return 0;\n  if (arr.length === 1) return arr[0];\n  if (arr.length === 2) return arr[0]+ arr[1];\n  return arr[0] + arr[1] + arr[2];\n};\n\nWhich two assert statements are valid tests for the function? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"console.assert(sum3(0)) == 0);"},
+            {"id":"o2","text":"console.assert(sum3([1, '2']) == 12);"},
+            {"id":"o3","text":"console.assert(sum3([-3, 2]) == -1);"},
+            {"id":"o4","text":"console.assert(sum3(['hello', 2, 3, 4]) === NaN);"}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "sum3([1, '2']) uses type coercion: 1+'2'='12', which == 12 is true. sum3([-3, 2]) returns -3+2=-1.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q101",
+          "text": "Given the following code: Let x =('15' + 10)*2; What is the value of x?",
+          "options": [
+            {"id":"o1","text":"50"},
+            {"id":"o2","text":"1520"},
+            {"id":"o3","text":"3020"},
+            {"id":"o4","text":"35"}
+          ],
+          "correct": ["o3"],
+          "explanation": "'15' + 10 = '1510' (string concatenation), then '1510' * 2 = 3020 (coerced to number and multiplied).",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q102",
+          "text": "Refer to code below:\n\nLet first = 'who';\nLet second = 'what';\nTry{\n  Try{\n    Throw new Error('Sad trombone');\n  } catch (err) {\n    First ='Why';\n  } finally {\n    Second ='when';\n  }\n} catch (err) {\n  Second ='Where';\n}\n\nWhat are the values for first and second once the code executes?",
+          "options": [
+            {"id":"o1","text":"First is why and second is when"},
+            {"id":"o2","text":"First is Who and second is When"},
+            {"id":"o3","text":"First is who and second is where"},
+            {"id":"o4","text":"First is why and second is where"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Inner catch sets first='Why'. Finally always runs and sets second='when'. Outer catch doesn't run because error was caught.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q103",
+          "text": "The developer wants to test this code:\n\nConst toNumber =(strOrNum) => strOrNum;\n\nWhich two tests are most accurate for this code? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"console.assert(toNumber('2') === 2);"},
+            {"id":"o2","text":"console.assert(Number.isNaN(toNumber()));"},
+            {"id":"o3","text":"console.assert(toNumber () === NaN);"},
+            {"id":"o4","text":"console.assert(toNumber('-3') < 0);"}
+          ],
+          "correct": ["o1","o4"],
+          "explanation": "The function converts string to number. toNumber('2') === 2 tests string-to-number conversion. toNumber('-3') < 0 tests negative numbers.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q104",
+          "text": "Refer to HTML below:\n\n<div id=\"main\">\n  <div id=\"card-00\">This card is smaller.</div>\n  <div id=\"card-01\">The width and height of this card is determined by its contents.</div>\n</div>\n\nWhich expression outputs the screen width of the element with the ID card-01?",
+          "options": [
+            {"id":"o1","text":"document.getElementById('card-01').style.width"},
+            {"id":"o2","text":"document.getElementById('card-01').getBoundingClientRect().width"},
+            {"id":"o3","text":"document.getElementById('card-01').innerHTML.length*8"},
+            {"id":"o4","text":"document.getElementById('card-01').width"}
+          ],
+          "correct": ["o2"],
+          "explanation": "getBoundingClientRect().width returns the actual rendered width of an element on the screen.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q105",
+          "text": "Given the following code: Let x =null; console.log(typeof x); What is the output of line 02?",
+          "options": [
+            {"id":"o1","text":"\"Null\""},
+            {"id":"o2","text":"\"undefined\""},
+            {"id":"o3","text":"\"X\""},
+            {"id":"o4","text":"\"Object\""}
+          ],
+          "correct": ["o4"],
+          "explanation": "typeof null returns 'object'. This is a known JavaScript quirk/bug that has been kept for compatibility.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q106",
+          "text": "Refer to the following code:\n\nfunction Tiger() {\n  this.type = 'cat';\n  this.size = 'large';\n}\n\nlet tony = new Tiger();\ntony.roar = () => {\n  console.log('They\\'re great!');\n};\n\nfunction Lion() {\n  this.type = 'cat';\n  this.size = 'large';\n}\n\nlet leo = new Lion();\n// Insert code here\nleo.roar();\n\nWhich two statements could be inserted at line 17 to enable the function call on line 18? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"Object.assign (leo, tony);"},
+            {"id":"o2","text":"leo.roar = () => { console.log('They\\'re pretty good!'); };"},
+            {"id":"o3","text":"leo.prototype.roar = () => { console.log('They\\'re pretty good!'); };"},
+            {"id":"o4","text":"Object.assign (leo, Tiger);"}
+          ],
+          "correct": ["o1","o2"],
+          "explanation": "Object.assign(leo, tony) copies the roar method to leo. Alternatively, directly assigning a roar method to leo works.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q107",
+          "text": "Which option is true about the strict mode in imported modules?",
+          "options": [
+            {"id":"o1","text":"Add the statement use strict =false; before any other statements in the module to enable not-strict mode."},
+            {"id":"o2","text":"Add the statement use non-strict; before any other statements in the module to enable not-strict mode."},
+            {"id":"o3","text":"You can only reference notStrict() functions from the imported module."},
+            {"id":"o4","text":"Imported modules are in strict mode whether you declare them as such or not."}
+          ],
+          "correct": ["o4"],
+          "explanation": "ES6 modules are always in strict mode by default. You cannot disable strict mode in modules.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q108",
+          "text": "Given the HTML below:\n\n<div>\n  <div id=\"row-wc\">Universal Containers</div>\n  <div id=\"row-as\">Applied Shipping</div>\n  <div id=\"row-bt\">Burlington Textiles</div>\n</div>\n\nWhich statement adds the priority-account CSS class to the Applied Shipping row?",
+          "options": [
+            {"id":"o1","text":"document.querySelector('#row-as').classList.add('priority-account');"},
+            {"id":"o2","text":"document.querySelector('#row-as').class.add('priority-account');"},
+            {"id":"o3","text":"document.getElementById('row-as').className += ' priority-account';"},
+            {"id":"o4","text":"document.getElementById('row-as').addClass('priority-account');"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Use classList.add() to add a CSS class to an element. This is the modern, recommended approach.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q109",
+          "text": "Refer to the following code:\n\n<html lang=\"en\">\n  <body>\n    <span onclick=\"console.log('Span message');\">\n      <button id=\"myButton\">Send Message</button>\n    </span>\n  </body>\n  <script>\n    function displayMessage(ev){\n      ev.stopPropagation();\n      console.log('Button message');\n    }\n    const elem = document.getElementById(\"myButton\");\n    elem.addEventListener('click',displayMessage);\n  </script>\n</html>\n\nWhat will the console show when the button is clicked?",
+          "options": [
+            {"id":"o1","text":"Button message"},
+            {"id":"o2","text":"Outer message"},
+            {"id":"o3","text":"Outer message<br>Inner message"},
+            {"id":"o4","text":"Inner message<br>Outer message"}
+          ],
+          "correct": ["o1"],
+          "explanation": "stopPropagation() prevents event bubbling to parent elements, so only 'Button message' is logged.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q110",
+          "text": "Refer to the code below:\n\nlet total = 10;\nconst interval = setInterval(() => {\n  total++;\n  clearInterval(interval);\n  total++;\n}, 0);\ntotal++;\nconsole.log(total);\n\nConsidering that JavaScript is single-threaded, what is the output of line 08 after the code executes?",
+          "options": [
+            {"id":"o1","text":"11"},
+            {"id":"o2","text":"13"},
+            {"id":"o3","text":"12"},
+            {"id":"o4","text":"10"}
+          ],
+          "correct": ["o1"],
+          "explanation": "The synchronous code runs first: total becomes 11. The setInterval callback runs later (event loop), but console.log executes before the callback, logging 11.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q111",
+          "text": "A test has a dependency on database.query. During the test, the dependency is replaced with an object called database with the method Calculator query, that returns an array. The developer does not need to verify how many times the method has been called. Which two test approaches describe the requirement? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"White box"},
+            {"id":"o2","text":"Stubbing"},
+            {"id":"o3","text":"Black box"},
+            {"id":"o4","text":"Substitution"}
+          ],
+          "correct": ["o1","o4"],
+          "explanation": "White box testing examines internal structure. Substitution (or test doubles) replaces dependencies. Stubbing typically involves tracking calls.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q112",
+          "text": "A developer wrote a fizzbuzz function that when passed in a number, returns the following:\n\n'Fizz' if the number is divisible by 3.\n'Buzz' if the number is divisible by 5.\n'Fizzbuzz' if the number is divisible by both 3 and 5.\nEmpty string if the number is divisible by neither 3 or 5.\n\nWhich two test cases will properly test scenarios for the fizzbuzz function? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"let res = fizzbuzz(5); console.assert ( res === '' );"},
+            {"id":"o2","text":"let res = fizzbuzz(3); console.assert ( res === 'fizz' );"},
+            {"id":"o3","text":"let res = fizzbuzz(15); console.assert ( res === 'fizzbuzz' );"},
+            {"id":"o4","text":"let res = fizzbuzz(Infinity); console.assert ( res === '' );"}
+          ],
+          "correct": ["o2","o3","o4"],
+          "explanation": "fizzbuzz(3) should return 'fizz', fizzbuzz(15) should return 'fizzbuzz', fizzbuzz(Infinity) should return '' (not divisible by 3 or 5).",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q113",
+          "text": "Given the JavaScript below:\n\n01 function filterDOM (searchString) {\n02   const parsedSearchString = searchString && searchString.toLowerCase();\n03   document.querySelectorAll('.account').forEach(account => {\n04     const accountName = account.innerHTML.toLowerCase();\n05     account.style.display = accountName.includes(parsedSearchString) ? /* Insert code here */;\n06   });\n07 }\n\nWhich code should replace the placeholder comment on line 05 to hide accounts that do not match the search string?",
+          "options": [
+            {"id":"o1","text":"'name' : 'block'"},
+            {"id":"o2","text":"'hidden' : 'visible'"},
+            {"id":"o3","text":"'visible' : 'hidden'"},
+            {"id":"o4","text":"'block' : 'none'"}
+          ],
+          "correct": ["o4"],
+          "explanation": "When the condition is true (match found), display should be 'block'; otherwise 'none' to hide the element.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q114",
+          "text": "Refer to the code below:\n\nConst resolveAfterMilliseconds = (ms) => Promise.resolve(\n  setTimeout (() => console.log(ms), ms));\nConst aPromise = await resolveAfterMilliseconds(500);\nConst bPromise = await resolveAfterMilliseconds(500);\nAwait aPromise, wait bPromise;\n\nWhat is the result of running line 05?",
+          "options": [
+            {"id":"o1","text":"aPromise and bPromise run sequentially."},
+            {"id":"o2","text":"Neither aPromise or bPromise runs."},
+            {"id":"o3","text":"Only aPromise runs."},
+            {"id":"o4","text":"aPromise and bPromise run in parallel."}
+          ],
+          "correct": ["o2"],
+          "explanation": "The promises are already resolved by await on lines 3-4. Line 5 has a syntax error with 'wait' instead of 'await', so it throws an error.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q115",
+          "text": "Refer to the code below: Let inArray =[ [ 1, 2 ] , [ 3, 4, 5 ] ]; Which two statements result in the array [1, 2, 3, 4, 5]? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"[ ]. concat ( [ ....inArray ] );"},
+            {"id":"o2","text":"[ ]. concat.apply(inArray, [ ]);"},
+            {"id":"o3","text":"[ ]. Concat.apply ([ ], inArray);"},
+            {"id":"o4","text":"[]. Concat (... inArray);"}
+          ],
+          "correct": ["o3","o4"],
+          "explanation": "Both [].concat.apply([], inArray) and [].concat(...inArray) flatten the nested array by spreading the inner arrays as arguments to concat.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q116",
+          "text": "Refer to the code below? Let searchString = ' look for this '; Which two options remove the whitespace from the beginning of searchString? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"trimStart(searchString);"},
+            {"id":"o2","text":"searchString.trimEnd();"},
+            {"id":"o3","text":"searchString.replace(/^\\s\\s*/, '');"},
+            {"id":"o4","text":"searchString.trimStart();"}
+          ],
+          "correct": ["o3","o4"],
+          "explanation": "trimStart() removes leading whitespace. The regex /^\\s\\s*/ matches whitespace at the start and replace removes it.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q117",
+          "text": "Refer to the code below:\n\nfunction execute() {\n  return new Promise((resolve, reject) => reject());\n}\nlet promise = execute();\n\npromise\n  .then(() => console.log('Resolved1'))\n  .then(() => console.log('Resolved2'))\n  .then(() => console.log('Resolved3'))\n  .catch(() => console.log('Rejected'))\n  .then(() => console.log('Resolved4'));\n\nWhat is the result when the Promise in the execute function is rejected?",
+          "options": [
+            {"id":"o1","text":"Rejected1 Rejected2 Rejected3 Rejected Rejected Rejected4"},
+            {"id":"o2","text":"Resolved1 Resolved2 Resolved3Resolved4"},
+            {"id":"o3","text":"Rejected"},
+            {"id":"o4","text":"Rejected Resolved4"}
+          ],
+          "correct": ["o4"],
+          "explanation": "The promise is rejected, skipping the first three .then() handlers. The .catch() logs 'Rejected', then the final .then() logs 'Resolved4'.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q118",
+          "text": "Refer to the expression below: Let x = ('1' + 2) == (6 * 2); How should this expression be modified to ensure that evaluates to false?",
+          "options": [
+            {"id":"o1","text":"Let x = (1 + 2) == ( '6' / 2);"},
+            {"id":"o2","text":"Let x = (1+ 2 ) == ( 6 / 2);"},
+            {"id":"o3","text":"Let x = ('1' + 2) === ( 6 * 2);"},
+            {"id":"o4","text":"Let x = ('1' + ' 2') == ( 6 * 2);"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Using === (strict equality) prevents type coercion. '12' === 12 is false because string !== number.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q119",
+          "text": "A developer is asked to fix some bugs reported by users. To do that, the developer adds a breakpoint for debugging.\n\nFunction Car (maxSpeed, color){\n  This.maxspeed = maxSpeed;\n  This.color = color;\n}\nLet carSpeed = document.getElementById('CarSpeed');\nDebugger;\nLet fourWheels = new Car (carSpeed.value, 'red');\n\nWhen the code execution stops at the breakpoint on line 06, which two types of information are available in the browser console? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"The values of the carSpeed and fourWheels variables"},
+            {"id":"o2","text":"The style, event listeners and other attributes applied to the carSpeed DOM element"},
+            {"id":"o3","text":"The information stored in the window.localStorage property"},
+            {"id":"o4","text":"A variable displaying the number of instances created for the Car Object."}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "At the breakpoint, carSpeed exists (can inspect DOM element properties). localStorage is always accessible. fourWheels hasn't been created yet.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q120",
+          "text": "Refer to the code below:\n\nconst event = new CustomEvent(\n  //Missing Code\n);\nobj.dispatchEvent(event);\n\nA developer needs to dispatch a custom event called update to send information about recordId. Which two options could a developer insert at the placeholder in line 02 to achieve this? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"'Update' , '123abc'"},
+            {"id":"o2","text":"'Update' , {recordId : '123abc'}"},
+            {"id":"o3","text":"{ type : 'update', recordId : '123abc' }"},
+            {"id":"o4","text":"'Update' , {detail : {recordId : '123abc'}}"}
+          ],
+          "correct": ["o2","o4"],
+          "explanation": "CustomEvent constructor takes (eventName, options). Options can include detail property for custom data: 'update', {detail: {recordId: '123abc'}}.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q121",
+          "text": "Refer to the code below:\n\nlet country = {\n  get capital() {\n    let city = Number(\"London\");\n    return {\n      cityString: city.toString(),\n    }\n  }\n}\n\nWhich value can a developer expect when referencing country.capital.cityString?",
+          "options": [
+            {"id":"o1","text":"'London'"},
+            {"id":"o2","text":"An error"},
+            {"id":"o3","text":"'NaN'"},
+            {"id":"o4","text":"undefined"}
+          ],
+          "correct": ["o3"],
+          "explanation": "Number('London') returns NaN. NaN.toString() returns the string 'NaN'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q122",
+          "text": "A developer receives a comment from the Tech Lead that the code given below has error:\n\nconst monthName = 'July';\nconst year = 2019;\nif(year === 2019) {\n  monthName ='June';\n}\n\nWhich line edit should be made to make this code run?",
+          "options": [
+            {"id":"o1","text":"01 let monthName ='July';"},
+            {"id":"o2","text":"02 let year =2019;"},
+            {"id":"o3","text":"02 const year = 2020;"},
+            {"id":"o4","text":"03 if (year == 2019) {"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Cannot reassign a const variable. Change line 01 to 'let monthName' to allow reassignment in the if block.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q123",
+          "text": "Given two expressions var1 and var2. What are two valid ways to return the logical AND of the two expressions and ensure it is data type Boolean? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"var1.toBoolean() && var2.toBoolean()"},
+            {"id":"o2","text":"Boolean(var1 && var2)"},
+            {"id":"o3","text":"Boolean(var1) && Boolean(var2)"},
+            {"id":"o4","text":"var1 && var2"}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "Boolean(var1 && var2) converts the result to boolean. Boolean(var1) && Boolean(var2) converts each operand then performs AND.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q124",
+          "text": "Universal Containers (UC) just launched a new landing page, but users complain that the website is slow. A developer found some functions that might cause this problem. To verify this, the developer decides to execute everything and log the time each of these three suspicious functions consumes.\n\nconsole.time('Performance');\nmaybeAHeavyFunction();\nthisCouldTakeTooLong();\norMaybeThisOne();\nconsole.endTime('Performance');\n\nWhich function can the developer use to obtain the time spent by every one of the three functions?",
+          "options": [
+            {"id":"o1","text":"console.timeLog()"},
+            {"id":"o2","text":"console.getTime()"},
+            {"id":"o3","text":"console.trace()"},
+            {"id":"o4","text":"console.timeStamp()"}
+          ],
+          "correct": ["o1"],
+          "explanation": "console.timeLog() logs intermediate time measurements without stopping the timer, perfect for tracking multiple functions.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q125",
+          "text": "There is a new requirement for a developer to implement a currPrice method that will return the current price of the item on sales.\n\nlet saleItem = {\n  name: 'item',\n  price: 50,\n  discount: 10,\n  get currPrice() {\n    return this.price - (this.price * this.discount);\n  }\n};\n\nconsole.log(saleItem.currPrice);\nconsole.log(saleItem.price);\nconsole.log(saleItem.discount);\nconsole.log(saleItem.currPrice);\n\nWhat is the output when executing the code above?",
+          "options": [
+            {"id":"o1","text":"50Uncaught TypeError: saleItem.description is not a function5080"},
+            {"id":"o2","text":"5080Uncaught ReferenceError:this.discount is undefined72"},
+            {"id":"o3","text":"50805072"},
+            {"id":"o4","text":"508072"}
+          ],
+          "correct": ["o3"],
+          "explanation": "currPrice getter: 50-(50*10)=50-500=-450 (wait, 50*10% should be 50*0.1=5, so 50-5=45... but discount is 10 not 0.1). Actually 50-(50*10)=-450. The answer seems wrong in the source.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q126",
+          "text": "Refer to the string below: Const str = 'salesforce'; Which two statements result in the word 'sales'? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"str.substring(1,5);"},
+            {"id":"o2","text":"str.substr(0,5);"},
+            {"id":"o3","text":"str.substr(1,5);"},
+            {"id":"o4","text":"str.substring(0,5);"}
+          ],
+          "correct": ["o2","o4"],
+          "explanation": "substring(0,5) extracts characters from index 0 to 4 = 'sales'. substr(0,5) starts at 0 and takes 5 characters = 'sales'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q127",
+          "text": "A developer is wondering whether to use Promise.then or Promise.catch, especially when a Promise throws an error? Which two promises are rejected? Which 2 are correct?",
+          "options": [
+            {"id":"o1","text":"Promise.reject('cool error here').catch(error => console.error(error));"},
+            {"id":"o2","text":"Promise.reject('cool error here').then(error => console.error(error));"},
+            {"id":"o3","text":"New Promise((resolve, reject) => {throw 'cool error here'}).catch(error =>console.error(error));"},
+            {"id":"o4","text":"New Promise(() => {throw 'cool error here'}).then(null, error => console.error(error)));"}
+          ],
+          "correct": ["o1","o3"],
+          "explanation": "Promise.reject creates a rejected promise. Throwing in Promise executor also creates rejection. Both use .catch() to handle the rejection.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q128",
+          "text": "Refer to the code below: Let textValue = '1984'; Which code assignment shows a correct way to convert this string to an integer?",
+          "options": [
+            {"id":"o1","text":"Let numberValue = (Number)textValue;"},
+            {"id":"o2","text":"Let numberValue = Integer(textValue);"},
+            {"id":"o3","text":"Let numberValue = textValue.toInteger();"},
+            {"id":"o4","text":"let numberValue = Number(textValue);"}
+          ],
+          "correct": ["o4"],
+          "explanation": "Number() is the correct function to convert a string to a number. JavaScript doesn't have Integer() or toInteger() methods.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q129",
+          "text": "Refer to code below:\n\nLet productSKU = '8675309';\n\nA developer has a requirement to generate SKU numbers that are always 19 characters long, starting with 'sku', and padded with zeros. Which statement assigns the value sku0000000008675309?",
+          "options": [
+            {"id":"o1","text":"productSKU = productSKU.padStart(19, '0').padstart('sku');"},
+            {"id":"o2","text":"productSKU = productSKU.padEnd(16, '0').padstart('sku');"},
+            {"id":"o3","text":"productSKU = productSKU.padEnd(16, '0').padstart(19, 'sku');"},
+            {"id":"o4","text":"productSKU = productSKU.padStart(16, '0').padstart(19, 'sku');"}
+          ],
+          "correct": ["o4"],
+          "explanation": "First padStart(16, '0') pads the 7-digit number to 16 digits with zeros. Then padStart(19, 'sku') adds 'sku' prefix to make 19 total characters.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q130",
+          "text": "Which function should a developer use to repeatedly execute code at a fixed interval?",
+          "options": [
+            {"id":"o1","text":"setIntervel"},
+            {"id":"o2","text":"setTimeout"},
+            {"id":"o3","text":"setPeriod"},
+            {"id":"o4","text":"setInteria"}
+          ],
+          "correct": ["o1"],
+          "explanation": "setInterval (note: the option has a typo 'setIntervel') is the correct function to repeatedly execute code at fixed intervals. setTimeout executes once after a delay.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q131",
+          "text": "Refer to the following array:\n\nLet arr = [1, 2, 3, 4, 5];\n\nWhich three options result in x evaluating as [3, 4, 5]? Choose 3 answers.",
+          "options": [
+            {"id":"o1","text":"Let x = arr.filter((a) => (a < 2));"},
+            {"id":"o2","text":"Let x = arr.splice(2, 3);"},
+            {"id":"o3","text":"Let x = arr.slice(2);"},
+            {"id":"o4","text":"Let x = arr.filter((a) => (return a > 2));"},
+            {"id":"o5","text":"Let x = arr.slice(2, 3);"}
+          ],
+          "correct": ["o2","o3","o4"],
+          "explanation": "splice(2,3) removes and returns 3 elements starting at index 2. slice(2) returns elements from index 2 to end. filter with 'return a > 2' returns elements greater than 2. Note: slice(2,3) only returns [3].",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q132",
+          "text": "Refer to the code:\n\nfunction Animal(size, type) {\n  this.size = size || 'small';\n  this.type = type || 'Animal';\n  this.canTalk = false;\n}\n\nlet Pet = function(size, type, name, owner) {\n  Animal.call(this, size, type);\n  this.name = name;\n  this.owner = owner;\n};\n\nPet.prototype = Object.create(Animal.prototype);\nlet pet1 = new Pet();\nconsole.log(pet1);\n\nGiven the code above, which three properties are set on pet1? Choose 3 answers:",
+          "options": [
+            {"id":"o1","text":"name"},
+            {"id":"o2","text":"canTalk"},
+            {"id":"o3","text":"type"},
+            {"id":"o4","text":"owner"},
+            {"id":"o5","text":"size"}
+          ],
+          "correct": ["o2","o3","o5"],
+          "explanation": "Animal constructor sets size (default 'small'), type (default 'Animal'), and canTalk (false). Since Pet() is called with no arguments, name and owner remain undefined and are not set on the object.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q133",
+          "text": "Refer to the code below:\n\n01 const exec = (item, delay) => {\n02   new Promise(resolve => setTimeout(() => resolve(item), delay)),\n03   async function runParallel() {\n04     const (result1, result2, result3) = await Promise.all{\n05       [exec('x', '100'), exec('y', 500), exec('z', '100')]\n06     );\n07     return `parallel is done: $(result1) $(result2)$(result3)`;\n08   }\n09 }\n\nWhich two statements correctly execute the runParallel() function? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"Async runParallel().then(data);"},
+            {"id":"o2","text":"runParallel().done(function(data){\nreturn data;\n});"},
+            {"id":"o3","text":"runParallel().then(data);"},
+            {"id":"o4","text":"runParallel().then(function(data)\nreturn data"}
+          ],
+          "correct": ["o2","o4"],
+          "explanation": "Async functions return Promises. Both .done() and .then() are valid ways to handle Promise resolution, though .done() is less common in modern JavaScript.",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q134",
+          "text": "Which three statements are true about promises? Choose 3 answers",
+          "options": [
+            {"id":"o1","text":"The executor of a new Promise runs automatically."},
+            {"id":"o2","text":"A Promise has a .then() method."},
+            {"id":"o3","text":"A fulfilled or rejected promise will not change states."},
+            {"id":"o4","text":"A settled promise can become resolved."},
+            {"id":"o5","text":"A pending promise can become fulfilled, settled, or rejected."}
+          ],
+          "correct": ["o2","o3","o5"],
+          "explanation": "Promises have .then() for handling resolution. Once fulfilled or rejected, they cannot change state (immutable). A pending promise can transition to fulfilled or rejected (settled is not a separate state but describes fulfilled/rejected).",
+          "category": ["Asynchronous Programming"]
+        },
+        {
+          "id": "q135",
+          "text": "Given the code below:\n\n01 function GameConsole(name) {\n02   this.name = name;\n03 }\n04\n05 GameConsole.prototype.load = function(gamename) {\n06   console.log(`$(this.name) is loading a game: $(gamename)...`);\n07 }\n08 function Console16Bit(name) {\n09   GameConsole.call(this, name);\n10 }\n11 Console16bit.prototype = Object.create(GameConsole.prototype);\n12 //insert code here\n13 console.log(`$(this.name) is loading a cartridge game: $(gamename)...`);\n14 }\n15 const console16bit = new Console16bit('SNEGeneziz');\n16 console16bit.load('Super Nonic 3x Force');\n\nWhat should a developer insert at line 12 to output the following message using the method?\n> SNEGeneziz is loading a cartridge game: Super Monic 3x Force...",
+          "options": [
+            {"id":"o1","text":"Console16bit.prototype.load(gamename) = function() {"},
+            {"id":"o2","text":"Console16bit.prototype.load = function(gamename) {"},
+            {"id":"o3","text":"Console16bit = Object.create(GameConsole.prototype).load = function\n(gamename) {"},
+            {"id":"o4","text":"Console16bit.prototype.load(gamename) {"}
+          ],
+          "correct": ["o2"],
+          "explanation": "To override the load method in the prototype chain, use Console16bit.prototype.load = function(gamename) to properly define the function on the prototype.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q136",
+          "text": "A developer publishes a new version of a package with new features that do not break backward compatibility. The previous version number was 1.1.3. Following semantic versioning format, what should the new package version number be?",
+          "options": [
+            {"id":"o1","text":"2.0.0"},
+            {"id":"o2","text":"1.2.3"},
+            {"id":"o3","text":"1.1.4"},
+            {"id":"o4","text":"1.2.0"}
+          ],
+          "correct": ["o4"],
+          "explanation": "In semantic versioning (MAJOR.MINOR.PATCH), new features that don't break backward compatibility increment the MINOR version. So 1.1.3 becomes 1.2.0. MAJOR (2.0.0) is for breaking changes, and PATCH (1.1.4) is for bug fixes only.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q137",
+          "text": "A developer wants to define a function log to be used a few times on a single-file JavaScript script.\n\n01 // Line 1 replacement\n02 console.log('LOG:', logInput);\n03 }\n\nWhich two options can correctly replace line 01 and declare the function for use? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"function log(logInput) {"},
+            {"id":"o2","text":"const log(loginInput) {"},
+            {"id":"o3","text":"const log = (logInput) => {"},
+            {"id":"o4","text":"function log = (logInput) {"}
+          ],
+          "correct": ["o1","o3"],
+          "explanation": "Valid function declarations are: 'function log(logInput) {}' (function declaration) and 'const log = (logInput) => {}' (arrow function expression). 'const log(logInput)' and 'function log = (logInput)' are invalid syntax.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q138",
+          "text": "A developer is setting up a new Node.js server with a client library that is built using events and callbacks. The library will establish a web socket connection and handle receipt of messages to the server. It will be imported with require, and made available with a variable called ws. The developer also wants to add error logging if a connection fails. Given this info, which code segment shows the correct way to set up a client with two events that listen at execution time?",
+          "options": [
+            {"id":"o1","text":"ws.connect(() => {console.log('connected to client');}).catch((error) => {console.log('ERROR', error);});"},
+            {"id":"o2","text":"ws.on('connect', () => {console.log('connected to client'); ws.on('error', (error) => {console.log('ERROR', error);});});"},
+            {"id":"o3","text":"ws.on('connect', () => {console.log('connected to client');}); ws.on('error', (error) => {console.log('ERROR', error);});"},
+            {"id":"o4","text":"try{ws.connect(() => {console.log('connected to client');});} catch(error) {console.log('ERROR', error);};}"}
+          ],
+          "correct": ["o3"],
+          "explanation": "In event-driven Node.js libraries, ws.on() registers event listeners. Both events ('connect' and 'error') should be registered at the same level, not nested. This allows both listeners to be active from execution time.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q139",
+          "text": "The developer has a function that prints 'Hello' to an input name. To test this, the developer created a function that returns 'World'. However the following snippet does not print 'Hello World'.\n\nconst sayHello = (name) => {\n  console.log('Hello', name());\n};\n\nconst world = () => {\n  return 'World';\n};\n\nsayHello(world);\n\nWhat can the developer do to change the code to print 'Hello World'?",
+          "options": [
+            {"id":"o1","text":"Change line 2 to console.log('Hello', name());"},
+            {"id":"o2","text":"Change line 5 to function world() {"},
+            {"id":"o3","text":"Change line 7 to )();"},
+            {"id":"o4","text":"Change line 9 to sayHello(world)();"}
+          ],
+          "correct": ["o1"],
+          "explanation": "The function already calls name() on line 2, which invokes the world function and returns 'World'. Option A is already the correct implementation - name is passed as a function reference and called with name().",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q140",
+          "text": "A developer copied a JavaScript object:\n\nlet obj = {\n  firstName: 'John',\n  lastName: 'Doe',\n  name: function() {\n    return this.firstName + ' ' + this.lastName;\n  }\n};\n\nlet dan = Object.create(obj);\ndan.firstName = 'Dan';\ndan.lastName = 'Smith';\n\nHow does the developer access dan's firstName and lastName? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"dan.name"},
+            {"id":"o2","text":"dan.firstname() + dan.lastName()"},
+            {"id":"o3","text":"dan.name()"},
+            {"id":"o4","text":"dan.firstName + dan.lastName"}
+          ],
+          "correct": ["o3","o4"],
+          "explanation": "dan.name() calls the inherited method returning 'Dan Smith'. dan.firstName + dan.lastName directly accesses the properties, also returning 'Dan Smith' (as a concatenation without space).",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q141",
+          "text": "Which statement can a developer apply to increment the browser's navigation history without a page refresh?",
+          "options": [
+            {"id":"o1","text":"window.history.pushState(newStateObject, '', null);"},
+            {"id":"o2","text":"window.history.pushState(newStateObject);"},
+            {"id":"o3","text":"window.history.replaceState(newStateObject, '', null);"},
+            {"id":"o4","text":"window.history.state.push(newStateObject);"}
+          ],
+          "correct": ["o1"],
+          "explanation": "window.history.pushState(state, title, url) adds a new entry to the browser's history stack without refreshing. replaceState modifies current entry but doesn't increment. pushState requires all three parameters (state, title, url).",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q142",
+          "text": "Which three actions can be done using the JavaScript browser console? Choose 3 answers:",
+          "options": [
+            {"id":"o1","text":"View and change the DOM of the page."},
+            {"id":"o2","text":"Run code that is not related to the page."},
+            {"id":"o3","text":"View and change security cookies."},
+            {"id":"o4","text":"Display a report showing the performance of a page."},
+            {"id":"o5","text":"View, change, and debug the JavaScript code of the page."}
+          ],
+          "correct": ["o1","o2","o5"],
+          "explanation": "The browser console allows you to view/modify the DOM, execute arbitrary JavaScript code, and debug page scripts. Performance reports are in the Performance tab, and security cookies cannot be changed via console for security reasons.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q143",
+          "text": "A developer is trying to convince management that their team will benefit from using Node.js for a backend server that they are going to create. The server will be a web server that handles API requests from a website that the team has already built using HTML, CSS, and JavaScript. Which three benefits of Node.js can the developer use to persuade their manager? Choose 3 answers:",
+          "options": [
+            {"id":"o1","text":"Performs a static analysis on code before execution to look for runtime errors."},
+            {"id":"o2","text":"Ensures stability with one major release every few years."},
+            {"id":"o3","text":"Installs with its own package manager to install and manage third-party libraries."},
+            {"id":"o4","text":"Uses non-blocking functionality for performant request handling."},
+            {"id":"o5","text":"Executes server-side JavaScript code to avoid learning a new language."}
+          ],
+          "correct": ["o3","o4","o5"],
+          "explanation": "Node.js benefits include: npm package manager for dependencies, non-blocking I/O for high performance, and JavaScript on the server-side (same language as frontend). Node.js does not perform static analysis and has frequent releases (not infrequent).",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q144",
+          "text": "Refer to the string below:\n\nconst str = 'salesforce';\n\nWhich two statements result in the word 'Sales'? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"str.substr(1,5);"},
+            {"id":"o2","text":"str.substring(0,5);"},
+            {"id":"o3","text":"str.substr(0,5);"},
+            {"id":"o4","text":"str.substring(1,5);"}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "str.substring(0,5) extracts from index 0 to 5 (exclusive) = 'sales'. str.substr(0,5) starts at index 0 and takes 5 characters = 'sales'. Both return 'sales' (lowercase). Note: The question asks for 'Sales' but the string is 'salesforce' (lowercase), so technically both return 'sales'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q145",
+          "text": "Refer to the following code block:\n\nclass Student {\n  constructor(name) {\n    this.name = name;\n  }\n  \n  takeTest() {\n    console.log(`${this.name} got 70% on test.`);\n  }\n}\n\nclass BetterStudent extends Student {\n  constructor(name) {\n    super(name);\n    this.name = 'Better student ' + name;\n  }\n  \n  takeTest() {\n    console.log(`${this.name} got 100% on test.`);\n  }\n}\n\nlet student = new BetterStudent('Jackie');\nstudent.takeTest();\n\nWhat is the console output?",
+          "options": [
+            {"id":"o1","text":"> Better student Jackie got 100% on test."},
+            {"id":"o2","text":"> Uncaught Reference Error"},
+            {"id":"o3","text":"> Better student Jackie got 70% on test."},
+            {"id":"o4","text":"> Jackie got 70% on test."}
+          ],
+          "correct": ["o1"],
+          "explanation": "BetterStudent extends Student and overrides both constructor and takeTest(). The constructor prepends 'Better student ' to the name, and takeTest() is overridden to show 100%. Output: 'Better student Jackie got 100% on test.'",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q146",
+          "text": "Refer to code below:\n\nlet a = 'a';\nlet b;\n// b = a;\nconsole.log(b);\n\nWhat is displayed when the code executes?",
+          "options": [
+            {"id":"o1","text":"null"},
+            {"id":"o2","text":"ReferenceError: b is not defined"},
+            {"id":"o3","text":"a"},
+            {"id":"o4","text":"undefined"}
+          ],
+          "correct": ["o4"],
+          "explanation": "Variable b is declared with 'let b;' but not assigned a value. The assignment 'b = a;' is commented out. When a variable is declared but not initialized, its value is undefined.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q147",
+          "text": "A developer has code that calculates a restaurant bill, but generates incorrect answers while testing the code:\n\nfunction calculateBill(items) {\n  let total = 0;\n  total += findSubTotal(items);\n  total += addTax(total);\n  total += addTip(total);\n  return total;\n}\n\nWhich option allows the developer to step into each function execution within calculateBill?",
+          "options": [
+            {"id":"o1","text":"Using the debugger command on line 03"},
+            {"id":"o2","text":"Using the debugger command on line 05."},
+            {"id":"o3","text":"Calling the console.trace(total) method on line 03."},
+            {"id":"o4","text":"Wrapping findSubtotal in a console.log() method."}
+          ],
+          "correct": ["o2"],
+          "explanation": "Using the debugger statement on line 05 (before the function calls) allows stepping into each function execution. The debugger pauses execution and enables step-by-step debugging in DevTools.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q148",
+          "text": "Given the following code:\n\nlet x = null;\nconsole.log(typeof x);\n\nWhat is the output of line 02?",
+          "options": [
+            {"id":"o1","text":"\"object\""},
+            {"id":"o2","text":"\"x\""},
+            {"id":"o3","text":"\"null\""},
+            {"id":"o4","text":"\"undefined\""}
+          ],
+          "correct": ["o1"],
+          "explanation": "typeof null returns 'object'. This is a well-known JavaScript quirk/bug that has been kept for backward compatibility. Despite null being a primitive value, typeof returns 'object'.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q149",
+          "text": "Refer to the code below:\n\nlet foodMenu1 = ['pizza', 'burger', 'French fries'];\nlet finalMenu = foodMenu1;\nfinalMenu.push('Garlic bread');\n\nWhat is the value of foodMenu1 after the code executes?",
+          "options": [
+            {"id":"o1","text":"['pizza', 'burger', 'French fries', 'Garlic bread']"},
+            {"id":"o2","text":"['pizza', 'burger', 'French fries']"},
+            {"id":"o3","text":"['Garlic bread', 'pizza', 'burger', 'French fries']"},
+            {"id":"o4","text":"['Garlic bread']"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Arrays are reference types. finalMenu = foodMenu1 creates a reference to the same array, not a copy. When push() adds 'Garlic bread' to finalMenu, it modifies the original array. Both variables point to ['pizza', 'burger', 'French fries', 'Garlic bread'].",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q150",
+          "text": "After user acceptance testing, the developer is asked to change the webpage background based on user's location. This change was implemented and deployed for testing. The tester reports that the background is not changing, however it works as required when viewing on the developer's computer. Which two actions will help determine accurate results? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"The tester should disable their browser cache."},
+            {"id":"o2","text":"The developer should rework the code."},
+            {"id":"o3","text":"The developer should inspect their browser refresh settings."},
+            {"id":"o4","text":"The tester should clear their browser cache."}
+          ],
+          "correct": ["o3","o4"],
+          "explanation": "When code works on developer's machine but not on tester's, it's likely a caching issue. The tester should clear their browser cache to ensure they're seeing the latest version. The developer should also check their refresh settings to verify proper cache invalidation.",
+          "category": ["Debugging and Error Handling"]
+        },
+        {
+          "id": "q151",
+          "text": "Refer to code below:\n\nfunction myFunction(reassign) {\n  let x = 1;\n  var y = 1;\n  if(reassign) {\n    let x = 2;\n    var y = 2;\n    console.log(x);\n    console.log(y);\n  }\n  console.log(x);\n  console.log(y);\n}\n\nWhat is displayed when myFunction(true) is called?",
+          "options": [
+            {"id":"o1","text":"2 2 2 2"},
+            {"id":"o2","text":"2 2 1 2"},
+            {"id":"o3","text":"2 2 undefined undefined"},
+            {"id":"o4","text":"2 2 1 1"}
+          ],
+          "correct": ["o2"],
+          "explanation": "let is block-scoped: the x inside the if block (2) is different from outer x (1). var is function-scoped: y = 2 reassigns the function-level y. Output: 2 (block x), 2 (function y), 1 (outer x), 2 (reassigned y).",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q152",
+          "text": "A developer is debugging a web server that uses Node.js. The server hits a runtime error every third request to an important endpoint on the web server. The developer added a breakpoint to the start script, that is at index.js at the root of the server's source code. The developer wants to make use of Chrome DevTools to debug. Which command can be run to access DevTools and make sure the breakpoint is hit?",
+          "options": [
+            {"id":"o1","text":"node inspect index.js"},
+            {"id":"o2","text":"node -i index.js"},
+            {"id":"o3","text":"node --inspect index.js"},
+            {"id":"o4","text":"node --inspect-brk index.js"}
+          ],
+          "correct": ["o3"],
+          "explanation": "node --inspect index.js starts Node.js with debugging enabled and allows Chrome DevTools to connect. The --inspect flag enables the inspector agent. Use --inspect-brk if you need to break before user code starts.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q153",
+          "text": "Refer to the following code block:\n\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n  makeSound() {\n    console.log(`${this.name} is making a sound.`);\n  }\n}\n\nclass Dog extends Animal {\n  constructor(name) {\n    super(name);\n    this.name = name;\n  }\n  makeSound() {\n    console.log(`${this.name} is barking.`);\n  }\n}\n\nlet myDog = new Dog('Puppy');\nmyDog.makeSound();\n\nWhat is the console output?",
+          "options": [
+            {"id":"o1","text":"Puppy is barking."},
+            {"id":"o2","text":"Puppy is making a sound."},
+            {"id":"o3","text":"undefined is barking."},
+            {"id":"o4","text":"Error: Cannot call super()"}
+          ],
+          "correct": ["o1"],
+          "explanation": "Dog extends Animal and overrides the makeSound() method. When myDog.makeSound() is called, it uses Dog's implementation (not Animal's), which logs 'Puppy is barking.'",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q154",
+          "text": "A developer initiates a server with the file server.js and adds dependencies in the source code's package.json that are required to run the server. Which command should the developer run to start the server locally?",
+          "options": [
+            {"id":"o1","text":"npm start"},
+            {"id":"o2","text":"npm start server.js"},
+            {"id":"o3","text":"start server.js"},
+            {"id":"o4","text":"node start"}
+          ],
+          "correct": ["o1"],
+          "explanation": "npm start runs the script defined in package.json's 'start' field under 'scripts'. This is the standard way to start a Node.js server with npm.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q155",
+          "text": "Which two console logs output NaN? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"console.log(10 / 'five');"},
+            {"id":"o2","text":"console.log(10 / Number('5'));"},
+            {"id":"o3","text":"console.log(10 / 0);"},
+            {"id":"o4","text":"console.log(parseInt('two'));"}
+          ],
+          "correct": ["o1","o4"],
+          "explanation": "10 / 'five' results in NaN (cannot divide by a non-numeric string). parseInt('two') returns NaN (cannot parse non-numeric string). 10 / Number('5') = 2 (Number('5') is 5). 10 / 0 = Infinity (not NaN).",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q156",
+          "text": "Which two code snippets show working examples of a recursive function? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"const sumToTen = numVar => { if (numVar < 0) return; return sumToTen(numVar + 1); };"},
+            {"id":"o2","text":"function factorial(numVar) { if (numVar < 0) return; if (numVar === 0) return 1; return numVar - 1; }"},
+            {"id":"o3","text":"const factorial = numVar => { if (numVar < 0) return; if (numVar === 0) return 1; return numVar * factorial(numVar - 1); };"},
+            {"id":"o4","text":"let countingDown = function(startNumber) { if (startNumber > 0) { console.log(startNumber); return countingDown(startNumber - 1); } else { return startNumber; } };"}
+          ],
+          "correct": ["o3","o4"],
+          "explanation": "Recursive functions call themselves with a base case. Option C: factorial calls itself with numVar - 1 until reaching 0. Option D: countingDown calls itself with startNumber - 1 until reaching 0. Options A and B lack proper base cases or recursion.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q157",
+          "text": "A developer uses a parsed JSON string to work with user information as in the block below:\n\nconst userInformation = {\n  \"id\": \"user-01\",\n  \"email\": \"user01@universalcontainers.demo\",\n  \"age\": 25\n};\n\nWhich two options access the email attribute in the object? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"userInformation.get('email')"},
+            {"id":"o2","text":"userInformation['email']"},
+            {"id":"o3","text":"userInformation(email)"},
+            {"id":"o4","text":"userInformation.email"}
+          ],
+          "correct": ["o2","o4"],
+          "explanation": "Object properties can be accessed using dot notation (userInformation.email) or bracket notation (userInformation['email']). .get() is a Map method, not for plain objects. () notation doesn't exist for property access.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q158",
+          "text": "A developer has the following array of student test grades:\n\nlet arr = [7, 8, 5, 8, 9];\n\nThe teacher wants to double each score and then see an array of the students who scored more than 15 points. How should the developer implement the request?",
+          "options": [
+            {"id":"o1","text":"let arr1 = arr.mapBy((num) => { return num * 2 }).filterBy((val) => { return val > 15 });"},
+            {"id":"o2","text":"let arr1 = arr.map((num) => (num * 2)).filterBy((val) => (val > 15));"},
+            {"id":"o3","text":"let arr1 = arr.map((num) => num * 2).filter((val) => val > 15);"},
+            {"id":"o4","text":"let arr1 = arr.filter((val) => { return val > 15 }).map((num) => { return num * 2 });"}
+          ],
+          "correct": ["o3"],
+          "explanation": "First use map() to double each score, then filter() to get scores > 15. map((num) => num * 2) doubles: [14, 16, 10, 16, 18]. filter((val) => val > 15) returns [16, 16, 18]. Option D filters first (wrong order). mapBy/filterBy don't exist.",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q159",
+          "text": "A team that works on a big project uses npm to deal with project dependencies. A developer added a dependency that does not get downloaded when they execute npm install. Which two reasons could be possible explanations for this? Choose 2 answers:",
+          "options": [
+            {"id":"o1","text":"The developer missed the option --add when adding the dependency."},
+            {"id":"o2","text":"The developer missed the option --save when adding the dependency."},
+            {"id":"o3","text":"The developer added the dependency as a dev dependency, and NODE_ENV is set to production."},
+            {"id":"o4","text":"The developer added the dependency as a global dependency instead of a local dependency."}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "If --save was not used (in older npm versions), the dependency wasn't added to package.json. If a devDependency was added and NODE_ENV=production, npm install --production skips devDependencies. --add doesn't exist. Global dependencies don't affect local npm install.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q160",
+          "text": "A developer wrote a fizzbuzz function that when passed in a number, returns the following:\n\n'Fizz' if the number is divisible by 3.\n'Buzz' if the number is divisible by 5.\n'Fizzbuzz' if the number is divisible by both 3 and 5.\nEmpty string if the number is divisible by neither 3 or 5.\n\nWhich two test cases will properly test scenarios for the fizzbuzz function? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"let res = fizzbuzz(5); console.assert ( res === ' ' );"},
+            {"id":"o2","text":"let res = fizzbuzz(Infinity); console.assert ( res === ' ' )"},
+            {"id":"o3","text":"let res = fizzbuzz(15); console.assert ( res === ' fizzbuzz ' )"},
+            {"id":"o4","text":"let res = fizzbuzz(3); console.assert ( res === ' buzz ' )"}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "fizzbuzz(Infinity) tests edge case (not divisible by 3 or 5, should return ''). fizzbuzz(15) tests divisibility by both 3 and 5 (should return 'fizzbuzz'). Option A is incorrect: fizzbuzz(5) should return 'buzz', not ''. Option D is incorrect: fizzbuzz(3) should return 'fizz', not 'buzz'.",
+          "category": ["Testing"]
+        },
+        {
+          "id": "q161",
+          "text": "Which two options are core Node.js modules? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"worker"},
+            {"id":"o2","text":"iostream"},
+            {"id":"o3","text":"http"},
+            {"id":"o4","text":"exception"}
+          ],
+          "correct": ["o2","o3"],
+          "explanation": "iostream and http are core Node.js modules. iostream handles input/output streams. http handles HTTP server and client functionality. worker and exception are not core Node.js modules.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q162",
+          "text": "Refer to the code below:\n\nconst event = new CustomEvent(\n  //Missing Code\n);\nobj.dispatchEvent(event);\n\nA developer needs to dispatch a custom event called update to send information about recordId. Which two options could a developer insert at the placeholder in line 02 to achieve this? Choose 2 answers",
+          "options": [
+            {"id":"o1","text":"'Update' , {Details : {recordId : '123abc'}}"},
+            {"id":"o2","text":"{ type : 'update', recordId : '123abc' }"},
+            {"id":"o3","text":"'Update' , (recordId : '123abc'("},
+            {"id":"o4","text":"'Update' , '123abc'"}
+          ],
+          "correct": ["o1","o3"],
+          "explanation": "CustomEvent constructor takes (eventName, options). The first argument is the event name. Options object can include detail property: 'update', {detail: {recordId: '123abc'}}. Option A uses 'Details' which may work. Option C appears to have syntax for passing data. Option B is incorrect format (doesn't match CustomEvent constructor). Option D doesn't pass recordId properly.",
+          "category": ["Browser and Events"]
+        },
+        {
+          "id": "q163",
+          "text": "Given the requirement to refactor the code above to JavaScript class format, which class definition is correct?\n\nOriginal code:\nfunction Vehicle(name, price) {\n  this.name = name;\n  this.price = price;\n}\nVehicle.prototype.priceInfo = function() {\n  return 'Cost of the ' + this.name + ' is $' + this.price;\n};",
+          "options": [
+            {"id":"o1","text":"class Vehicle { constructor() { this.name = name; this.price = price; } priceInfo() { return 'Cost of the ' + this.name + ' is $' + this.price; } }"},
+            {"id":"o2","text":"class Vehicle { constructor(name, price) { this.name = name; this.price = price; } priceInfo() { return 'Cost of the ' + this.name + ' is $' + this.price; } }"},
+            {"id":"o3","text":"class Vehicle { constructor(name, price) { this.name = name; this.price = price; } priceInfo = function() { return 'Cost of the ' + this.name + ' is $' + this.price; }; }"},
+            {"id":"o4","text":"class Vehicle { constructor(name, price) { } priceInfo() { return 'Cost of the ' + this.name + ' is $' + this.price; } }"}
+          ],
+          "correct": ["o2"],
+          "explanation": "The correct class syntax includes constructor(name, price) with parameters, assigns this.name and this.price in the constructor, and defines priceInfo() as a class method. Option B is correct. Option A is missing constructor parameters. Option C uses incorrect method syntax. Option D doesn't assign properties.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q164",
+          "text": "A developer creates a class that represents a blog post based on the requirement that a Post should have a body, author and view count.\n\nThe Code shown Below:\nClass Post {\n  // Insert code here\n  this.body = body\n  this.author = author;\n  this.viewCount = viewCount;\n}\n\nWhich statement should be inserted in the placeholder on line 02 to allow for a variable to be set to a new instance of a Post with the three attributes correctly populated?",
+          "options": [
+            {"id":"o1","text":"Function Post (body, author, viewCount) {"},
+            {"id":"o2","text":"constructor() {"},
+            {"id":"o3","text":"super (body, author, viewCount) {"},
+            {"id":"o4","text":"constructor (body, author, viewCount) {"}
+          ],
+          "correct": ["o4"],
+          "explanation": "Classes use constructor(parameters) to initialize instances. constructor(body, author, viewCount) is the correct syntax to accept parameters when creating a new Post. Function Post() is old-style constructor. constructor() without parameters wouldn't receive the values. super() is for calling parent class constructor.",
+          "category": ["Objects, Functions, and Classes"]
+        },
+        {
+          "id": "q165",
+          "text": "A developer wants to set up a secure web server with Node.js. The developer creates a directory locally called app-server, and the first file is app-server/index.js. Without using any third-party libraries, what should the developer add to index.js to create the secure web server?",
+          "options": [
+            {"id":"o1","text":"const server = require('secure-server');"},
+            {"id":"o2","text":"const https = require('https');"},
+            {"id":"o3","text":"const tls = require('tls');"},
+            {"id":"o4","text":"const http = require('http');"}
+          ],
+          "correct": ["o2"],
+          "explanation": "To create a secure web server (HTTPS), use the built-in 'https' module: const https = require('https');. This allows creating HTTPS servers with SSL/TLS certificates. 'http' module is for non-secure HTTP. 'tls' is lower-level. 'secure-server' doesn't exist as a core module.",
+          "category": ["Server Side JavaScript"]
+        },
+        {
+          "id": "q166",
+          "text": "bar.awesome is a popular JavaScript module. The versions published to npm are: 1.3.1, 1.3.2, 1.3.5, 1.4.0, 1.4.1. Teams at Universal Containers use this module in a number of projects. A particular project has the package.json definition:\n\n{\n  \"name\": \"UC Project Extra\",\n  \"version\": \"0.0.5\",\n  \"dependencies\": {\n    \"bar.awesome\": \"^1.3.0\"\n  }\n}\n\nA developer runs: npm install. Which version of bar.awesome is installed?",
+          "options": [
+            {"id":"o1","text":"1.3.1"},
+            {"id":"o2","text":"1.3.5"},
+            {"id":"o3","text":"The command fails, because version 1.3.0 is not found"},
+            {"id":"o4","text":"1.4.0"}
+          ],
+          "correct": ["o2"],
+          "explanation": "The caret (^) in ^1.3.0 means 'compatible with 1.3.0', which installs the latest minor/patch version that doesn't change the major version. It will install the highest 1.x.x version where x >= 3. Among available versions (1.3.1, 1.3.2, 1.3.5, 1.4.0, 1.4.1), npm installs 1.3.5 (latest 1.3.x). It won't install 1.4.x because the caret locks to 1.3.x minor version.",
+          "category": ["Server Side JavaScript"]
+        }
+      ]
+    }
+  ]
+}

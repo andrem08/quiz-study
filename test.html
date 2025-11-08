@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Test - Salesforce Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Estude para certificações Salesforce</h1>
+    </header>
+
+    <main>
+      <section id="selection" class="screen">
+        <h2>Escolha a certificação</h2>
+        <div id="cert-list" class="cert-list">
+          <!-- cartas de certificação serão inseridas aqui -->
+        </div>
+      </section>
+
+      <section id="quiz" class="screen hidden">
+        <div class="quiz-header">
+          <button id="back-btn" class="btn small">← Voltar</button>
+          <h2 id="cert-title"></h2>
+        </div>
+
+        <div id="question-area"></div>
+
+        <div class="quiz-controls">
+          <button id="prev-btn" class="btn">Anterior</button>
+          <button id="confirm-btn" class="btn primary">Confirmar</button>
+          <button id="next-btn" class="btn">Próxima</button>
+        </div>
+
+        <div id="result-area" class="result hidden"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>Protótipo — Estudo local</small>
+    </footer>
+  </div>
+
+  <script>
+    // Check if files are loading
+    console.log('Script loaded!');
+    
+    // Try to load questions.json
+    fetch('questions.json')
+      .then(r => {
+        console.log('Fetch response:', r);
+        return r.json();
+      })
+      .then(json => {
+        console.log('Questions loaded:', json);
+        alert('Questions loaded successfully! Found ' + json.certifications.length + ' certifications with ' + json.certifications[0].questions.length + ' questions');
+      })
+      .catch(err => {
+        console.error('Error loading questions:', err);
+        alert('ERROR: ' + err.message + '\n\nPlease check the browser console (F12) for more details.');
+      });
+  </script>
+</body>
+</html>

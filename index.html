@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Study Salesforce — Certificações</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Estude para certificações Salesforce</h1>
+      <button id="theme-toggle" class="theme-toggle" title="Alternar tema">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </header>
+
+    <main>
+      <section id="selection" class="screen">
+        <h2>Escolha a certificação</h2>
+        <div id="cert-list" class="cert-list">
+          <!-- cartas de certificação serão inseridas aqui -->
+        </div>
+      </section>
+
+      <section id="mode-selection" class="screen hidden">
+        <div class="quiz-header">
+          <button id="mode-back-btn" class="btn small">← Voltar</button>
+          <h2 id="mode-cert-title"></h2>
+        </div>
+        
+        <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;padding:40px 20px">
+          <div class="mode-card" data-mode="full">
+            <div style="font-size:48px;margin-bottom:15px">📚</div>
+            <h3>Quiz Completo</h3>
+            <p id="full-quiz-count"></p>
+            <button class="btn primary">Iniciar Quiz Completo</button>
+          </div>
+          
+          <div class="mode-card" data-mode="random">
+            <div style="font-size:48px;margin-bottom:15px">🎲</div>
+            <h3>Criar Teste Aleatório</h3>
+            <p>Escolha quantas questões deseja</p>
+            <div style="margin:15px 0">
+              <label style="font-weight:600;display:block;margin-bottom:8px">Número de questões:</label>
+              <input type="number" id="random-count" min="1" style="width:100%;padding:8px;border:1px solid #ccc;border-radius:4px;font-size:16px">
+            </div>
+            <div style="margin:15px 0">
+              <label style="font-weight:600;display:block;margin-bottom:8px">⏱️ Limite de tempo (opcional):</label>
+              <div style="display:flex;gap:8px;align-items:center">
+                <input type="number" id="time-hours" min="0" max="23" placeholder="Horas" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:4px;font-size:16px">
+                <span>:</span>
+                <input type="number" id="time-minutes" min="0" max="59" placeholder="Min" style="flex:1;padding:8px;border:1px solid #ccc;border-radius:4px;font-size:16px">
+              </div>
+            </div>
+            <button class="btn primary">Criar Teste Aleatório</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz" class="screen hidden">
+        <div class="quiz-header">
+          <button id="back-btn" class="btn small">← Voltar</button>
+          <h2 id="cert-title"></h2>
+          <div id="timer-display" class="timer-display hidden"></div>
+        </div>
+
+        <div id="questions-per-page" class="questions-per-page-selector"></div>
+
+        <div class="quiz-controls">
+          <button class="btn" data-nav="first">« Primeira</button>
+          <button class="btn" data-nav="prev">Anterior</button>
+          <button class="btn primary" data-action="confirm-page">✓ Confirmar Página</button>
+          <button class="btn primary" data-action="confirm-all">✓✓ Confirmar Tudo</button>
+          <button class="btn" data-nav="next">Próxima</button>
+          <button class="btn" data-nav="last">Última »</button>
+          <button class="btn" data-action="clear" style="margin-left:10px">Limpar Respostas da Página</button>
+        </div>
+
+        <div id="question-area"></div>
+        
+        <div id="page-result-area" class="result hidden"></div>
+
+        <div class="quiz-controls">
+          <button class="btn" data-nav="first">« Primeira</button>
+          <button class="btn" data-nav="prev">Anterior</button>
+          <button class="btn primary" data-action="confirm-page">✓ Confirmar Página</button>
+          <button class="btn primary" data-action="confirm-all">✓✓ Confirmar Tudo</button>
+          <button class="btn" data-nav="next">Próxima</button>
+          <button class="btn" data-nav="last">Última »</button>
+          <button class="btn" data-action="clear" style="margin-left:10px">Limpar Respostas da Página</button>
+        </div>
+
+        <div id="result-area" class="result hidden"></div>
+      </section>
+
+      <section id="summary" class="screen hidden">
+        <div class="quiz-header">
+          <h2 id="summary-title">Resumo do Quiz</h2>
+        </div>
+
+        <div id="summary-score"></div>
+
+        <div class="summary-actions" style="text-align:center;margin:20px 0;display:flex;gap:12px;justify-content:center">
+          <button class="btn primary" data-action="back-to-quiz">← Voltar ao Quiz</button>
+          <button class="btn" data-action="restart-quiz">🔄 Novo Teste</button>
+        </div>
+
+        <div id="summary-grid"></div>
+
+        <div id="summary-detail" class="hidden"></div>
+      </section>
+    </main>
+
+    <footer>
+      <small>Protótipo — Estudo local</small>
+    </footer>
+  </div>
+
+  <!-- Time Over Modal -->
+  <div id="time-over-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>⏰ Tempo Esgotado!</h2>
+      <p>O tempo limite para este teste acabou.</p>
+      <p>Você pode continuar respondendo, mas o tempo será registrado como excedido.</p>
+      <button class="btn primary" onclick="document.getElementById('time-over-modal').classList.add('hidden')">Continuar</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
