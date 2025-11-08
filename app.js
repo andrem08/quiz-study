@@ -376,6 +376,7 @@ document.addEventListener('click', e => {
   else if (e.target.matches('[data-action="back-to-quiz"]')) {
     document.getElementById('summary').classList.add('hidden');
     document.getElementById('quiz').classList.remove('hidden');
+    window.scrollTo(0, 0);
   }
   else if (e.target.matches('[data-action="restart-quiz"]')) {
     document.getElementById('summary').classList.add('hidden');
@@ -544,7 +545,8 @@ function showPageScore(pageQuestions) {
   });
   
   const pct = answered > 0 ? Math.round((score / answered) * 100) : 0;
-  const pass = pct >= 65;
+  const passingScore = currentCert.passingScore || 70;
+  const pass = pct >= passingScore;
   const start = currentPage * QUESTIONS_PER_PAGE;
   const end = Math.min(start + QUESTIONS_PER_PAGE, currentCert.questions.length);
   
@@ -560,7 +562,8 @@ function showScore() {
     if (sel.length === q.correct.length && sel.every(id => q.correct.includes(id))) score++;
   });
   const pct = Math.round((score / currentCert.questions.length) * 100);
-  const pass = pct >= 65;
+  const passingScore = currentCert.passingScore || 70;
+  const pass = pct >= passingScore;
   document.getElementById('result-area').classList.remove('hidden');
   document.getElementById('result-area').innerHTML = `<div style="text-align:center;padding:24px;background:${pass?'#e6ffed':'#ffeef0'};border-radius:8px;border:2px solid ${pass?'#b7f2c7':'#ffcad3'}"><div style="font-size:48px">${pass?'':''}</div><div style="font-size:32px;font-weight:bold;color:${pass?'#0b8a3f':'#d32f2f'}">${score}/${currentCert.questions.length}</div><div style="font-size:24px;margin-top:8px;font-weight:600;color:${pass?'#0b8a3f':'#d32f2f'}">${pct}%</div><div style="margin-top:12px">${answered} de ${currentCert.questions.length} respondidas</div><div style="margin-top:16px;font-size:20px;font-weight:600;color:${pass?'#0b8a3f':'#d32f2f'}">${pass?' Aprovado!':'Continue estudando!'}</div></div>`;
 }
@@ -618,7 +621,8 @@ function showSummary() {
   const total = currentCert.questions.length;
   const answered = correct + incorrect;
   const pct = answered > 0 ? Math.round((correct / total) * 100) : 0;
-  const pass = pct >= 65;
+  const passingScore = currentCert.passingScore || 65;
+  const pass = pct >= passingScore;
   
   // Calculate category-based scores
   const categoryStats = {};
@@ -656,11 +660,11 @@ function showSummary() {
       <div style="font-size:32px;font-weight:600;color:${pass?'#0b8a3f':'#d32f2f'};margin-bottom:15px">${pct}%</div>
       <div style="font-size:24px;font-weight:600;color:${pass?'#0b8a3f':'#d32f2f'};margin-bottom:15px">${pass?'✅ APROVADO!':'❌ NÃO APROVADO'}</div>
       <div style="font-size:16px;margin-top:15px;padding-top:15px;border-top:2px solid ${pass?'#28a745':'#dc3545'}">
-        <span style="color:#28a745;font-weight:600">✓ ${correct} Corretas</span> • 
-        <span style="color:#dc3545;font-weight:600">✗ ${incorrect} Incorretas</span> • 
+        <span style="color:#28a745;font-weight:600">✓ ${correct} Corretas</span> <span style="color:#000">•</span> 
+        <span style="color:#dc3545;font-weight:600">✗ ${incorrect} Incorretas</span> <span style="color:#000">•</span> 
         <span style="color:#ffc107;font-weight:600">○ ${unanswered} Não Respondidas</span>
       </div>
-      <div style="font-size:16px;margin-top:15px;padding-top:15px;border-top:2px solid ${pass?'#28a745':'#dc3545'}">
+      <div style="font-size:16px;margin-top:15px;padding-top:15px;border-top:2px solid ${pass?'#28a745':'#dc3545'};color:#333">
         <strong>⏱️ Tempo:</strong> ${formatTime(elapsedTime)}
         ${timeLimit ? ` <span style="color:${timeExceeded?'#dc3545':'#28a745'}">(Limite: ${formatTime(timeLimit)}${timeExceeded?' - EXCEDIDO':''})</span>` : ''}
       </div>
@@ -672,7 +676,7 @@ function showSummary() {
         <div id="category-grid" style="display:grid;grid-template-columns:repeat(2, 1fr);gap:12px">
           ${Object.entries(categoryStats).map(([catName, stats]) => {
             const catPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
-            const catPass = catPct >= 65;
+            const catPass = catPct >= passingScore;
             const category = currentCert.categories.find(c => c.name === catName);
             const description = category ? category.description : '';
             return `

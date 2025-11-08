@@ -3,6 +3,7 @@
     {
       "id": "jsdev1",
       "name": "JavaScript Developer I",
+      "passingScore": 70,
       "categories": [
         {
           "name": "Variables, Types, and Collections",
@@ -450,8 +451,8 @@
             {"id":"o4","text":"sampleText.includes(' Fox ', 3);"},
             {"id":"o5","text":"sampleText.includes(' quick ') !== -1;"}
           ],
-          "correct": ["o2","o3","o5"],
-          "explanation": "includes() is case-sensitive. 'fox' exists (no spaces needed). ' quick ' starts at index 3, searching from 4 finds it. includes() returns boolean, but !== -1 still works. ' fox ' doesn't exist (wrong spacing).",
+          "correct": ["o1","o2","o5"],
+          "explanation": "includes() is case-sensitive and returns a boolean. 'fox' exists without spaces. ' fox ' exists with spaces before and after. ' quick ' with spaces exists and !== -1 comparison with a boolean always returns true. ' Fox ' is case-sensitive and doesn't match. includes(' quick ', 4) searches from index 4 and doesn't find ' quick ' which starts at index 3.",
           "category": ["Variables, Types, and Collections"]
         },
         {
@@ -743,7 +744,7 @@
         },
         {
           "id": "q55",
-          "text": "A developer wrote a test for sum3 function. The function was changed to sum only the first two numbers. Which two results occur? Choose 2 answers\n\nlet res = sum3([1, 2, 3]);\nconsole.assert(res === 6);\nres = sum3([1, 2, 3, 4]);\nconsole.assert(res === 6);",
+          "text": "A developer wrote a test for sum3 function. The function was changed to sum only the first two numbers. Which two results occur? Choose 2 answers\n\nlet res = sum3([1, 2, 3]);\nconsole.assert(res === 6);\n\nres = sum3([1, 2, 3, 4]);\nconsole.assert(res === 6);",
           "options": [
             {"id":"o1","text":"The line 02 assertion fails."},
             {"id":"o2","text":"The line 02 assertion passes."},
@@ -797,13 +798,13 @@
           "id": "q59",
           "text": "Given the expressions var1 and var2, what are two valid ways to return the concatenation of the two expressions and ensure it is string? Choose 2 answers",
           "options": [
-            {"id":"o1","text":"var1.toString ( ) var2.toString ( )"},
-            {"id":"o2","text":"String (var1) .concat (var2)"},
+            {"id":"o1","text":"var1.toString() + var2.toString()"},
+            {"id":"o2","text":"String(var1).concat(var2)"},
             {"id":"o3","text":"var1 + var2"},
-            {"id":"o4","text":"string.concat (var1 +var2)"}
+            {"id":"o4","text":"String.concat(var1 + var2)"}
           ],
-          "correct": ["o1","o4"],
-          "explanation": "toString() on both variables concatenated, or string.concat with the sum ensures string type.",
+          "correct": ["o1","o2"],
+          "explanation": "toString() and String() convert to string before concatenation. var1 + var2 may not ensure string type if var1 or var2 are not strings.String.concat(var1 + var2) is not a valid method.",
           "category": ["Variables, Types, and Collections"]
         },
         {
@@ -977,7 +978,7 @@
         },
         {
           "id": "q73",
-          "text": "A developer implements a function that adds a few values. Function sum(num) { If (num == undefined) { Num =0; } Return function( num2, num3){ If (num3 ===undefined) { Num3 =0 ; } Return num + num2 + num3; } } Which three options can the developer invoke for this function to get a return value of 10? Choose 3 answers",
+          "text": "A developer implements a function that adds a few values. Function sum(num) { If (num == undefined) { Num =0; } Return function( num2, num3){ If (num3 ===undefined) { Num3 =0 ; } Return num + num2 + num3; } } Which three options can the developer invoke for this function to get a return value of 10? Choose 2 answers",
           "options": [
             {"id":"o1","text":"sum(5)(5)"},
             {"id":"o2","text":"Sum (5, 5) ()"},
@@ -1174,15 +1175,28 @@
         },
         {
           "id": "q89",
-          "text": "At Universal Containers, every team has its own way of copying JavaScript objects. The code snippet shows an implementation from one team:\n\nconst date = new Date(2020, 05, 10);\nconst dateDisplayOptions = {\n  year: 'numeric',\n  month: 'long',\n  day: 'numeric'\n};\n\nconst formattedDate = date.toLocaleDateString('en', dateDisplayOptions);\n\nWhat is the output of the code execution?",
+          "text": "At Universal Containers, every team has its own way of copying JavaScript objects. The code snippet shows an implementation from one team:\n\nfunction Person() {\n  this.firstName = 'John';\n  this.lastName = 'Doe';\n  this.name = () => {\n    console.log('Hello ' + this.firstName + ' ' + this.lastName);\n  }\n}\n\nconst john = new Person();\nconst dan = JSON.parse(JSON.stringify(john));\ndan.firstName = 'Dan';\ndan.name();\n\nWhat is the output of the code execution?",
           "options": [
-            {"id":"o1","text":"SyntaxError: Unexpected token in JSON"},
+            {"id":"o1","text":"Hello Dan Doe"},
             {"id":"o2","text":"Hello John Doe"},
-            {"id":"o3","text":"Hello Dan Doe"},
-            {"id":"o4","text":"Hello Dan"}
+            {"id":"o3","text":"TypeError: dan.name is not a function"},
+            {"id":"o4","text":"TypeError: Assignment to constant variable."}
           ],
-          "correct": ["o1"],
-          "explanation": "JSON.parse throws a SyntaxError when trying to parse objects with methods or non-JSON compliant data.",
+          "correct": ["o3"],
+          "explanation": "JSON.stringify removes methods from objects. After parsing, dan only has firstName and lastName properties, but no name method, causing a TypeError when trying to call dan.name().",
+          "category": ["Variables, Types, and Collections"]
+        },
+        {
+          "id": "q89b",
+          "text": "A developer uses the code below to format a date:\n\nconst date = new Date(2020, 05, 10);\nconst dateDisplayOptions = {\n  year: 'numeric',\n  month: 'long',\n  day: 'numeric'\n};\n\nconst formattedDate = date.toLocaleDateString('en', dateDisplayOptions);\n\nAfter executing, what is the value of formattedDate?",
+          "options": [
+            {"id":"o1","text":"May 10, 2020"},
+            {"id":"o2","text":"June 10, 2020"},
+            {"id":"o3","text":"October 05, 2020"},
+            {"id":"o4","text":"November 05, 2020"}
+          ],
+          "correct": ["o2"],
+          "explanation": "JavaScript Date months are 0-indexed (0=January, 1=February, etc.). Month 05 represents June, so new Date(2020, 05, 10) creates June 10, 2020.",
           "category": ["Variables, Types, and Collections"]
         },
         {
@@ -1709,13 +1723,13 @@
           "id": "q130",
           "text": "Which function should a developer use to repeatedly execute code at a fixed interval?",
           "options": [
-            {"id":"o1","text":"setIntervel"},
+            {"id":"o1","text":"setinterval"},
             {"id":"o2","text":"setTimeout"},
             {"id":"o3","text":"setPeriod"},
             {"id":"o4","text":"setInteria"}
           ],
           "correct": ["o1"],
-          "explanation": "setInterval (note: the option has a typo 'setIntervel') is the correct function to repeatedly execute code at fixed intervals. setTimeout executes once after a delay.",
+          "explanation": "setInterval is the correct function to repeatedly execute code at fixed intervals. setTimeout executes once after a delay.",
           "category": ["Asynchronous Programming"]
         },
         {
