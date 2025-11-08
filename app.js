@@ -360,7 +360,10 @@ document.addEventListener('click', e => {
   else if (e.target.matches('[data-nav="next"]')) { currentPage++; renderQuestions(); window.scrollTo(0, 0); }
   else if (e.target.matches('[data-nav="last"]')) { currentPage = Math.ceil(currentCert.questions.length / QUESTIONS_PER_PAGE) - 1; renderQuestions(); window.scrollTo(0, 0); }
   else if (e.target.matches('[data-action="confirm-page"]')) confirmPageAnswers();
-  else if (e.target.matches('[data-action="confirm-all"]')) confirmAllAnswers();
+  else if (e.target.matches('[data-action="confirm-all"]')) {
+    // Show confirmation modal
+    document.getElementById('confirm-all-modal').classList.remove('hidden');
+  }
   else if (e.target.matches('[data-action="clear"]')) clearAnswers();
   else if (e.target.matches('[data-action="show-answer"]')) {
     const qid = e.target.dataset.qid;
@@ -382,6 +385,12 @@ document.addEventListener('click', e => {
     const qNum = parseInt(e.target.dataset.qnum);
     showQuestionDetail(qNum);
   }
+});
+
+// Confirm All Modal - Yes button
+document.getElementById('confirm-all-yes').addEventListener('click', () => {
+  document.getElementById('confirm-all-modal').classList.add('hidden');
+  confirmAllAnswers();
 });
 
 function showSingleAnswer(qid) {

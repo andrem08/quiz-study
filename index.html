@@ -127,6 +127,19 @@
     </div>
   </div>
 
+  <!-- Confirm All Modal -->
+  <div id="confirm-all-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>⚠️ Confirmar Tudo</h2>
+      <p>Você está prestes a finalizar o teste e ver o resumo completo.</p>
+      <p><strong>Tem certeza que deseja continuar?</strong></p>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:20px">
+        <button class="btn" onclick="document.getElementById('confirm-all-modal').classList.add('hidden')">Cancelar</button>
+        <button class="btn primary" id="confirm-all-yes">Sim, Confirmar Tudo</button>
+      </div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
