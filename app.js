@@ -624,6 +624,34 @@ function showSummary() {
   const passingScore = currentCert.passingScore || 65;
   const pass = pct >= passingScore;
   
+  // Calculate difficulty-based scores
+  const difficultyStats = {
+    easy: { correct: 0, incorrect: 0, unanswered: 0, total: 0 },
+    medium: { correct: 0, incorrect: 0, unanswered: 0, total: 0 },
+    hard: { correct: 0, incorrect: 0, unanswered: 0, total: 0 }
+  };
+  
+  currentCert.questions.forEach(q => {
+    const difficulty = q.difficulty || 5;
+    let level = 'medium';
+    if (difficulty <= 3) level = 'easy';
+    else if (difficulty >= 7) level = 'hard';
+    
+    difficultyStats[level].total++;
+    
+    const selected = userAnswers[q.id] || [];
+    if (selected.length === 0) {
+      difficultyStats[level].unanswered++;
+    } else {
+      const isCorrect = selected.length === q.correct.length && selected.every(id => q.correct.includes(id));
+      if (isCorrect) {
+        difficultyStats[level].correct++;
+      } else {
+        difficultyStats[level].incorrect++;
+      }
+    }
+  });
+  
   // Calculate category-based scores
   const categoryStats = {};
   
@@ -652,21 +680,214 @@ function showSummary() {
     }
   });
   
+  // Generate difficulty evaluation message
+  let difficultyEvaluation = '';
+  let difficultyIcon = '📊';
+  let difficultyColor = '#333';
+  
+  const easyPct = difficultyStats.easy.total > 0 ? Math.round((difficultyStats.easy.correct / difficultyStats.easy.total) * 100) : 0;
+  const mediumPct = difficultyStats.medium.total > 0 ? Math.round((difficultyStats.medium.correct / difficultyStats.medium.total) * 100) : 0;
+  const hardPct = difficultyStats.hard.total > 0 ? Math.round((difficultyStats.hard.correct / difficultyStats.hard.total) * 100) : 0;
+  
+  const hasEasy = difficultyStats.easy.total > 0;
+  const hasMedium = difficultyStats.medium.total > 0;
+  const hasHard = difficultyStats.hard.total > 0;
+  
+  // Determine performance level and provide feedback
+  if (hasEasy && easyPct >= 80) {
+    difficultyIcon = '🌟';
+    difficultyColor = '#28a745';
+    difficultyEvaluation = `<strong>Excelente!</strong> Você dominou as questões fáceis (${easyPct}%). `;
+    if (hasMedium) {
+      if (mediumPct >= 70) {
+        difficultyEvaluation += `Seu desempenho nas questões médias também está ótimo (${mediumPct}%). `;
+        if (hasHard) {
+          if (hardPct >= 50) {
+            difficultyEvaluation += `E você está se saindo bem até nas questões difíceis (${hardPct}%)! Continue assim!`;
+          } else {
+            difficultyEvaluation += `Nas questões difíceis (${hardPct}%), há espaço para melhorar, mas você está no caminho certo.`;
+          }
+        } else {
+          difficultyEvaluation += `Continue assim!`;
+        }
+      } else {
+        difficultyEvaluation += `Porém, as questões médias (${mediumPct}%) merecem mais atenção. Revise esses conceitos intermediários.`;
+      }
+    } else if (hasHard) {
+      if (hardPct >= 50) {
+        difficultyEvaluation += `E você está se saindo bem nas questões difíceis (${hardPct}%)! Continue assim!`;
+      } else {
+        difficultyEvaluation += `Nas questões difíceis (${hardPct}%), há espaço para melhorar. Continue estudando!`;
+      }
+    } else {
+      difficultyEvaluation += `Continue assim!`;
+    }
+  } else if (hasEasy && easyPct >= 60) {
+    difficultyIcon = '💪';
+    difficultyColor = '#ffc107';
+    difficultyEvaluation = `<strong>Bom progresso!</strong> Você acertou ${easyPct}% das questões fáceis. Com mais prática, você pode melhorar! `;
+    if (hasMedium) {
+      if (mediumPct < 50) {
+        difficultyEvaluation += `Foque em fortalecer os conceitos intermediários (${mediumPct}% nas questões médias).`;
+      } else {
+        difficultyEvaluation += `Seu desempenho nas questões médias (${mediumPct}%) está razoável. Continue estudando!`;
+      }
+    }
+  } else if (hasEasy && easyPct < 60) {
+    difficultyIcon = '📚';
+    difficultyColor = '#dc3545';
+    difficultyEvaluation = `<strong>Continue estudando!</strong> Você acertou apenas ${easyPct}% das questões fáceis, que são fundamentais. `;
+    difficultyEvaluation += `Recomendamos revisar os conceitos básicos antes de avançar. `;
+    if (difficultyStats.easy.unanswered > 0) {
+      difficultyEvaluation += `Você deixou ${difficultyStats.easy.unanswered} questões fáceis sem responder. `;
+    }
+    difficultyEvaluation += `Pratique mais e refaça o teste!`;
+  } else if (!hasEasy && hasMedium) {
+    // Caso não tenha questões fáceis, avaliar pelas médias
+    if (mediumPct >= 70) {
+      difficultyIcon = '🌟';
+      difficultyColor = '#28a745';
+      difficultyEvaluation = `<strong>Excelente!</strong> Você dominou as questões de nível médio (${mediumPct}%). `;
+      if (hasHard) {
+        if (hardPct >= 50) {
+          difficultyEvaluation += `E você está se saindo bem nas questões difíceis (${hardPct}%)! Continue assim!`;
+        } else {
+          difficultyEvaluation += `Nas questões difíceis (${hardPct}%), há espaço para melhorar. Continue praticando!`;
+        }
+      } else {
+        difficultyEvaluation += `Continue assim!`;
+      }
+    } else if (mediumPct >= 50) {
+      difficultyIcon = '💪';
+      difficultyColor = '#ffc107';
+      difficultyEvaluation = `<strong>Bom progresso!</strong> Você acertou ${mediumPct}% das questões de nível médio. Com mais prática, você pode melhorar! `;
+      if (hasHard) {
+        difficultyEvaluation += `Nas questões difíceis você obteve ${hardPct}%. Continue estudando!`;
+      }
+    } else {
+      difficultyIcon = '📚';
+      difficultyColor = '#dc3545';
+      difficultyEvaluation = `<strong>Continue estudando!</strong> Você acertou apenas ${mediumPct}% das questões de nível médio. `;
+      difficultyEvaluation += `Revise os conceitos e pratique mais!`;
+    }
+  } else if (!hasEasy && !hasMedium && hasHard) {
+    // Caso só tenha questões difíceis
+    if (hardPct >= 50) {
+      difficultyIcon = '🌟';
+      difficultyColor = '#28a745';
+      difficultyEvaluation = `<strong>Excelente!</strong> Você está se saindo muito bem nas questões difíceis (${hardPct}%)! Continue assim!`;
+    } else if (hardPct >= 30) {
+      difficultyIcon = '💪';
+      difficultyColor = '#ffc107';
+      difficultyEvaluation = `<strong>Bom progresso!</strong> Você acertou ${hardPct}% das questões difíceis. Continue praticando!`;
+    } else {
+      difficultyIcon = '📚';
+      difficultyColor = '#dc3545';
+      difficultyEvaluation = `<strong>Continue estudando!</strong> As questões difíceis requerem mais prática. Você acertou ${hardPct}%. Revise os conceitos e tente novamente!`;
+    }
+  } else {
+    // Fallback genérico
+    difficultyIcon = '📊';
+    difficultyColor = '#666';
+    difficultyEvaluation = `<strong>Análise de desempenho:</strong> `;
+    const parts = [];
+    if (hasEasy) parts.push(`Fáceis: ${easyPct}%`);
+    if (hasMedium) parts.push(`Médias: ${mediumPct}%`);
+    if (hasHard) parts.push(`Difíceis: ${hardPct}%`);
+    difficultyEvaluation += parts.join(' • ') + '. Continue praticando para melhorar!';
+  }
+  
+  // Determine difficulty container class based on actual performance
+  let difficultyContainerClass = 'needs-work';
+  
+  // Calculate overall difficulty-weighted performance
+  if (hasEasy) {
+    // If there are easy questions, they are the foundation
+    if (easyPct >= 80) {
+      // Strong foundation - check if overall performance is excellent
+      if ((!hasMedium || mediumPct >= 70) && (!hasHard || hardPct >= 40)) {
+        difficultyContainerClass = 'excellent';
+      } else if ((!hasMedium || mediumPct >= 50) || (!hasHard || hardPct >= 30)) {
+        difficultyContainerClass = 'good';
+      }
+    } else if (easyPct >= 60) {
+      // Decent foundation - good progress
+      difficultyContainerClass = 'good';
+    }
+  } else if (hasMedium) {
+    // No easy questions - evaluate by medium
+    if (mediumPct >= 70) {
+      if (!hasHard || hardPct >= 40) {
+        difficultyContainerClass = 'excellent';
+      } else {
+        difficultyContainerClass = 'good';
+      }
+    } else if (mediumPct >= 50) {
+      difficultyContainerClass = 'good';
+    }
+  } else if (hasHard) {
+    // Only hard questions - adjust expectations
+    if (hardPct >= 50) {
+      difficultyContainerClass = 'excellent';
+    } else if (hardPct >= 30) {
+      difficultyContainerClass = 'good';
+    }
+  }
+  
   // Show score
   document.getElementById('summary-score').innerHTML = `
-    <div style="background:${pass?'#e6ffed':'#ffeef0'};border:3px solid ${pass?'#28a745':'#dc3545'};border-radius:10px;padding:20px">
-      <div style="font-size:56px;margin-bottom:10px">${pass?'🎉':'📚'}</div>
+    <div class="summary-score-main ${pass?'pass':'fail'}">
       <div style="font-size:42px;font-weight:bold;color:${pass?'#0b8a3f':'#d32f2f'};margin-bottom:10px">${correct}/${total}</div>
       <div style="font-size:32px;font-weight:600;color:${pass?'#0b8a3f':'#d32f2f'};margin-bottom:15px">${pct}%</div>
       <div style="font-size:24px;font-weight:600;color:${pass?'#0b8a3f':'#d32f2f'};margin-bottom:15px">${pass?'✅ APROVADO!':'❌ NÃO APROVADO'}</div>
-      <div style="font-size:16px;margin-top:15px;padding-top:15px;border-top:2px solid ${pass?'#28a745':'#dc3545'}">
-        <span style="color:#28a745;font-weight:600">✓ ${correct} Corretas</span> <span style="color:#000">•</span> 
-        <span style="color:#dc3545;font-weight:600">✗ ${incorrect} Incorretas</span> <span style="color:#000">•</span> 
-        <span style="color:#ffc107;font-weight:600">○ ${unanswered} Não Respondidas</span>
+      <div class="summary-stats-divider ${pass?'pass':'fail'}">
+        <span class="stat-correct">✓ ${correct} Corretas</span> <span class="stat-separator">•</span> 
+        <span class="stat-incorrect">✗ ${incorrect} Incorretas</span> <span class="stat-separator">•</span> 
+        <span class="stat-unanswered">○ ${unanswered} Não Respondidas</span>
       </div>
-      <div style="font-size:16px;margin-top:15px;padding-top:15px;border-top:2px solid ${pass?'#28a745':'#dc3545'};color:#333">
+      <div class="summary-time-info ${pass?'pass':'fail'}">
         <strong>⏱️ Tempo:</strong> ${formatTime(elapsedTime)}
-        ${timeLimit ? ` <span style="color:${timeExceeded?'#dc3545':'#28a745'}">(Limite: ${formatTime(timeLimit)}${timeExceeded?' - EXCEDIDO':''})</span>` : ''}
+        ${timeLimit ? ` <span class="time-limit ${timeExceeded?'exceeded':'ok'}">(Limite: ${formatTime(timeLimit)}${timeExceeded?' - EXCEDIDO':''})</span>` : ''}
+      </div>
+    </div>
+    
+    <div class="difficulty-analysis-container difficulty-${difficultyContainerClass}">
+      <h3 class="difficulty-analysis-title">
+        <span style="font-size:32px">${difficultyIcon}</span>
+        Análise por Dificuldade
+      </h3>
+      
+      <div class="difficulty-cards-grid">
+        ${difficultyStats.easy.total > 0 ? `
+          <div class="difficulty-card difficulty-easy difficulty-${easyPct >= 80 ? 'excellent' : easyPct >= 60 ? 'good' : 'poor'}">
+            <div class="difficulty-label">😊 Fácil (1-3)</div>
+            <div class="difficulty-score">${difficultyStats.easy.correct}/${difficultyStats.easy.total}</div>
+            <div class="difficulty-percent">${easyPct}%</div>
+            ${difficultyStats.easy.unanswered > 0 ? `<div class="difficulty-unanswered">${difficultyStats.easy.unanswered} não respondidas</div>` : ''}
+          </div>
+        ` : ''}
+        
+        ${difficultyStats.medium.total > 0 ? `
+          <div class="difficulty-card difficulty-medium difficulty-${mediumPct >= 70 ? 'excellent' : mediumPct >= 50 ? 'good' : 'poor'}">
+            <div class="difficulty-label">😐 Média (4-6)</div>
+            <div class="difficulty-score">${difficultyStats.medium.correct}/${difficultyStats.medium.total}</div>
+            <div class="difficulty-percent">${mediumPct}%</div>
+            ${difficultyStats.medium.unanswered > 0 ? `<div class="difficulty-unanswered">${difficultyStats.medium.unanswered} não respondidas</div>` : ''}
+          </div>
+        ` : ''}
+        
+        ${difficultyStats.hard.total > 0 ? `
+          <div class="difficulty-card difficulty-hard difficulty-${hardPct >= 50 ? 'excellent' : hardPct >= 30 ? 'good' : 'poor'}">
+            <div class="difficulty-label">😤 Difícil (7-10)</div>
+            <div class="difficulty-score">${difficultyStats.hard.correct}/${difficultyStats.hard.total}</div>
+            <div class="difficulty-percent">${hardPct}%</div>
+            ${difficultyStats.hard.unanswered > 0 ? `<div class="difficulty-unanswered">${difficultyStats.hard.unanswered} não respondidas</div>` : ''}
+          </div>
+        ` : ''}
+      </div>
+      
+      <div class="difficulty-evaluation">
+        ${difficultyEvaluation}
       </div>
     </div>
     
