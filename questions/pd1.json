@@ -1,0 +1,3151 @@
+{
+  "certification": {
+    "id": "pd1",
+    "name": "Salesforce Platform Developer I",
+    "passingScore": 68,
+    "recommendedTime": 105,
+    "recommendedQuestions": 60,
+    "categories": [
+      {
+        "name": "Developer Fundamentals",
+        "description": "This section covers the basics of the Salesforce platform, including understanding the capabilities and limitations of declarative customization. You'll need to demonstrate knowledge of when to use code versus configuration, understanding the Salesforce development lifecycle, and recognizing the various declarative options available on the platform."
+      },
+      {
+        "name": "Data Modeling and Management",
+        "description": "This topic focuses on designing and implementing custom objects, fields, and relationships. You'll be tested on your ability to create appropriate data models, understand different relationship types, manage data integrity, and implement field-level security. Knowledge of schema design best practices and the implications of different field types is essential."
+      },
+      {
+        "name": "Logic and Process Automation",
+        "description": "This section evaluates your understanding of Apex programming fundamentals, including triggers, classes, and methods. You'll need to demonstrate knowledge of when and how to use different automation tools like Process Builder, Flow, and Workflow Rules, as well as understanding the order of execution and best practices for writing efficient Apex code."
+      },
+      {
+        "name": "User Interface",
+        "description": "This topic covers creating and customizing user interfaces using Visualforce, Lightning Web Components, and Aura Components. You'll be tested on your ability to implement custom UIs, understand component communication, handle events, and apply styling. Knowledge of when to use each framework and their respective limitations is crucial."
+      },
+      {
+        "name": "Testing, Debugging and Deployment",
+        "description": "This section focuses on writing effective unit tests, achieving code coverage, debugging techniques, and understanding deployment processes. You'll need to demonstrate knowledge of test classes, system.assert methods, debugging tools like Developer Console and logs, and the deployment lifecycle including sandboxes and change sets."
+      },
+      {
+        "name": "Integration",
+        "description": "This topic evaluates your understanding of integrating Salesforce with external systems using REST and SOAP APIs, callouts, and integration patterns. You'll be tested on authentication methods, handling HTTP requests/responses, understanding governor limits in integration contexts, and implementing best practices for secure and efficient integrations."
+      }
+    ],
+    "questions": [
+      {
+        "id": "pd1_q1",
+        "text": "Universal Containers is building a recruiting app with an Applicant object that stores information about an individual person and a Job object that represents a job. Each applicant may apply for more than one job. What should a developer implement to represent that an applicant has applied for a job?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Junction object between Applicant and Job"
+          },
+          {
+            "id": "B",
+            "text": "Lookup field from Applicant to Job"
+          },
+          {
+            "id": "C",
+            "text": "Master-detail field from Applicant to Job"
+          },
+          {
+            "id": "D",
+            "text": "Formula field on Applicant that references Job"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "A junction object creates many-to-many relationships with two master-detail relationships: one to Applicant and one to Job__c. This allows multiple applicants per job and multiple jobs per applicant. Option B (lookup) only supports one-to-many. Option C (master-detail) also only supports one-to-many, and you can't have two master-details between the same objects. Option D (formula field) cannot create relationships.",
+        "category": ["Data Modeling and Management"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q2",
+        "text": "The Account object in an organization has a master-detail relationship to a child object called Branch. The following automations exist: Roll-up summary fields, Custom validation rules, and Duplicate rules. A developer created a trigger on the Account object. Which two things should the developer consider while testing the trigger code? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Rollup summary fields can cause the parent record to go through Save."
+          },
+          {
+            "id": "B",
+            "text": "Duplicate rules are executed once all DML operations commit to the database."
+          },
+          {
+            "id": "C",
+            "text": "The trigger may fire multiple times during a transaction."
+          },
+          {
+            "id": "D",
+            "text": "The validation rules will cause the trigger to fire again."
+          }
+        ],
+        "correct": ["A", "C"],
+        "explanation": "Roll-up summary fields on the parent Account can cause the parent record to be saved again when child Branch records are updated, which may cause the trigger to fire multiple times (A). Triggers can execute multiple times within a single transaction due to cascading updates, roll-up summary field recalculations, or workflow field updates, so developers must implement recursion prevention logic (C). Duplicate rules (B) actually execute BEFORE the DML operation commits, not after, to prevent duplicates from being created. Validation rules (D) validate data but do not cause triggers to fire again; they may prevent the DML operation if validation fails, but they don't re-invoke triggers.",
+        "category": ["Logic and Process Automation", "Testing, Debugging and Deployment"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q3",
+        "text": "An Apex method, getAccounts, that returns a List of Accounts given a searchTerm, is available for Lightning Web Components to use. What is the correct definition of a Lightning Web Component property that uses the getAccounts method?",
+        "options": [
+          {
+            "id": "A",
+            "text": "@wire(getAccounts, { searchTerm: '$searchTerm' })"
+          },
+          {
+            "id": "B",
+            "text": "@track(getAccounts, '$searchTerm')"
+          },
+          {
+            "id": "C",
+            "text": "@wire(getAccounts, 'searchTerm: $searchTerm')"
+          },
+          {
+            "id": "D",
+            "text": "@wire(getAccounts, '$searchTerm')"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Correct @wire syntax: @wire(apexMethod, { paramName: '$reactiveProperty' }). The $ prefix makes the property reactive. Option A correctly maps the Apex parameter 'searchTerm' to '$searchTerm'. Option B uses @track (for rendering, not wiring). Option C passes a string instead of an object. Option D doesn't map the parameter name.",
+        "category": ["User Interface", "Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q4",
+        "text": "Which three data types can a SOQL query return? Choose 3 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Double"
+          },
+          {
+            "id": "B",
+            "text": "Long"
+          },
+          {
+            "id": "C",
+            "text": "sObject"
+          },
+          {
+            "id": "D",
+            "text": "Integer"
+          },
+          {
+            "id": "E",
+            "text": "List"
+          }
+        ],
+        "correct": ["A", "C", "E"],
+        "explanation": "SOQL returns: sObject (C) for records, List (E) for multiple records (e.g., List<Account>), and Double (A) for aggregate results (COUNT, SUM, AVG). Option B (Long) is not a SOQL return type. Option D (Integer) is wrong because aggregates return Double, not Integer, to preserve decimal precision.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q5",
+        "text": "A team of many developers work in their own individual orgs that have the same configuration as the production org. Which type of org is best suited for this scenario?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Developer Sandbox"
+          },
+          {
+            "id": "B",
+            "text": "Full Sandbox"
+          },
+          {
+            "id": "C",
+            "text": "Developer Edition"
+          },
+          {
+            "id": "D",
+            "text": "Partner Developer Edition"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Developer Sandboxes copy production metadata (configuration) without data, allowing individual developers to work independently with the same config as production. Option B (Full Sandbox) is for staging/UAT, includes data, and is shared. Option C (Developer Edition) is standalone, not connected to production. Option D (Partner Developer Edition) is for ISV partners building AppExchange packages.",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q6",
+        "text": "A developer needs to confirm that a Contact trigger works correctly without changing the organization's data. What should the developer do to test the Contact trigger?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use Deploy from the VSCode IDE to deploy an 'insert Contact' Apex class."
+          },
+          {
+            "id": "B",
+            "text": "Use the New button on the Salesforce Contacts Tab to create a new Contact record."
+          },
+          {
+            "id": "C",
+            "text": "Use the Test menu on the Developer Console to run all test classes for the Contact trigger."
+          },
+          {
+            "id": "D",
+            "text": "Use the Open Execute Anonymous feature on the Developer Console to run an 'insert Contact' DML statement."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Test classes execute in an isolated environment with automatic rollback, leaving no data changes. This comprehensively verifies trigger functionality without affecting org data. Option A (deploy) doesn't test the trigger. Option B (UI creation) directly modifies real data. Option D (Execute Anonymous) also modifies real data without automatic rollback.",
+        "category": ["Testing, Debugging and Deployment", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q7",
+        "text": "Which action causes a before trigger to fire by default for Accounts?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Renaming or replacing picklists"
+          },
+          {
+            "id": "B",
+            "text": "Updating addresses using Mass Address Update tool"
+          },
+          {
+            "id": "C",
+            "text": "Importing data using the Data Loader and the Bulk API"
+          },
+          {
+            "id": "D",
+            "text": "Converting Leads to Contacts"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Data Loader/Bulk API perform DML operations (insert/update/upsert) that fire before insert or before update triggers. These are standard DML operations. Option A (picklist changes) is metadata, not record DML. Option B (Mass Address Update) typically bypasses triggers for performance. Option D (Lead conversion) creates Contacts/Accounts but doesn't consistently fire Account triggers.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q8",
+        "text": "A developer at AW Computing is tasked to create the supporting test class for a programmatic customization that leverages records stored within the custom object, Pricing_Structure__c. AW Computing has a complex pricing structure for each item on the store, spanning more than 500 records. Which two approaches can the developer use to ensure Pricing_Structure__c records are available when the test class is executed? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use a Test Data Factory class."
+          },
+          {
+            "id": "B",
+            "text": "Use the @IsTest(SeeAllData=true) annotation."
+          },
+          {
+            "id": "C",
+            "text": "Use the Test.loadData() method."
+          },
+          {
+            "id": "D",
+            "text": "Use without sharing on the class declaration."
+          }
+        ],
+        "correct": ["A", "B"],
+        "explanation": "Test Data Factory (A) is best practice for programmatically creating reusable test data (the 500+ records). @IsTest(SeeAllData=true) (B) allows access to existing org data, though it creates data dependency (less recommended). Option C (Test.loadData) loads from static resources but isn't a primary approach here. Option D (without sharing) affects security, not test data access.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q9",
+        "text": "Universal Containers has a large number of custom applications that were built using a third-party JavaScript framework and exposed using Visualforce pages. The company wants to update these applications to apply styling that resembles the look and feel of Lightning Experience. What should the developer do to fulfill the business request in the quickest and most effective manner?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Rewrite all Visualforce pages as Lightning components."
+          },
+          {
+            "id": "B",
+            "text": "Set the attribute enableLightning to true in the definition."
+          },
+          {
+            "id": "C",
+            "text": "Enable Available for Lightning Experience, Lightning Communities, and the mobile app on Visualforce pages used by the custom application."
+          },
+          {
+            "id": "D",
+            "text": "Incorporate the Salesforce Lightning Design System CSS stylesheet into the JavaScript applications."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "SLDS CSS stylesheet is the quickest way to apply Lightning styling to existing Visualforce pages without rewriting code. SLDS provides CSS classes matching Lightning's look and feel. Option A (rewrite as Lightning) is time-consuming. Option B references non-existent 'enableLightning' attribute. Option C (enable Lightning availability) doesn't auto-apply styling.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q10",
+        "text": "A developer has a single custom controller class that works with a Visualforce Wizard to support creating and editing multiple sObjects. The wizard accepts data from user inputs across multiple Visualforce pages and from a parameter on the initial URL. Which three statements are useful inside the unit test to effectively test the custom controller? Choose 3 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "String nextPage = controller.save().getUrl();"
+          },
+          {
+            "id": "B",
+            "text": "ApexPages.currentPage().getParameters().put('input', 'TestValue');"
+          },
+          {
+            "id": "C",
+            "text": "insert pageRef;"
+          },
+          {
+            "id": "D",
+            "text": "public ExtendedController(ApexPages.StandardController ctrl) { }"
+          },
+          {
+            "id": "E",
+            "text": "Test.setCurrentPage(pageRef);"
+          }
+        ],
+        "correct": ["A", "B", "E"],
+        "explanation": "Option A tests save() and verifies navigation via PageReference URL. Option B simulates URL parameters using getParameters().put(). Option E sets page context with Test.setCurrentPage(). Option C is invalid syntax (can't insert PageReference). Option D is a constructor signature, not a test statement.",
+        "category": ["Testing, Debugging and Deployment", "User Interface"],
+        "difficulty": 7
+      },
+      {
+        "id": "pd1_q11",
+        "text": "A lead developer creates a virtual class called 'OrderRequest'. How can a developer use the OrderRequest class within the CustomerOrder class?",
+        "options": [
+          {
+            "id": "A",
+            "text": "extends (class='OrderRequest')public class CustomerOrder"
+          },
+          {
+            "id": "B",
+            "text": "public class CustomerOrder implements Order"
+          },
+          {
+            "id": "C",
+            "text": "public class CustomerOrder extends OrderRequest"
+          },
+          {
+            "id": "D",
+            "text": "@Implements (class='OrderRequest')public class CustomerOrder"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Use 'extends' to inherit from a virtual class. Correct syntax: 'public class CustomerOrder extends OrderRequest'. Option A uses invalid syntax with parentheses. Option B uses 'implements' (for interfaces, not classes) and wrong name. Option D uses non-existent '@Implements' annotation.",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q12",
+        "text": "A developer has a Visualforce page and custom controller to save Account records. The developer wants to display any validation rule violations to the user. How can the developer make sure that validation rule violations are displayed?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Add custom controller attributes to display the message."
+          },
+          {
+            "id": "B",
+            "text": "Use a try/catch with a custom exception class."
+          },
+          {
+            "id": "C",
+            "text": "Include <apex:messages> on the Visualforce page."
+          },
+          {
+            "id": "D",
+            "text": "Perform the DML using the database.insert() method."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "<apex:messages> automatically displays validation rule violations from DML operations by rendering errors from ApexPages.getMessages(). Option A requires manual error handling. Option B catches exceptions but doesn't display them without additional code. Option D is just a DML method; still needs <apex:messages> to display errors.",
+        "category": ["User Interface", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q13",
+        "text": "Since Aura application events follow the traditional publish-subscribe model, which method is used to fire an event?",
+        "options": [
+          {
+            "id": "A",
+            "text": "fire()"
+          },
+          {
+            "id": "B",
+            "text": "sendEvent()"
+          },
+          {
+            "id": "C",
+            "text": "FireEvent()"
+          },
+          {
+            "id": "D",
+            "text": "emit()"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Use fire() to fire Aura application events: $A.get('e.namespace:eventName').fire(). Option B (sendEvent()) is not a valid Aura method. Option C (FireEvent()) uses wrong case (JavaScript is case-sensitive). Option D (emit()) is for LWC, not Aura components.",
+        "category": ["User Interface"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q14",
+        "text": "Which code statement includes an Apex method named updateAccounts in the class AccountController for use in a Lightning web component?",
+        "options": [
+          {
+            "id": "A",
+            "text": "import updateAccounts from 'AccountController';"
+          },
+          {
+            "id": "B",
+            "text": "import updateAccounts from 'Salesforce/apex/AccountController';"
+          },
+          {
+            "id": "C",
+            "text": "import updateAccounts from 'AccountController.updateAccounts';"
+          },
+          {
+            "id": "D",
+            "text": "import updateAccounts from '@salesforce/apex/AccountController.updateAccounts';"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Correct syntax: import methodName from '@salesforce/apex/ClassName.methodName'. Option A missing @salesforce/apex prefix and method name. Option B uses 'Salesforce/apex' instead of '@salesforce/apex' and missing method name. Option C missing @salesforce/apex prefix.",
+        "category": ["User Interface", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q15",
+        "text": "A developer needs to allow users to complete a form on an Account record that will create a record for a custom object. The form needs to display different fields depending on the user's job role. The functionality should only be available to a small group of users. Which three things should the developer do to satisfy these requirements? Choose 3 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Create a Dynamic Form."
+          },
+          {
+            "id": "B",
+            "text": "Create a Custom Permission for the users."
+          },
+          {
+            "id": "C",
+            "text": "Add a Dynamic Action to the Users' assigned Page Layouts."
+          },
+          {
+            "id": "D",
+            "text": "Create a Lightning web component."
+          },
+          {
+            "id": "E",
+            "text": "Add a Dynamic Action to the Account Record Page."
+          }
+        ],
+        "correct": ["B", "C", "D"],
+        "explanation": "B) Custom Permissions control access for small user groups. C) Dynamic Actions show different fields based on role/profile. D) LWC provides conditional field rendering with permission checks. Option A (Dynamic Forms) only controls field visibility, not creating custom object records. Option E lacks role-based variation.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q16",
+        "text": "Where are two locations a developer can look to find information about the status of batch or future methods? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Apex Jobs"
+          },
+          {
+            "id": "B",
+            "text": "Paused Flow Interviews component"
+          },
+          {
+            "id": "C",
+            "text": "Apex Flex Queue"
+          },
+          {
+            "id": "D",
+            "text": "Developer Console"
+          }
+        ],
+        "correct": ["A", "D"],
+        "explanation": "A) Apex Jobs shows status of batch and future methods (Queued, Processing, Completed, Failed). D) Developer Console monitors async jobs in Jobs tab. Option B monitors paused flows, not Apex. Option C only shows queued batch jobs, not future methods or completed jobs.",
+        "category": ["Testing, Debugging and Deployment", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q17",
+        "text": "Which two statements are true about using the @testSetup annotation in an Apex test class? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Records created in the test setup method cannot be updated in individual test methods."
+          },
+          {
+            "id": "B",
+            "text": "In a test setup method, test data is inserted once and made available for all test methods in the test class."
+          },
+          {
+            "id": "C",
+            "text": "A method defined with the @testSetup annotation executes once for each test method in the test class and counts towards system limits."
+          },
+          {
+            "id": "D",
+            "text": "The @testSetup annotation is not supported when the @isTest(SeeAllData=True) annotation is used."
+          }
+        ],
+        "correct": ["B", "D"],
+        "explanation": "B) @testSetup creates data once, available to all test methods via rollback/rollforward. D) Incompatible with @isTest(SeeAllData=true) due to conflicting purposes. Option A wrong: records CAN be updated. Option C wrong: executes ONCE per class, not per method.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q18",
+        "text": "Which two are best practices when it comes to Aura component and application event handling? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Try to use application events as opposed to component events."
+          },
+          {
+            "id": "B",
+            "text": "Reuse the event logic in a component bundle, by putting the logic in the helper."
+          },
+          {
+            "id": "C",
+            "text": "Use component events to communicate actions that should be handled at the application level."
+          },
+          {
+            "id": "D",
+            "text": "Handle low-level events in the event handler and re-fire them as higher-level events."
+          }
+        ],
+        "correct": ["B", "D"],
+        "explanation": "B) Helper promotes reusability and keeps controller clean. D) Re-firing as higher-level events provides better abstraction. Option A wrong: prefer component events over application events for efficiency. Option C backwards: use application events for app-level actions, not component events.",
+        "category": ["User Interface"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q19",
+        "text": "Universal Containers (UC) uses a custom object called Vendor. The Vendor custom object has a master-detail relationship with the standard Account object. Based on some internal discussions, the UC administrator tried to change the master-detail relationship to a lookup relationship, but was not able to do so. What is a possible reason that this change was not permitted?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Some of the Vendor records have null for the Account field."
+          },
+          {
+            "id": "B",
+            "text": "The Account object has a roll-up summary field on the Vendor object."
+          },
+          {
+            "id": "C",
+            "text": "The Account object does not allow changing a field type for a custom field."
+          },
+          {
+            "id": "D",
+            "text": "The organization wide default for the Vendor object is Public Read/Write."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Roll-up summary fields only work with master-detail relationships. Account has a roll-up on Vendor, preventing conversion to lookup. Must delete roll-up first. Option A wrong: nulls block TO master-detail, not FROM it. Option C wrong: Salesforce allows field type changes. Option D: OWD irrelevant to relationship changes.",
+        "category": ["Data Modeling and Management"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q20",
+        "text": "A business has a proprietary Order Management System (OMS) that creates orders from its website and fulfills the orders. When the order is created in the OMS, an integration also creates an order record in Salesforce and relates it to the contact as identified by the email on the order. As the order goes through different stages in the OMS, the integration also updates it in Salesforce. The business notices that each update from the OMS creates a new order record in Salesforce. Which two actions should prevent the duplicate order records from being created in Salesforce? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the order number from the OMS as an external ID."
+          },
+          {
+            "id": "B",
+            "text": "Ensure that the order number in the OMS is unique."
+          },
+          {
+            "id": "C",
+            "text": "Use the email on the contact record as an external ID."
+          },
+          {
+            "id": "D",
+            "text": "Write a trigger on the Order object to delete the duplicates."
+          }
+        ],
+        "correct": ["A", "B"],
+        "explanation": "A) External ID on order number enables upsert operations to update existing records. B) Unique order numbers ensure correct external ID matching. Option C wrong: email identifies Contact, not Order. Option D inefficient: prevent duplicates with external IDs, not delete with triggers.",
+        "category": ["Integration", "Data Modeling and Management"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q21",
+        "text": "What should a developer do to check the code coverage of a class after running all tests?",
+        "options": [
+          {
+            "id": "A",
+            "text": "View the code coverage percentage for the class using the Overall Code Coverage panel in the Developer Console Tests tab."
+          },
+          {
+            "id": "B",
+            "text": "View the Class Test Percentage tab on the Apex Class list view in Salesforce Setup."
+          },
+          {
+            "id": "C",
+            "text": "Select and run the class on the Apex Test Execution page in the Developer Console."
+          },
+          {
+            "id": "D",
+            "text": "View the Code Coverage column in the list view on the Apex Classes page."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Overall Code Coverage panel in Developer Console Tests tab shows detailed coverage after test execution. Option B wrong: no 'Class Test Percentage' tab exists. Option C wrong: running the class doesn't show coverage. Option D less accurate: Setup may not reflect most recent test run.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q22",
+        "text": "Given the following Apex statement: Account myAccount = [SELECT Id, Name FROM Account]; What occurs when more than one Account is returned by the SOQL query?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The variable, myAccount, is automatically cast to the List data type."
+          },
+          {
+            "id": "B",
+            "text": "An unhandled exception is thrown and the code terminates."
+          },
+          {
+            "id": "C",
+            "text": "The query fails and an error is written to the debug log."
+          },
+          {
+            "id": "D",
+            "text": "The first Account returned is assigned to myAccount."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Throws System.QueryException: 'List has more than 1 row for assignment to SObject', terminating execution. Option A wrong: no automatic type casting. Option C wrong: query succeeds, exception occurs during assignment. Option D wrong: doesn't silently assign first record.",
+        "category": ["Logic and Process Automation", "Testing, Debugging and Deployment"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q23",
+        "text": "What are two considerations for deploying from a sandbox to production? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "At least 75% of Apex code must be covered by unit tests."
+          },
+          {
+            "id": "B",
+            "text": "Unit tests must have calls to the System.assert method."
+          },
+          {
+            "id": "C",
+            "text": "Should deploy during business hours to ensure feedback can be quickly addressed."
+          },
+          {
+            "id": "D",
+            "text": "All triggers must have at least one line of test coverage."
+          }
+        ],
+        "correct": ["A", "D"],
+        "explanation": "A) 75% code coverage required for all Apex. D) Every trigger needs at least 1 line covered, even if overall 75% met. Option B wrong: System.assert() not technically required. Option C wrong: deploy during maintenance windows, not business hours.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q24",
+        "text": "Which annotation should a developer use on an Apex method to make it available to be wired to a property in a Lightning web component?",
+        "options": [
+          {
+            "id": "A",
+            "text": "@AuraEnabled(cacheable=true)"
+          },
+          {
+            "id": "B",
+            "text": "@RemoteAction(cacheable=true)"
+          },
+          {
+            "id": "C",
+            "text": "@RemoteAction"
+          },
+          {
+            "id": "D",
+            "text": "@AuraEnabled"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "@AuraEnabled(cacheable=true) required for @wire. The cacheable=true enables client-side caching and reactive updates. Option D (@AuraEnabled alone) only allows imperative calls, not @wire. Options B and C (@RemoteAction) are for Visualforce remoting, not LWC.",
+        "category": ["User Interface", "Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q25",
+        "text": "A developer must write an Apex method that will be called from a Lightning component. The method may delete an Account stored in the accountRec variable. Which method should a developer use to ensure only users that should be able to delete Accounts can successfully perform deletions?",
+        "options": [
+          {
+            "id": "A",
+            "text": "accountRec.isDeletable()"
+          },
+          {
+            "id": "B",
+            "text": "Schema.sObjectType.Account.isDeletable()"
+          },
+          {
+            "id": "C",
+            "text": "accountRec.sObjectType.isDeletable()"
+          },
+          {
+            "id": "D",
+            "text": "Account.isDeletable"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Schema.sObjectType.Account.isDeletable() checks object-level delete permissions for the running user. Option A wrong: sObject instances don't have isDeletable(). Option C wrong: malformed syntax (needs getSObjectType().getDescribe().isDeletable()). Option D wrong: missing parentheses and Schema namespace.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q26",
+        "text": "What is a consideration for running a flow in debug mode?",
+        "options": [
+          {
+            "id": "A",
+            "text": "When debugging a schedule-triggered flow, the flow starts only for one record."
+          },
+          {
+            "id": "B",
+            "text": "Clicking Pause allows an element to be replaced in the flow."
+          },
+          {
+            "id": "C",
+            "text": "DML operations will be rolled back when the debugging ends."
+          },
+          {
+            "id": "D",
+            "text": "Callouts to external systems are not executed when debugging a flow."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "DML operations are automatically rolled back at debug session end to prevent test data in production. Option A wrong: you specify which records to process, not a limitation. Option B wrong: can't modify flow elements during active debug. Option D wrong: callouts ARE executed, requiring caution.",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q27",
+        "text": "A developer creates a batch Apex job to update a large number of records, and receives reports of the job timing out and not completing. What is the first step towards troubleshooting the issue?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Check the asynchronous job monitoring page to view the job status and logs."
+          },
+          {
+            "id": "B",
+            "text": "Check the debug logs for the batch job."
+          },
+          {
+            "id": "C",
+            "text": "Disable the batch job and recreate it with a smaller number of records."
+          },
+          {
+            "id": "D",
+            "text": "Decrease the batch size to reduce the load on the system."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Check Apex Jobs page first to see batch status, errors, and execution details. Option B (debug logs) is secondary after identifying failed batch. Options C and D are solutions, not diagnostic steps—diagnose root cause first.",
+        "category": ["Testing, Debugging and Deployment", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q28",
+        "text": "Universal Containers has implemented an order management application. Each Order can have one or more Order Line items. The Order Line object is related to the Order via a master-detail relationship. For each Order Line item, the total price is calculated by multiplying the Order Line item price with the quantity ordered. What is the best practice to get the sum of all Order Line item totals on the Order record?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Roll-up summary field"
+          },
+          {
+            "id": "B",
+            "text": "Formula field"
+          },
+          {
+            "id": "C",
+            "text": "Apex trigger"
+          },
+          {
+            "id": "D",
+            "text": "Quick action"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Roll-up summary field automatically aggregates child record values in master-detail relationships (SUM, COUNT, MIN, MAX, AVG). Option B (formula) can't reference child records. Option C (trigger) violates clicks-not-code principle. Option D (quick action) is UI component, not calculation mechanism.",
+        "category": ["Data Modeling and Management", "Developer Fundamentals"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q29",
+        "text": "Universal Containers decides to use purely declarative development to build out a new Salesforce application. Which two options can be used to build out the business logic layer for this application? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Record-Triggered Flow"
+          },
+          {
+            "id": "B",
+            "text": "Batch Jobs"
+          },
+          {
+            "id": "C",
+            "text": "Remote Actions"
+          },
+          {
+            "id": "D",
+            "text": "Validation Rules"
+          }
+        ],
+        "correct": ["A", "D"],
+        "explanation": "A) Record-Triggered Flows execute on record changes with complex logic, no code. D) Validation Rules enforce data quality declaratively. Option B (Batch Jobs) requires Apex code. Option C (Remote Actions) are @RemoteAction Apex methods, requiring code.",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q30",
+        "text": "A developer wrote Apex code that calls out to an external system using REST API. How should a developer write the test to prove the code is working as intended?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Write a class that implements HttpCalloutMock."
+          },
+          {
+            "id": "B",
+            "text": "Write a class that extends WebServiceMock."
+          },
+          {
+            "id": "C",
+            "text": "Write a class that implements WebServiceMock."
+          },
+          {
+            "id": "D",
+            "text": "Write a class that extends HttpCalloutMock."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Implement HttpCalloutMock interface with respond(HttpRequest) method to simulate external responses. Use Test.setMock() to register. Option D wrong: HttpCalloutMock is interface (implement, not extend). Options B and C wrong: WebServiceMock is for SOAP, not REST callouts.",
+        "category": ["Testing, Debugging and Deployment", "Integration"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q31",
+        "text": "What are two ways for a developer to execute tests in an org? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Tooling API"
+          },
+          {
+            "id": "B",
+            "text": "Metadata API"
+          },
+          {
+            "id": "C",
+            "text": "Bulk API"
+          },
+          {
+            "id": "D",
+            "text": "Developer Console"
+          }
+        ],
+        "correct": ["A", "D"],
+        "explanation": "A) Tooling API provides programmatic test execution via REST endpoints for CI/CD. D) Developer Console offers interactive UI for running tests and viewing coverage. Option B (Metadata API) deploys metadata but can't execute tests on-demand. Option C (Bulk API) for data loading, not tests.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q32",
+        "text": "The following Apex method is part of the ContactService class that is called from a trigger: public static void setBusinessUnitToEMEA(Contact thisContact) { thisContact.Business_Unit__c = 'EMEA'; update thisContact; }. How should the developer modify the code to ensure best practices are met?",
+        "options": [
+          {
+            "id": "A",
+            "text": "public static void setBusinessUnitToEMEA(List<Contact> contacts) { for(Contact thisContact : contacts) { thisContact.Business_Unit__c = 'EMEA'; } update contacts; }"
+          },
+          {
+            "id": "B",
+            "text": "public static void setBusinessUnitToEMEA(List<Contact> contacts) { for(Contact thisContact : contacts) { thisContact.Business_Unit__c = 'EMEA'; update contacts[0]; } }"
+          },
+          {
+            "id": "C",
+            "text": "public static void setBusinessUnitToEMEA(Contact thisContact) { List<Contact> contacts = new List<Contact>(); contacts.add(thisContact.Business_Unit__c = 'EMEA'); update contacts; }"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Option A bulkifies by accepting List<Contact>, iterating to set values, and performing single DML outside loop. Option B has DML inside loop. Option C has invalid syntax (adding String to Contact list).",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q33",
+        "text": "An org has an existing flow that edits an Opportunity with an Update Records element. A developer must update the flow to also create a Contact and store the created Contact's ID on the Opportunity. Which update must the developer make in the flow?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Add a new Update Records element."
+          },
+          {
+            "id": "B",
+            "text": "Add a new Roll Back Records element."
+          },
+          {
+            "id": "C",
+            "text": "Add a new Create Records element."
+          },
+          {
+            "id": "D",
+            "text": "Add a new Get Records element."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Create Records element creates new records and stores ID in output variable for use in Update Records element. Option A (Update) modifies existing records. Option B (Roll Back) reverses DML. Option D (Get) retrieves existing records.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q34",
+        "text": "Given the following Anonymous block: ```List<Case> casesToUpdate = new List<Case>(); for(Case thisCase : [SELECT Id, Status FROM Case LIMIT 50000]) { thisCase.Status = 'Working'; casesToUpdate.add(thisCase); } try { Database.update(casesToUpdate, false); } catch(Exception e) { System.debug(e.getMessage()); }``` What should a developer consider for an environment that has over 10,000 Case records?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The transaction will succeed and changes will be committed."
+          },
+          {
+            "id": "B",
+            "text": "The transaction will fail due to exceeding the governor limit."
+          },
+          {
+            "id": "C",
+            "text": "The try/catch block will handle any DML exceptions thrown."
+          },
+          {
+            "id": "D",
+            "text": "The try/catch block will handle exceptions thrown by governor limits."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Violates governor limits: SOQL query retrieves 50,000 records (exceeds 50,000 limit), and update attempts 50,000 DML rows (exceeds 10,000 limit). System.LimitException cannot be caught by try-catch. Options C and D wrong: governor limit exceptions bypass exception handling. Option A wrong: transaction fails.",
+        "category": ["Logic and Process Automation", "Testing, Debugging and Deployment"],
+        "difficulty": 7
+      },
+      {
+        "id": "pd1_q35",
+        "text": "What are two benefits of using External IDs? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "An External ID field can be used to reference an ID from another external system."
+          },
+          {
+            "id": "B",
+            "text": "An External ID can be a formula field to help create a unique key from two fields in Salesforce."
+          },
+          {
+            "id": "C",
+            "text": "An External ID can be used with Salesforce Mobile to make external data visible."
+          },
+          {
+            "id": "D",
+            "text": "An External ID is indexed and can improve the performance of SOQL queries."
+          }
+        ],
+        "correct": ["A", "D"],
+        "explanation": "A) Store unique identifiers from external systems, enabling upsert operations for integrations. D) Automatically indexed, improving SOQL query performance. Option B wrong: External IDs can't be formula fields. Option C wrong: unrelated to mobile data visibility.",
+        "category": ["Data Modeling and Management", "Integration"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q37",
+        "text": "Universal Containers needs to create a custom user interface component that allows users to enter information about their accounts. The component should be able to validate the user input before saving the information to the database. What is the best technology to create this component?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Flow"
+          },
+          {
+            "id": "B",
+            "text": "Lightning Web Components"
+          },
+          {
+            "id": "C",
+            "text": "Visualforce"
+          },
+          {
+            "id": "D",
+            "text": "VUE JavaScript framework"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "LWC uses modern web standards with client-side validation, superior performance, and seamless Apex integration. Option A (Flow) lacks flexibility for complex UI. Option C (Visualforce) is legacy technology. Option D (VUE) not natively supported in Salesforce.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q38",
+        "text": "A Developer Edition org has five existing accounts. A developer wants to add 10 more accounts for testing purposes. The following code is executed in the Developer Console using the Execute Anonymous window:\n\n```\nAccount myAccount = new Account(Name = 'MyAccount');\ninsert myAccount;\n\nInteger x = 1;\nList<Account> newAccounts = new List<Account>();\ndo {\n    Account acct = new Account (Name = 'New Account ' + x++);\n    newAccounts.add(acct);\n} while (x < 10);\n```\n\nHow many total accounts will be in the org after this code is executed?",
+        "options": [
+          {
+            "id": "A",
+            "text": "5"
+          },
+          {
+            "id": "B",
+            "text": "6"
+          },
+          {
+            "id": "C",
+            "text": "10"
+          },
+          {
+            "id": "D",
+            "text": "15"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Total: 5 existing + 1 myAccount + 9 from loop = 15. Do-while loop runs for x=1 through x=9 (9 iterations). Assumes newAccounts list is inserted after loop (though code shown doesn't include insert statement).",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q39",
+        "text": "Universal Containers wants to automatically assign new cases to the appropriate support representative based on the case origin. They have created a custom field on the Case object to store the support representative name. What is the best solution to assign the case to the appropriate support representative?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use a trigger on the Case object."
+          },
+          {
+            "id": "B",
+            "text": "Use a formula field on the Case object."
+          },
+          {
+            "id": "C",
+            "text": "Use a validation rule on the Case object."
+          },
+          {
+            "id": "D",
+            "text": "Use an Assignment Flow element."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Record-Triggered Flow with Assignment element is declarative solution following clicks-not-code philosophy. Option A (trigger) works but violates best practices. Option B (formula field) is read-only. Option C (validation rule) enforces constraints, not assignments.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q40",
+        "text": "How many Accounts will be inserted by the following block of code?\n\n```\nfor(Integer i=0; i<500; i++) {\n    Account a = new Account(Name='New Account');\n    insert a;\n}\n```",
+        "options": [
+          {
+            "id": "A",
+            "text": "100"
+          },
+          {
+            "id": "B",
+            "text": "0"
+          },
+          {
+            "id": "C",
+            "text": "150"
+          },
+          {
+            "id": "D",
+            "text": "500"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Code intends to insert 500 accounts but violates 150 DML statement limit. Would fail on 151st iteration with System.LimitException, rolling back all changes (0 inserted). Answer D (500) tests understanding of code intent. Best practice: bulkify by adding to list and single insert outside loop.",
+        "category": ["Logic and Process Automation", "Testing, Debugging and Deployment"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q41",
+        "text": "A developer needs to make a custom Lightning Web Component available in the Salesforce Classic user interface. Which approach can be used to accomplish this?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Embed the Lightning Web Component is a Visualforce Component and add directly to the page layout."
+          },
+          {
+            "id": "B",
+            "text": "Use the Lightning Out JavaScript library to embed the Lightning Web Component in a Visualforce page and add to the page layout."
+          },
+          {
+            "id": "C",
+            "text": "Use a Visualforce page with a custom controller to invoke the Lightning Web Component using a call to an Apex method."
+          },
+          {
+            "id": "D",
+            "text": "Wrap the Lightning Web Component in an Aura Component and surface the Aura Component as a Visualforce tab."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Lightning Out JavaScript library embeds LWCs in Visualforce pages for Classic. Uses $Lightning.use() and $Lightning.createComponent(). Option A wrong: can't directly embed LWC in VF Component. Option C wrong: can't invoke LWC through Apex. Option D wrong: VF tab doesn't make it available on page layouts.",
+        "category": ["User Interface", "Integration"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q42",
+        "text": "Universal Containers decides to use exclusively declarative development to build out a new Salesforce application. Which three options should be used to build out the database layer for the application? Choose 3 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Custom objects and fields"
+          },
+          {
+            "id": "B",
+            "text": "Triggers"
+          },
+          {
+            "id": "C",
+            "text": "Roll-up summaries"
+          },
+          {
+            "id": "D",
+            "text": "Relationships"
+          },
+          {
+            "id": "E",
+            "text": "Flows"
+          }
+        ],
+        "correct": ["A", "C", "D"],
+        "explanation": "A) Custom objects/fields are foundational declarative data model elements. C) Roll-up summaries aggregate child records declaratively (COUNT, SUM, MIN, MAX). D) Relationships (Lookup, Master-Detail) define object connections declaratively. Option B (Triggers) is Apex code, not declarative. Option E (Flows) for automation, not data layer structure.",
+        "category": ["Data Modeling and Management", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q43",
+        "text": "A developer wants to improve runtime performance of Apex calls by caching results on the client. What is the most efficient way to implement this and follow best practices?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Decorate the server-side method with @AuraEnabled(cacheable=true)."
+          },
+          {
+            "id": "B",
+            "text": "Call the setStorable() method on the action in the JavaScript client-side code."
+          },
+          {
+            "id": "C",
+            "text": "Decorate the server-side method with @AuraEnabled(storable=true)."
+          },
+          {
+            "id": "D",
+            "text": "Set a cookie in the browser for use upon return to the page."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "@AuraEnabled(cacheable=true) enables client-side caching with automatic cache management, works with @wire, and requires read-only methods. Option B (setStorable()) is legacy Aura approach. Option C wrong: parameter is 'cacheable', not 'storable'. Option D wrong: cookies bypass Salesforce cache management and have limitations.",
+        "category": ["User Interface", "Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q44",
+        "text": "A developer is implementing an Apex class for a financial system. Within the class, the variables 'creditAmount' and 'debitAmount' should not be able to change once a value is assigned. In which two ways can the developer declare the variables to ensure their value can only be assigned one time? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the static keyword and assign its value in a static initializer."
+          },
+          {
+            "id": "B",
+            "text": "Use the final keyword and assign its value in the class constructor."
+          },
+          {
+            "id": "C",
+            "text": "Use the final keyword and assign its value when declaring the variable."
+          },
+          {
+            "id": "D",
+            "text": "Use the static keyword and assign its value in the class constructor."
+          }
+        ],
+        "correct": ["B", "C"],
+        "explanation": "'final' keyword ensures single assignment. B) Assign in constructor for instance-specific values. C) Assign at declaration for constants. Option A wrong: 'static' alone allows reassignment. Option D wrong: can't assign static variables in instance constructors (use static initializer blocks).",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q45",
+        "text": "A developer created a trigger on a custom object. This custom object also has some dependent pick lists. According to the order of execution rules, which step happens first?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The original record is loaded from the database."
+          },
+          {
+            "id": "B",
+            "text": "System validation is run for maximum field lengths."
+          },
+          {
+            "id": "C",
+            "text": "Old values are overwritten with the new record values."
+          },
+          {
+            "id": "D",
+            "text": "JavaScript validation is run in the browser,"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "First step: Load original record from database (or initialize new record). Then: System validation → Overwrite old values → Before triggers → Validation rules → After triggers. Option D (JavaScript validation) runs client-side before server request.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q46",
+        "text": "A developer needs to create a baseline set of data (Accounts, Contacts, Products, Assets) for an entire suite of Apex tests allowing them to test isolated requirements for various types of Salesforce cases. Which approach can efficiently generate the required data for each unit test?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Create a mock using the HttpcalloutMock interface."
+          },
+          {
+            "id": "B",
+            "text": "Use @TestSetup with a void method."
+          },
+          {
+            "id": "C",
+            "text": "Add @IsTest (seeAllData=true) at the start of the unit test class."
+          },
+          {
+            "id": "D",
+            "text": "Create test data before Test .startTest() in the unit test."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "@TestSetup creates data once before all test methods, providing performance and efficiency. Each test gets fresh copy. Option A (HttpCalloutMock) for HTTP mocks, not data. Option C (seeAllData=true) is anti-pattern breaking isolation. Option D works but inefficient (creates data per test method).",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q47",
+        "text": "A developer created a trigger on the Account object and wants to test if the trigger is properly bulkified. The developer team decided that the trigger should be tested with 200 account records with unique names. What two things should be done to create the test data within the unit test with the least amount of code? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the @isTest (seeAllData=true) annotation in the test class."
+          },
+          {
+            "id": "B",
+            "text": "Use the @isTest (isParallel=true) annotation in the test class."
+          },
+          {
+            "id": "C",
+            "text": "Create a static resource containing test data."
+          },
+          {
+            "id": "D",
+            "text": "Use Test, loadData to populate data in your test methods."
+          }
+        ],
+        "correct": ["C", "D"],
+        "explanation": "C) Create CSV static resource with 200 unique accounts. D) Test.loadData() reads static resource and creates sObjects in one line. Option A (seeAllData=true) is anti-pattern. Option B (isParallel=true) for parallel execution, not data creation.",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q48",
+        "text": "A software company is using Salesforce to track the companies they sell their software to in the Account object. They also use Salesforce to track bugs in their software with a custom object, Bug__c. As part of a process improvement initiative, they want to be able to report on which companies have reported which bugs. Each company should be able to report multiple bugs and bugs can also be reported by multiple companies. What is needed to allow this reporting?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Roll-up summary field of Bug_c on Account"
+          },
+          {
+            "id": "B",
+            "text": "Master-detail field on Bug_c to Account"
+          },
+          {
+            "id": "C",
+            "text": "Lookup field on Bug_c to Account"
+          },
+          {
+            "id": "D",
+            "text": "Function object between Bug__c and Account"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Many-to-many relationship requires junction object with two master-detail relationships (one to Account, one to Bug__c). Enables tracking which companies reported which bugs with full history and reporting capabilities. Options A, B, C create only one-to-many relationships. Note: 'Function object' likely typo for 'Junction object'.",
+        "category": ["Data Modeling and Management"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q49",
+        "text": "What should a developer use to script the deployment and unit test execution as part of continuous integration?",
+        "options": [
+          {
+            "id": "A",
+            "text": "VS Code"
+          },
+          {
+            "id": "B",
+            "text": "Execute Anonymous"
+          },
+          {
+            "id": "C",
+            "text": "Salesforce CLI"
+          },
+          {
+            "id": "D",
+            "text": "Developer Console"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Salesforce CLI scripts deployments and test execution for CI/CD pipelines. Key commands: sf project deploy, sf apex run test. Scriptable, returns structured output (JSON), integrates with Jenkins/GitHub Actions. Options A (VS Code), B (Execute Anonymous), D (Developer Console) are for manual development, not scriptable CI/CD automation.",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q50",
+        "text": "If Apex code executes inside the execute() method of an Apex class when implementing the Batchable interface, which two statements are true regarding governor limits? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "The Apex governor limits are reset for each iteration of the execute () method."
+          },
+          {
+            "id": "B",
+            "text": "The Apex governor limits cannot be exceeded due to the asynchronaus nature of the transaction."
+          },
+          {
+            "id": "C",
+            "text": "The Apex governor limits will use the asynchronous limit levels."
+          },
+          {
+            "id": "D",
+            "text": "The Apex governor limits are omitted while calling the constructor of the Apex class."
+          }
+        ],
+        "correct": ["A", "C"],
+        "explanation": "A) Limits reset for each execute() iteration—each batch is separate transaction with fresh limits. C) Uses asynchronous limits (200 SOQL vs 100, 12MB heap vs 6MB, 60s CPU vs 10s). Option B wrong: limits CAN be exceeded. Option D wrong: limits always apply.",
+        "category": ["Logic and Process Automation", "Testing, Debugging and Deployment"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q51",
+        "text": "A credit card company needs to implement the functionality for a service agent to process damaged or stolen credit cards. When the customers call in, the service agent must gather many pieces of information. A developer is tasked to implement this functionality. What should the developer use to satisfy this requirement in the most efficient manner?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Screen-based flow"
+          },
+          {
+            "id": "B",
+            "text": "Approval process"
+          },
+          {
+            "id": "C",
+            "text": "Apex trigger"
+          },
+          {
+            "id": "D",
+            "text": "Lightning Component"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Screen Flow is declarative solution for interactive data gathering with multiple screens, validation, and conditional logic. Option B (Approval process) for routing approvals, not gathering data. Option C (Apex trigger) server-side automation, no UI. Option D (Lightning Component) requires code, less efficient than declarative Flow.",
+        "category": ["Logic and Process Automation", "User Interface"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q52",
+        "text": "Which three steps allow a custom Scalable Vector Graphic (SVG) to be included in a Lightning web component? Choose 3 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Import the static resource and provide a JavaScript property for it."
+          },
+          {
+            "id": "B",
+            "text": "Upload the SVG as a static resource."
+          },
+          {
+            "id": "C",
+            "text": "Reference the import in the HTML template."
+          },
+          {
+            "id": "D",
+            "text": "Import the SVG as a content asset file."
+          },
+          {
+            "id": "E",
+            "text": "Reference the property in the HTML template."
+          }
+        ],
+        "correct": ["A", "B", "C"],
+        "explanation": "B) Upload SVG as static resource. A) Import in JS: import myIcon from '@salesforce/resourceUrl/customIcon'; store in property. C) Reference in HTML: <img src={iconUrl} />. Option D wrong: Content Asset Files for CMS, not LWC. Option E partially correct but less accurate than C.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q53",
+        "text": "A developer must create a Lightning component that allows users to input Contact record information to create a Contact record, including a Salary__c custom field. What should the developer use, along with a lightning-record-edit-form, so that Salary__c field functions as a currency input and is only viewable and editable by users that have the correct field-level permissions on Salary__c?",
+        "options": [
+          {
+            "id": "A",
+            "text": "<lightning-input type=\"number\" value=\"Salary__c\" formatter=\"currency\"></lightning-input>"
+          },
+          {
+            "id": "B",
+            "text": "<lightning-formatted-number value=\"Salary__c\" format-style=\"currency\"></lightning-formatted-number>"
+          },
+          {
+            "id": "C",
+            "text": "<lightning-input-field field-name=\"Salary__c\"></lightning-input-field>"
+          },
+          {
+            "id": "D",
+            "text": "<lightning-input-currency value=\"Salary__c\"></lightning-input-currency>"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "lightning-input-field respects FLS automatically, applies correct input type from schema, handles currency formatting with locale-specific symbols, and enforces validation rules. Option A (lightning-input) doesn't respect FLS. Option B (lightning-formatted-number) is read-only display. Option D doesn't exist as standard component.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q54",
+        "text": "What is the value of the Trigger.old context variable in a before insert trigger?",
+        "options": [
+          {
+            "id": "A",
+            "text": "An empty list of sObjects"
+          },
+          {
+            "id": "B",
+            "text": "Undefined"
+          },
+          {
+            "id": "C",
+            "text": "null"
+          },
+          {
+            "id": "D",
+            "text": "A list of newly created sObjects without IDs"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Trigger.old is null in before insert because no previous state exists for new records. Trigger.old only available in update and delete triggers. Option A wrong: null, not empty list. Option B wrong: 'undefined' not valid in Apex. Option D describes Trigger.new (new records without IDs).",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q55",
+        "text": "Which code in a Visualforce page and/or controller might present a security vulnerability?",
+        "options": [
+          {
+            "id": "A",
+            "text": "<apex:outputText value=\"{!ApexPages.currentPage().parameters.userInput}\" />"
+          },
+          {
+            "id": "B",
+            "text": "<apex:outputText escape=\"false\" value=\"{!ApexPages.currentPage().parameters.userInput}\" />"
+          },
+          {
+            "id": "C",
+            "text": "<apex:outputField value=\"{!ctrl.userInput}\" rendered=\"{!isEditable}\" />"
+          },
+          {
+            "id": "D",
+            "text": "<apex:outputField value=\"{!ctrl.userInput}\" />"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "XSS vulnerability: renders URL parameter with escape='false', allowing script injection. Attackers can inject malicious JavaScript (e.g., <script>alert(document.cookie)</script>). Option A safe: escape defaults to true. Options C and D safe: apex:outputField auto-escapes. Never use escape='false' with user input.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 7
+      },
+      {
+        "id": "pd1_q56",
+        "text": "When a user edits the Postal Code on an Account, a custom Account text field named 'Timezone' must be updated based on the values in a PostalCodeToTimezone__c custom object. Which two automation tools can be used to implement this feature? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Quick actions"
+          },
+          {
+            "id": "B",
+            "text": "Approval process"
+          },
+          {
+            "id": "C",
+            "text": "Account trigger"
+          },
+          {
+            "id": "D",
+            "text": "Fast Field Updates record-triggered flow"
+          }
+        ],
+        "correct": ["C", "D"],
+        "explanation": "C) Apex trigger detects PostalCode change, queries PostalCodeToTimezone__c, updates Timezone field. D) Record-Triggered Flow (Fast Field Update/before-save) uses Get Records to query custom object and Assignment to update field. Option A (Quick actions) user-initiated, not automatic. Option B (Approval process) for routing approvals, not lookups.",
+        "category": ["Logic and Process Automation", "Data Modeling and Management"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q57",
+        "text": "While working in a sandbox, an Apex test fails when run in the Test Runner. However, executing the Apex logic in the Execute Anonymous window succeeds with no exceptions or errors. Why did the method fail in the sandbox test framework but succeed in the Developer Console?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The test method does not use system.runAs to execute as a specific user."
+          },
+          {
+            "id": "B",
+            "text": "The test method is calling an @future method."
+          },
+          {
+            "id": "C",
+            "text": "The test method relies on existing data in the sandbox."
+          },
+          {
+            "id": "D",
+            "text": "The test method has a syntax error in the code."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Tests run in isolated context without access to org data. Execute Anonymous accesses actual sandbox data. Test fails because it queries for records not created in test method. Option A (runAs) wouldn't explain different behavior. Option B (@future) works in tests with Test.startTest/stopTest. Option D (syntax error) would fail both.",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q58",
+        "text": "A developer is creating an app that contains multiple Lightning web components. One of the child components is used for navigation purposes. When a user clicks a button called Next in the child component, the parent component must be alerted so it can navigate to the next page. How should this be accomplished?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Update a property on the parent."
+          },
+          {
+            "id": "B",
+            "text": "Call a method in the Apex controller."
+          },
+          {
+            "id": "C",
+            "text": "Fire a notification."
+          },
+          {
+            "id": "D",
+            "text": "Create a custom event."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Custom events enable child-to-parent communication in LWC. Child dispatches CustomEvent, parent listens with event handler. Child: this.dispatchEvent(new CustomEvent('next')). Parent HTML: onnext={handleNext}. Option A wrong: properties are one-way (parent-to-child). Option B wrong: Apex for server operations, not component communication. Option C wrong: no standard 'notification' mechanism.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q59",
+        "text": "A custom picklist field, Pool Preference, exists on a custom object. The picklist contains the following options: 'Vegan', 'Kosher', 'No Preference'. The developer must ensure a value is populated every time a record is created or updated. What is the optimal way to ensure a value is selected every time a record is saved?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Set 'Use the first value in the list as the default value' to True."
+          },
+          {
+            "id": "B",
+            "text": "Write an Apex trigger to ensure a value is selected."
+          },
+          {
+            "id": "C",
+            "text": "Mark the field as Required on the object's page layout."
+          },
+          {
+            "id": "D",
+            "text": "Mark the field as Required on the field definition."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Required at field definition enforces at database level across all entry points (UI, API, Apex, Data Loader). Option A (default value) doesn't prevent clearing on updates. Option B (trigger) programmatic overkill, violates clicks-not-code. Option C (page layout) UI-level only, doesn't enforce for API or other layouts.",
+        "category": ["Data Modeling and Management", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q60",
+        "text": "A developer is tasked with building a custom Lightning web component to collect Contact information. The form will be shared among many different types of users in the org. There are security requirements that only certain fields should be edited and viewed by certain groups of users. What should the developer use in their Lightning Web Component to support the security requirements?",
+        "options": [
+          {
+            "id": "A",
+            "text": "aura-input-field"
+          },
+          {
+            "id": "B",
+            "text": "force-input-field"
+          },
+          {
+            "id": "C",
+            "text": "ui-input-field"
+          },
+          {
+            "id": "D",
+            "text": "lightning-input-field"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "lightning-input-field automatically respects FLS and OLS, dynamically rendering based on user permissions (hidden if no read, read-only if no edit, editable if full access). Uses Lightning Data Service for CRUD and security. Options A, B, C don't exist in LWC (force-input-field is Aura equivalent).",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q61",
+        "text": "A company decides to implement a new process where every time an Opportunity is created, a follow up Task should be created and assigned to the Opportunity Owner. What is the most efficient way for a developer to implement this?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Apex trigger on Task"
+          },
+          {
+            "id": "B",
+            "text": "Task actions"
+          },
+          {
+            "id": "C",
+            "text": "Auto-launched flow on Task"
+          },
+          {
+            "id": "D",
+            "text": "Record-triggered flow on Opportunity"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Record-Triggered Flow on Opportunity (after-save) creates Task with Create Records element. Declarative, admin-maintainable, auto-bulkified. Option A (trigger on Task) fires on wrong object. Option B not a real automation tool. Option C (auto-launched on Task) has no trigger and wrong object.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q62",
+        "text": "In terms of the MVC paradigm, what are two advantages of implementing the view layer of a Salesforce application using Lightning Web Component-based development over Visualforce? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Rich component ecosystem"
+          },
+          {
+            "id": "B",
+            "text": "Log capturing via the Debug Logs Setup page"
+          },
+          {
+            "id": "C",
+            "text": "Built-in standard and custom set controllers"
+          },
+          {
+            "id": "D",
+            "text": "Self-contained and reusable units of an application"
+          }
+        ],
+        "correct": ["A", "D"],
+        "explanation": "A) 70+ Lightning Base Components, SLDS styling, npm ecosystem access. D) Self-contained with Shadow DOM, easily reusable across pages/apps, clear @api interfaces. Option B (Debug Logs) available for both. Option C (set controllers) is Visualforce feature, not LWC advantage.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q63",
+        "text": "The value of the account type field is not being displayed correctly on the page. Assuming the custom controller is properly referenced on the Visualforce page, what should the developer do to correct the problem?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Add a getter method for the actType attribute."
+          },
+          {
+            "id": "B",
+            "text": "Change the Account attribute to public."
+          },
+          {
+            "id": "C",
+            "text": "Add with sharing to the custom controller."
+          },
+          {
+            "id": "D",
+            "text": "Convert the Account.Type to a String."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Missing getter method prevents Visualforce data binding. Need: public String getActType() { return actType; } or automatic property: public String actType { get; set; }. Option B (public variable) not best practice. Option C (with sharing) controls record security, not field visibility. Option D wrong: Type already String.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q64",
+        "text": "What are two ways a developer can get the status of an enqueued job for a class that implements the queueable interface? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "View the Apex Status page"
+          },
+          {
+            "id": "B",
+            "text": "View the Apex Jobs page"
+          },
+          {
+            "id": "C",
+            "text": "Query the AsyncApexJob object"
+          },
+          {
+            "id": "D",
+            "text": "View the Apex Flex Queue"
+          }
+        ],
+        "correct": ["B", "C"],
+        "explanation": "B) Apex Jobs page (Setup → Jobs → Apex Jobs) shows all async jobs with status, times. C) Query AsyncApexJob: SELECT Status, NumberOfErrors FROM AsyncApexJob WHERE Id = :jobId. Option A wrong: no 'Apex Status' page. Option D wrong: Flex Queue only for Batch Apex, not Queueable.",
+        "category": ["Logic and Process Automation", "Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q65",
+        "text": "What is an example of a polymorphic lookup field in Salesforce?",
+        "options": [
+          {
+            "id": "A",
+            "text": "The ParentId field on the standard Account object"
+          },
+          {
+            "id": "B",
+            "text": "A custom field, Link__c, on the standard Contact object that looks up to an Account or a Campaign"
+          },
+          {
+            "id": "C",
+            "text": "The WhatId field on the standard Event object"
+          },
+          {
+            "id": "D",
+            "text": "The LeadId and ContactId fields on the standard Campaign Member object"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "WhatId on Task/Event can reference multiple object types (Account, Opportunity, Campaign, Case, etc.). Other polymorphic fields: WhoId (Lead/Contact), OwnerId (User/Queue). Option A (ParentId on Account) self-lookup, not polymorphic. Option B wrong: custom fields can't be polymorphic. Option D wrong: two separate fields, not one polymorphic field.",
+        "category": ["Data Modeling and Management", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q66",
+        "text": "Which statement should be used to allow some of the records in a list of records to be inserted if others fail to be inserted?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Database.insert(records, true)"
+          },
+          {
+            "id": "B",
+            "text": "insert records"
+          },
+          {
+            "id": "C",
+            "text": "insert(records, false)"
+          },
+          {
+            "id": "D",
+            "text": "Database.insert(records, false)"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Database.insert(records, false) allows partial success via allOrNone=false parameter. Returns List<Database.SaveResult> to check success/errors per record. Option A (true) all-or-none default. Option B (insert) defaults to all-or-none. Option C invalid syntax.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q67",
+        "text": "The orderHelper class is a utility class that contains business logic for processing orders. Consider the following code snippet: public class without sharing orderHelper { // code implementation }. A developer needs to create a constant named delivery_multiplier with a value of 4.15. The value of the constant should not change at any time in the code. How should the developer declare the delivery multiplier constant to meet the business objectives?",
+        "options": [
+          {
+            "id": "A",
+            "text": "static decimal DELIVERY_MULTIPLIER = 4.15;"
+          },
+          {
+            "id": "B",
+            "text": "constant decimal DELIVERY_MULTIPLIER = 4.15;"
+          },
+          {
+            "id": "C",
+            "text": "static final decimal DELIVERY_MULTIPLIER = 4.15;"
+          },
+          {
+            "id": "D",
+            "text": "decimal DELIVERY_MULTIPLIER = 4.15;"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "'static final' creates class-level constant. 'static' makes it class-level (shared across instances). 'final' makes it immutable (assign once). Convention: ALL_CAPS naming. Option A (static only) can be modified. Option B wrong: no 'constant' keyword in Apex. Option D creates modifiable instance variable.",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q68",
+        "text": "Based on this code, what is the value of x?\n\n```\nBoolean isOK;\nInteger x;\nString theString = 'Hello';\n\nif (isOK == false && theString == 'Hello') {\n    x = 1;\n} else if (isOK == true && theString == 'Hello') {\n    x = 2;\n} else if (isOK != null && theString == 'Hello') {\n    x = 3;\n} else {\n    x = 4;\n}\n```",
+        "options": [
+          {
+            "id": "A",
+            "text": "4"
+          },
+          {
+            "id": "B",
+            "text": "1"
+          },
+          {
+            "id": "C",
+            "text": "2"
+          },
+          {
+            "id": "D",
+            "text": "3"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "isOK is null (uninitialized). First condition: null == false is FALSE. Second: null == true is FALSE. Third: isOK != null is FALSE (it IS null). All conditions fail, else executes: x = 4. Key: uninitialized Boolean is null, not false. Null is distinct from false in Boolean three-state logic.",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q69",
+        "text": "Universal Containers wants to back up all of the data and attachments in its Salesforce org once a month. Which approach should a developer use to meet this requirement?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Schedule a report."
+          },
+          {
+            "id": "B",
+            "text": "Use the Data Loader command line."
+          },
+          {
+            "id": "C",
+            "text": "Define a Data Export scheduled job."
+          },
+          {
+            "id": "D",
+            "text": "Create a Schedulable Apex class."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Data Export service (Setup → Data → Data Export) provides automated monthly backups with all objects, attachments, delivered as CSV zip. Option A (reports) limited to 2000 rows, no attachments. Option B (Data Loader CLI) requires manual scripting, external scheduling. Option D (Schedulable Apex) unnecessary complexity.",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q70",
+        "text": "A developer is asked to write helper methods that create test data for unit tests. What should be changed in the TestUtils class so that its methods are only usable by unit test methods?\n\n```\npublic class TestUtils {\n    public static Account createAccount() {\n        Account acct = new Account();\n        // ...set some fields on acct...\n        return acct;\n    }\n    // ...other methods...\n}\n```",
+        "options": [
+          {
+            "id": "A",
+            "text": "@isTest above line 03."
+          },
+          {
+            "id": "B",
+            "text": "Add @isTest above line 01."
+          },
+          {
+            "id": "C",
+            "text": "Change public to private on line 01."
+          },
+          {
+            "id": "D",
+            "text": "Remove static from line 03."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "@isTest on class (line 01) marks entire class as test code, only accessible in test context, doesn't count against org limits, prevents production use. Option A (method-level) doesn't restrict whole class. Option C wrong: private top-level classes not allowed in Apex. Option D (remove static) doesn't restrict to test usage.",
+        "category": ["Testing, Debugging and Deployment", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q71",
+        "text": "Assuming that name is a String obtained by a Visualforce page, which two SOQL queries performed are safe from SOQL injection? (Choose two.)",
+        "options": [
+          {
+            "id": "A",
+            "text": "String query = '%' + name + '%'; List<Account> results = [SELECT Id FROM Account WHERE Name LIKE :query];"
+          },
+          {
+            "id": "B",
+            "text": "String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name.noQuotes() + '%\\''; List<Account> results = Database.query(query);"
+          },
+          {
+            "id": "C",
+            "text": "String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + String.escapeSingleQuotes(name) + '%\\''; List<Account> results = Database.query(query);"
+          },
+          {
+            "id": "D",
+            "text": "String query = 'SELECT Id FROM Account WHERE Name LIKE \\'%' + name + '%\\''; List<Account> results = Database.query(query);"
+          }
+        ],
+        "correct": ["A", "C"],
+        "explanation": "Option A uses bind variable (:query) which treats user input as data, not executable code, preventing injection. Option C uses String.escapeSingleQuotes() to sanitize input before dynamic query, escaping single quotes that could break the query. Option B uses noQuotes() which isn't a standard Apex method and doesn't prevent injection. Option D directly concatenates unsanitized user input into dynamic query, allowing malicious input like ' OR '1'='1 to bypass intended logic.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q72",
+        "text": "Consider the following code snippet: public class with sharing AccountsController { @AuraEnabled public List<Account> getAllAccounts(){ return [SELECT Id, Name, Industry FROM Account]; } } Apex Test Class Snippet: @isTest private class with sharing AccountsController_Test { @testSetup private static void makeData(){ User user1 = [SELECT Id FROM User WHERE Profile.Name = 'System Administrator' AND isActive = true LIMIT 1]; User user2 = [SELECT Id FROM User WHERE Profile.Name = 'Standard User' AND UserName = 'test@test.com' AND isActive = true LIMIT 1]; TestUtils.insertAccounts(10, user1.Id); TestUtils.insertAccounts(20, user2.Id); } @isTest private static void getAllAccounts_StandardUser_Test(){ List<Account> result = AccountsController.getAllAccounts(); System.assertEquals(20, result.size()); } } When the test class runs, the assertion fails. Which change should the developer implement in the Apex test method to ensure the test method executes successfully?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Query the Administrator user into memory and enclose lines 15 and 16 within the System.runAs(user); method."
+          },
+          {
+            "id": "B",
+            "text": "Query the Standard User into memory and enclose lines 15 and 16 within the System.runAs(); method."
+          },
+          {
+            "id": "C",
+            "text": "Add @isTest(seeAllData=true); to line 12 and enclose lines 15 and 16 within Test.startTest(); and Test.stopTest();."
+          },
+          {
+            "id": "D",
+            "text": "Add System.runAs(user); to line 14 and enclose line 15 within Test.startTest(); and Test.stopTest();."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "The AccountsController class uses 'with sharing' so it respects sharing rules. By default, Apex tests run in system context ignoring sharing rules. To test how Standard User sees data (20 records), wrap the test code in System.runAs(standardUser) to enforce sharing rules for that user context. Option A uses wrong user (Admin would see all records). Option C uses seeAllData which violates test isolation. Option D has incorrect syntax.",
+        "category": ["Testing, Debugging and Deployment", "Logic and Process Automation"],
+        "difficulty": 7
+      },
+      {
+        "id": "pd1_q73",
+        "text": "While writing an Apex class, a developer wants to make sure that all functionality being developed is handled as specified by the requirements. Which approach should the developer use to be sure that the Apex class is working according to specifications?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Include a savepoint and Database.rollback()."
+          },
+          {
+            "id": "B",
+            "text": "Include a try/catch block to the Apex class."
+          },
+          {
+            "id": "C",
+            "text": "Run the code in an Execute Anonymous block in the Developer Console."
+          },
+          {
+            "id": "D",
+            "text": "Create a test class to execute the business logic and run the test in the Developer Console."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Test classes validate functionality against specifications through assertions, test various scenarios and edge cases, and provide detailed feedback on whether requirements are met. Option A (savepoint/rollback) manages transactions but doesn't validate requirements. Option B (try/catch) handles exceptions but doesn't ensure specification compliance. Option C (Execute Anonymous) tests small code snippets interactively but isn't comprehensive for full validation.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q74",
+        "text": "A software company uses the following objects and relationships: Case: to handle customer support issues; Defect__c: a custom object to represent known issues with the company's software; Case_Defect__c: a junction object between Case and Defect__c to represent that a defect is a cause of a customer issue. Case and Defect__c have Private organization-wide defaults. What should be done to share a specific Case_Defect__c record with a user?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Share the parent Case record Defect__c records."
+          },
+          {
+            "id": "B",
+            "text": "Share the parent Case and Defect__c record."
+          },
+          {
+            "id": "C",
+            "text": "Share the parent Defect__c record."
+          },
+          {
+            "id": "D",
+            "text": "Share the Case_Defect__c record."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Junction objects inherit access from BOTH parent objects through master-detail relationships. Since Case and Defect__c have Private OWD, users need access to both parent records to see the junction record. Sharing only Case (A) or only Defect__c (C) is insufficient. You cannot directly share junction object records (D) - access is controlled by parent sharing.",
+        "category": ["Data Modeling and Management"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q75",
+        "text": "A developer writes a trigger on the Account object on the before update event that increments a count field. A record-triggered flow also increments the count field every time that an Account is created or updated. What is the value of the count field if an Account is inserted with an initial value of zero, assuming no other automation logic is implemented on the Account?",
+        "options": [
+          {
+            "id": "A",
+            "text": "4"
+          },
+          {
+            "id": "B",
+            "text": "2"
+          },
+          {
+            "id": "C",
+            "text": "1"
+          },
+          {
+            "id": "D",
+            "text": "3"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "During insert: (1) before insert trigger increments count to 1, (2) after insert record-triggered flow increments to 2. The flow's update triggers before update event: (3) before update trigger increments to 3, (4) after update record-triggered flow increments to 4. Final value = 4. This demonstrates Salesforce's order of execution where flows can cause recursive trigger execution.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 7
+      },
+      {
+        "id": "pd1_q76",
+        "text": "Universal Containers has developed custom Apex code and Lightning Components in a Sandbox environment. They need to deploy the code and associated configurations to the Production environment. What is the recommended process for deploying the code and configurations to Production?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the Force.com IDE to deploy the Apex code and Lightning Components."
+          },
+          {
+            "id": "B",
+            "text": "Use the Ant Migration Tool to deploy the Apex code and Lightning Components."
+          },
+          {
+            "id": "C",
+            "text": "Use a change set to deploy the Apex code and Lightning Components."
+          },
+          {
+            "id": "D",
+            "text": "Use Salesforce CLI to deploy the Apex code and Lightning Components."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Change sets are the recommended, simplest way to deploy metadata (Apex, Lightning Components) from Sandbox to Production with point-and-click interface. Option A (Force.com IDE) is deprecated. Option B (Ant Migration Tool) works but requires more technical expertise for standard deployments. Option D (Salesforce CLI) is effective but requires scripting knowledge, making change sets easier for most users.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q77",
+        "text": "Universal Containers wants to assess the advantages of declarative development versus programmatic customization for specific use cases in its Salesforce implementation. What are two characteristics of declarative development over programmatic customization? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Declarative development does not require Apex test classes."
+          },
+          {
+            "id": "B",
+            "text": "Declarative development has higher design limits and query limits."
+          },
+          {
+            "id": "C",
+            "text": "Declarative development can be done using the Setup menu."
+          },
+          {
+            "id": "D",
+            "text": "Declarative code logic does not require maintenance or review."
+          }
+        ],
+        "correct": ["A", "C"],
+        "explanation": "Declarative tools (flows, process builders, validation rules) don't require Apex test classes since they leverage built-in Salesforce features (A). Declarative development uses Setup menu point-and-click tools like page layouts, workflows, Lightning App Builder (C). Option B is wrong: declarative has STRICTER limits than programmatic. Option D is wrong: declarative logic still requires maintenance as business needs evolve.",
+        "category": ["Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q78",
+        "text": "A developer needs to have records with specific field values in order to test a new Apex class. What should the developer do to ensure the data is available to the test?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use SOQL to query the org for the required data."
+          },
+          {
+            "id": "B",
+            "text": "Use Test.loadData() and reference a CSV file in a static resource."
+          },
+          {
+            "id": "C",
+            "text": "Use Anonymous Apex to create the required data."
+          },
+          {
+            "id": "D",
+            "text": "Use Test.loadData() and reference a JSON file in Documents."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Test.loadData() loads data from CSV files in static resources, simplifying test data creation for specific field values in bulk while maintaining test isolation. Option A (querying org) violates test isolation principles. Option C (Anonymous Apex) cannot be used within test classes. Option D is wrong: Test.loadData() doesn't support JSON files in Documents, only CSV in static resources.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q79",
+        "text": "A developer has an integer variable called maxAttempts. The developer needs to ensure that once maxAttempts is initialized, it preserves its value for the length of the Apex transaction; while being able to share the variable's state between trigger executions. How should the developer declare maxAttempts to meet these requirements?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Declare maxAttempts as a constant using the static and final keywords."
+          },
+          {
+            "id": "B",
+            "text": "Declare maxAttempts as a member variable on the trigger definition."
+          },
+          {
+            "id": "C",
+            "text": "Declare maxAttempts as a variable on a helper class."
+          },
+          {
+            "id": "D",
+            "text": "Declare maxAttempts as a private static variable on a helper class."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Private static variable on helper class: static variables persist throughout Apex transaction and share state between trigger executions, private ensures encapsulation. Example: private static Integer maxAttempts = 5; Option A (static final) creates constants that cannot be modified after initialization. Option B (trigger member variable) resets each trigger execution. Option C (non-static helper variable) resets during each trigger execution.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q80",
+        "text": "Flow Builder uses an Apex action to provide additional information about multiple Contacts, stored in a custom class ContactInfo. Which is the correct definition of the Apex method that gets the additional information?",
+        "options": [
+          {
+            "id": "A",
+            "text": "@InvocableMethod(label='Additional Info') public ContactInfo getInfo(Id contactId) { /* implementation */ }"
+          },
+          {
+            "id": "B",
+            "text": "@InvocableMethod(label='Additional Info') public static List<ContactInfo> getInfo(List<Id> contactIds) { /* implementation */ }"
+          },
+          {
+            "id": "C",
+            "text": "@InvocableMethod(label='Additional Info') public static ContactInfo getInfo(Id contactId) { /* implementation */ }"
+          },
+          {
+            "id": "D",
+            "text": "@InvocableMethod(label='Additional Info') public List<ContactInfo> getInfo(List<Id> contactIds) { /* implementation */ }"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "@InvocableMethod for Flow must be: static, annotated with @InvocableMethod, accept List parameter (bulkification), return List of custom class objects. This supports Flow's bulk processing for multiple records. Options A and C use single values not Lists (no bulkification). Option D missing static keyword.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q81",
+        "text": "What are two use cases for executing Anonymous Apex code? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Schedule an Apex class to run periodically"
+          },
+          {
+            "id": "B",
+            "text": "To delete 15,000 inactive Accounts in a single transaction after a deployment"
+          },
+          {
+            "id": "C",
+            "text": "To run a batch Apex class to update all Contacts"
+          },
+          {
+            "id": "D",
+            "text": "To add unit test code coverage to an org"
+          }
+        ],
+        "correct": ["B", "C"],
+        "explanation": "Anonymous Apex executes ad hoc code without creating permanent class/trigger. Use cases: (B) bulk data operations like deleting 15,000 inactive Accounts after deployment, (C) executing batch jobs like Database.executeBatch(new UpdateContactBatch()). Option A (scheduling) requires scheduled job not Anonymous Apex. Option D (test coverage) requires test classes, cannot be added via Anonymous Apex.",
+        "category": ["Developer Fundamentals", "Testing, Debugging and Deployment"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q82",
+        "text": "How should a developer write unit tests for a private method in an Apex class?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the SeeAllData annotation."
+          },
+          {
+            "id": "B",
+            "text": "Add a test method in the Apex class."
+          },
+          {
+            "id": "C",
+            "text": "Mark the Apex class as global."
+          },
+          {
+            "id": "D",
+            "text": "Use the @TestVisible annotation."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "@TestVisible annotation allows private methods/variables to be accessed in test classes without changing access modifier, enabling adequate testing while maintaining encapsulation. Option A (SeeAllData) relates to test data access not method visibility. Option B (test method in class) violates separation of concerns. Option C (global class) exposes everything unnecessarily.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q83",
+        "text": "Universal Containers hires a developer to build a custom search page to help users find the Accounts they want. Users will be able to search on Name, Description, and a custom comments field. Which consideration should the developer be aware of when deciding between SOQL and SOSL? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "SOSL is faster for text searches."
+          },
+          {
+            "id": "B",
+            "text": "SOQL is able to return more records."
+          },
+          {
+            "id": "C",
+            "text": "SOQL is faster for text searches."
+          },
+          {
+            "id": "D",
+            "text": "SOSL is able to return more records."
+          }
+        ],
+        "correct": ["A", "B"],
+        "explanation": "SOSL is designed for full-text searches across multiple fields/objects, making it faster for unstructured text searches (A). SOQL returns up to 50,000 records per query while SOSL returns only 2,000 records (B). Option C wrong: SOQL optimized for structured queries not text searches. Option D wrong: SOSL has lower record limit.",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q84",
+        "text": "Universal Containers (UC) processes orders in Salesforce in a custom object, Order__c. They also allow sales reps to upload CSV files with thousands of orders at a time. A developer is tasked with integrating orders placed in Salesforce with UC's enterprise resource planning (ERP) system. After the status for an Order__c is first set to 'Placed', the order information must be sent to a REST endpoint in the ERP system that can process one order at a time. What should the developer implement to accomplish this?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Callout from a Queueable class called from a trigger"
+          },
+          {
+            "id": "B",
+            "text": "Callout from a Batchable class called from a scheduled job"
+          },
+          {
+            "id": "C",
+            "text": "Flow with a callout from an invocable method"
+          },
+          {
+            "id": "D",
+            "text": "Callout from an @future method called from a trigger"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Queueable Apex supports callouts and allows chaining to process records one at a time efficiently. Trigger detects status change to 'Placed' and enqueues Queueable class for REST callout. Option B (Batch) suited for bulk processing not individual REST calls. Option C (Flow invocable) less efficient for large-scale callout operations. Option D (@future) supports callouts but doesn't allow chaining like Queueable.",
+        "category": ["Integration", "Logic and Process Automation"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q85",
+        "text": "Developers at Universal Containers (UC) use version control to share their code changes, but they notice that when they deploy their code to different environments they often have failures. They decide to set up Continuous Integration (CI). What should the UC development team use to automatically run tests as part of their CI process?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Salesforce CLI"
+          },
+          {
+            "id": "B",
+            "text": "Visual Studio Code"
+          },
+          {
+            "id": "C",
+            "text": "Force.com Toolkit"
+          },
+          {
+            "id": "D",
+            "text": "Developer Console"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Salesforce CLI supports scripting for CI pipelines, allowing automatic testing and deployment as part of CI process with commands like 'sf project deploy' and 'sf apex run test'. Option B (VS Code) is IDE not CI tool. Option C (Force.com Toolkit) outdated and doesn't support CI. Option D (Developer Console) for manual debugging/testing not automation.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q86",
+        "text": "A developer is migrating a Visualforce page into a Lightning web component. The Visualforce page shows information about a single record. The developer decides to use Lightning Data Service to access record data. Which security consideration should the developer be aware of?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Lightning Data Service ignores field-level security."
+          },
+          {
+            "id": "B",
+            "text": "The with sharing keyword must be used to enforce sharing rules."
+          },
+          {
+            "id": "C",
+            "text": "Lightning Data Service handles sharing rules and field-level security."
+          },
+          {
+            "id": "D",
+            "text": "The isAccessible() method must be used for field-level access checks."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Lightning Data Service automatically enforces Salesforce's security model including sharing rules and field-level security (FLS), eliminating need for manual security checks. Option A wrong: LDS enforces FLS. Option B wrong: 'with sharing' applies to Apex not LDS. Option D wrong: isAccessible() unnecessary since LDS already enforces FLS.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q87",
+        "text": "Which two actions may cause triggers to fire? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Changing a user's default division when the transfer division option is checked"
+          },
+          {
+            "id": "B",
+            "text": "Updates to FeedItem"
+          },
+          {
+            "id": "C",
+            "text": "Cascading delete operations"
+          },
+          {
+            "id": "D",
+            "text": "Renaming or replacing a picklist entry"
+          }
+        ],
+        "correct": ["B", "C"],
+        "explanation": "FeedItem updates (Chatter posts on records) can fire triggers defined on FeedItem object (B). Cascading deletes on child records when parent deleted fire triggers on child objects (C). Option A (changing user division) doesn't fire triggers. Option D (renaming picklist) is metadata change that doesn't fire triggers.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q88",
+        "text": "A developer is designing a new application on the Salesforce platform and wants to ensure it can support multiple tenants effectively. Which design framework should the developer consider to ensure scalability and maintainability?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Waterfall Model"
+          },
+          {
+            "id": "B",
+            "text": "Flux (view, action, dispatcher, and store)"
+          },
+          {
+            "id": "C",
+            "text": "Model-View-Controller (MVC)"
+          },
+          {
+            "id": "D",
+            "text": "Agile Development"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "MVC (Model-View-Controller) pattern separates business logic (model/sObjects), user interface (view/Visualforce/Lightning), and controller logic (Apex controllers), ensuring scalability and maintainability. Salesforce architecture inherently supports MVC. Option A (Waterfall) is development methodology not design framework. Option B (Flux) is front-end architecture not Salesforce-specific. Option D (Agile) is methodology not framework.",
+        "category": ["Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q89",
+        "text": "The following code snippet is executed by a Lightning web component in an environment with more than 2,000 lead records: @AuraEnabled public static void updateLeads() { for(Lead thisLead : [SELECT Origin__c FROM Lead]) { thisLead.LeadSource = thisLead.Origin__c; update thisLead; } } Which governor limit will likely be exceeded within the Apex transaction?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Total number of SOQL queries issued"
+          },
+          {
+            "id": "B",
+            "text": "Total number of DML statements issued"
+          },
+          {
+            "id": "C",
+            "text": "Total number of records processed as a result of DML statements"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Code attempts to update 2,000+ Leads with individual DML statements in loop. This exceeds 10,000 DML rows limit (total records processed in DML). Option A wrong: only 1 SOQL query (limit 100). Option B wrong: while 2,000+ DML statements exceeds 150 limit, the question specifies 'within transaction' and DML rows limit (C) would be hit first with proper bulkification.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q90",
+        "text": "Which three code lines are required to create a Lightning component on a Visualforce page? Choose 3 answers.",
+        "options": [
+          {
+            "id": "A",
+            "text": "$Lightning.use"
+          },
+          {
+            "id": "B",
+            "text": "$Lightning.useComponent"
+          },
+          {
+            "id": "C",
+            "text": "<apex:includeLightning/>"
+          },
+          {
+            "id": "D",
+            "text": "<apex:slds/>"
+          },
+          {
+            "id": "E",
+            "text": "$Lightning.createComponent"
+          }
+        ],
+        "correct": ["A", "C", "E"],
+        "explanation": "To embed Lightning component in Visualforce: (1) <apex:includeLightning/> includes Lightning framework, (2) $Lightning.use loads Lightning components and resources, (3) $Lightning.createComponent renders component dynamically in page. Option B ($Lightning.useComponent) doesn't exist. Option D (<apex:slds/>) loads Salesforce Lightning Design System styling, not required for component embedding.",
+        "category": ["User Interface"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q91",
+        "text": "Management asked for opportunities to be automatically created for accounts with annual revenue greater than $1,000,000. A developer created the following trigger on the Account object to satisfy this requirement. Users are able to update account records via the UI and can see an opportunity created for high annual revenue accounts. However, when the administrator tries to upload a list of 179 accounts using Data Loader, it fails with system.Exception errors. Which two actions should the developer take to fix the code segment shown above? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Query for existing opportunities outside the for loop."
+          },
+          {
+            "id": "B",
+            "text": "Check if all the required fields for Opportunity are being added on creation."
+          },
+          {
+            "id": "C",
+            "text": "Move the DML that saves opportunities outside the for loop."
+          },
+          {
+            "id": "D",
+            "text": "Use Database.query to query the opportunities."
+          }
+        ],
+        "correct": ["A", "C"],
+        "explanation": "Classic bulkification problem: SOQL query inside loop (A) hits 100-query limit with 179 records. DML inside loop (C) hits 150-statement limit. Solution: Query all opportunities outside loop using Set<Id> of Account Ids, then check existence in memory. Collect new opportunities in List and perform single insert outside loop. Option B (required fields) doesn't address governor limit errors. Option D (Database.query) doesn't fix bulkification issues.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 7
+      },
+      {
+        "id": "pd1_q92",
+        "text": "What should a developer use to obtain the Id and Name of all the Leads, Accounts, and Contacts that have the company name 'Universal Containers'?",
+        "options": [
+          {
+            "id": "A",
+            "text": "FIND 'Universal Containers' IN CompanyName Fields RETURNING lead(id, name), account(id, name), contact(id, name)"
+          },
+          {
+            "id": "B",
+            "text": "SELECT Lead.Id, Lead.Name, Account.Id, Account.Name, Contact.Id, Contact.Name FROM Lead, Account, Contact WHERE CompanyName = 'Universal Containers'"
+          },
+          {
+            "id": "C",
+            "text": "FIND 'Universal Containers' IN Name Fields RETURNING lead(id, name), account(id, name), contact(id, name)"
+          },
+          {
+            "id": "D",
+            "text": "SELECT lead(id, name), account(id, name), contact(id, name) FROM Lead, Account, Contact WHERE Name = 'Universal Containers'"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "SOSL (Salesforce Object Search Language) searches across multiple objects using FIND...IN...RETURNING syntax. Option A searches CompanyName fields across Lead, Account, Contact objects. SOQL (Options B, D) cannot query multiple unrelated objects in single statement. Option C searches Name fields instead of CompanyName, which wouldn't match company name consistently across objects.",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q93",
+        "text": "Universal Containers has an order system that uses an Order Number to identify an order for customers and service agents. Order records will be imported into Salesforce. How should the Order Number field be defined in Salesforce?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Indirect Lookup"
+          },
+          {
+            "id": "B",
+            "text": "Direct Lookup"
+          },
+          {
+            "id": "C",
+            "text": "External ID and Unique"
+          },
+          {
+            "id": "D",
+            "text": "Lookup"
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "External ID marks field for matching during data imports/integrations and enables upsert operations using external system identifiers. Unique constraint prevents duplicate Order Numbers. This combination allows efficient data synchronization between Salesforce and external systems. Options A/B (Indirect/Direct Lookup) create relationships not unique identifiers. Option D (Lookup) creates relationships, doesn't ensure uniqueness or enable external matching.",
+        "category": ["Data Modeling and Management", "Integration"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q94",
+        "text": "Universal Containers (UC) uses out-of-the-box order management, that has a Master-Detail relationship between Order and Order Line Item. UC stores the availability date on each Order Line Item and Orders are only shipped when all of the Order Line Items are available. Which method should be used to calculate the estimated ship date for an Order?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use a LATEST formula on each of the latest availability date fields."
+          },
+          {
+            "id": "B",
+            "text": "Use a CEILING formula on each of the latest availability date fields."
+          },
+          {
+            "id": "C",
+            "text": "Use a DAYS formula on each of the availability date fields and a COUNT Roll-Up Summary field on the Order."
+          },
+          {
+            "id": "D",
+            "text": "Use a MAX Roll-Up Summary field on the latest availability date fields."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "MAX Roll-Up Summary on master (Order) calculates latest (maximum) availability date from all detail records (Order Line Items). Since all items must be available before shipping, the maximum date determines when Order ships. Master-detail relationship enables roll-up summaries. Option A (LATEST) not a valid formula function. Option B (CEILING) rounds numbers not dates. Option C (DAYS/COUNT) doesn't identify latest date.",
+        "category": ["Data Modeling and Management", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q95",
+        "text": "A developer creates a new Apex trigger with a helper class, and writes a test class that only exercises 95% coverage of the new Apex helper class. Change Set deployment to production fails with the test coverage warning: 'Test coverage of selected Apex Trigger is 0%, at least 1% test coverage is required.' What should the developer do to successfully deploy the new Apex trigger and helper class?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Run the tests using the 'Run All Tests' method."
+          },
+          {
+            "id": "B",
+            "text": "Remove the failing test methods from the test class"
+          },
+          {
+            "id": "C",
+            "text": "Create a test class and methods to cover the Apex trigger."
+          },
+          {
+            "id": "D",
+            "text": "Increase the test class coverage on the helper class."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Trigger has 0% coverage despite helper class at 95%. Each Apex component (trigger, class) needs separate test coverage. Triggers require at least 1% coverage, classes need 75% org-wide average. Test class must invoke trigger by performing DML operations on trigger's object. Option A (Run All Tests) doesn't create missing trigger tests. Option B (remove tests) reduces coverage. Option D (increase helper coverage) doesn't address trigger's 0% coverage.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q96",
+        "text": "A developer identifies the following triggers on the Expense__c object: deleteExpense, applyDefaultsToExpense, validateExpenseUpdate. The triggers process before delete, before insert, and before update events respectively. Which two techniques should the developer implement to ensure trigger best practices are followed? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Unify all three triggers in a single trigger on the Expense__c object that includes all events."
+          },
+          {
+            "id": "B",
+            "text": "Unify the before insert and before update triggers and use Flow for the delete action."
+          },
+          {
+            "id": "C",
+            "text": "Create helper classes to execute the appropriate logic when a record is saved."
+          },
+          {
+            "id": "D",
+            "text": "Maintain all three triggers on the Expense__c object, but move the Apex logic out of the trigger definition."
+          }
+        ],
+        "correct": ["A", "C"],
+        "explanation": "Best practice: One trigger per object (A) handling all events to avoid conflicts and unpredictable execution order. Use trigger as dispatcher calling helper classes (C) for clean separation of concerns, improving maintainability and testability. Option B (mixing Flow and triggers) complicates architecture unnecessarily. Option D (maintaining multiple triggers) violates one-trigger-per-object principle even with external logic.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q97",
+        "text": "Which exception type cannot be caught?",
+        "options": [
+          {
+            "id": "A",
+            "text": "custom exception"
+          },
+          {
+            "id": "B",
+            "text": "LimitException"
+          },
+          {
+            "id": "C",
+            "text": "NoAccessException"
+          },
+          {
+            "id": "D",
+            "text": "CalloutException"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "LimitException (System.LimitException) cannot be caught in try-catch because it's thrown when governor limits are exceeded and Salesforce stops execution immediately - no further processing allowed. Custom exceptions (A), NoAccessException (C), and CalloutException (D) can all be caught and handled in try-catch blocks for error recovery logic.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q98",
+        "text": "A developer completed modifications to a feature that is comprised of two elements: Apex trigger and Trigger handler Apex class. What are two factors that the developer must take into account to properly deploy them to the production environment? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Apex classes must have at least 75% code coverage org-wide."
+          },
+          {
+            "id": "B",
+            "text": "All methods in the test classes must use @isTest."
+          },
+          {
+            "id": "C",
+            "text": "At least one line of code must be executed for the Apex trigger."
+          },
+          {
+            "id": "D",
+            "text": "Test methods must be declared with the testMethod keyword."
+          }
+        ],
+        "correct": ["A", "C"],
+        "explanation": "Production deployment requires: 75% org-wide code coverage for all Apex (A), and at least 1% coverage for each trigger (at least one line executed) (C). Option B wrong: @isTest recommended but not mandatory for all methods. Option D wrong: testMethod keyword deprecated, replaced by @isTest annotation.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q99",
+        "text": "A developer needs to prevent the creation of Request__c records when certain conditions exist in the system. A RequestLogic class exists that checks the conditions. What is the correct implementation?",
+        "options": [
+          {
+            "id": "A",
+            "text": "trigger RequestTrigger on Request__c (before insert) { RequestLogic.validateRecords(Trigger.new); }"
+          },
+          {
+            "id": "B",
+            "text": "trigger RequestTrigger on Request__c (before insert) { RequestLogic.validateRecords(trigger.new); }"
+          },
+          {
+            "id": "C",
+            "text": "trigger RequestTrigger on Request__c (before insert) { if (RequestLogic.isValid(Request__c)) { Request.addError('Your request cannot be created at this time.'); } }"
+          },
+          {
+            "id": "D",
+            "text": "trigger RequestTrigger on Request__c (after insert) { if (RequestLogic.isValid(Request__c)) { Request.addError('Your request cannot be created at this time.'); } }"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Before insert trigger prevents record creation before database commit. Use lowercase 'trigger.new' (Apex is case-sensitive for context variables). Option A uses uppercase 'Trigger.new' which may work but lowercase is standard. Option C has invalid syntax (Request__c is object name not variable, Request undefined). Option D uses after insert - too late to prevent creation, records already committed.",
+        "category": ["Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q100",
+        "text": "A developer wants to get access to the standard price book in the org while writing a test class that covers an OpportunityLineItem trigger. Which method allows access to the price book?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use Test.getStandardPricebookId() to get the standard price book ID."
+          },
+          {
+            "id": "B",
+            "text": "Use @isTest(SeeAllData=true) and delete the existing standard price book."
+          },
+          {
+            "id": "C",
+            "text": "Use @TestVisible to allow the test method to see the standard price book."
+          },
+          {
+            "id": "D",
+            "text": "Use Test.loadData() and a static resource to load a standard price book."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Test.getStandardPricebookId() specifically retrieves Standard Price Book ID in test context without requiring SeeAllData=true, maintaining test isolation. Essential for creating OpportunityLineItem test data. Option B (SeeAllData) violates test isolation best practices. Option C (@TestVisible) grants visibility to private members not Standard Price Book. Option D (Test.loadData) loads custom data from static resources, cannot create Standard Price Book.",
+        "category": ["Testing, Debugging and Deployment"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q101",
+        "text": "When importing and exporting data into Salesforce, which two statements are true? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Bulk API can be used to bypass the storage limits when importing large data volumes in development environments."
+          },
+          {
+            "id": "B",
+            "text": "Data import wizard is an application that is installed on your computer"
+          },
+          {
+            "id": "C",
+            "text": "Bulk API can be used to import large data volumes in development environments without bypassing the storage limits."
+          },
+          {
+            "id": "D",
+            "text": "Developer and Developer Pro sandboxes have different storage limits."
+          }
+        ],
+        "correct": ["C", "D"],
+        "explanation": "Bulk API efficiently imports large data volumes but respects storage limits (C). Developer Pro sandboxes have larger storage capacity than Developer sandboxes (D). Option A wrong: Bulk API cannot bypass storage limits - they're enforced at org level. Option B wrong: Data Import Wizard is web-based tool in Salesforce Setup, not installed application.",
+        "category": ["Developer Fundamentals", "Integration"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q102",
+        "text": "Universal Containers wants Opportunities to no longer be editable when reaching the Closed/Won stage. How should a developer accomplish this?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use a validation rule."
+          },
+          {
+            "id": "B",
+            "text": "Make fields as read-only on the page layout."
+          },
+          {
+            "id": "C",
+            "text": "Use the Process Automation settings."
+          },
+          {
+            "id": "D",
+            "text": "Use Flow Builder."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Validation rule checks StageName field and prevents updates when stage is Closed/Won, displaying error message. Works across all entry points (UI, API, data loader). Option B (read-only page layout) only affects UI, not API/integrations. Option C (Process Automation settings) not designed for preventing edits. Option D (Flow) could work but validation rule is simpler declarative solution.",
+        "category": ["Developer Fundamentals", "Data Modeling and Management"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q103",
+        "text": "How does the Lightning Component framework help developers implement solutions faster?",
+        "options": [
+          {
+            "id": "A",
+            "text": "By providing device-awareness for mobile and desktops"
+          },
+          {
+            "id": "B",
+            "text": "By providing an Agile process with default steps"
+          },
+          {
+            "id": "C",
+            "text": "By providing change history and version control"
+          },
+          {
+            "id": "D",
+            "text": "By providing code review standards and processes"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Lightning Component Framework provides built-in device-awareness, automatically adapting components for mobile, tablet, and desktop without extra coding. Responsive design capabilities accelerate multi-device development. Options B, C, D wrong: Agile processes, version control, and code review are development practices not framework features.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 3
+      },
+      {
+        "id": "pd1_q104",
+        "text": "A developer is tasked to perform a security review of the ContactSearch Apex class that exists in the system. Within the class, the developer identifies the following method as a security threat: List<Contact> performSearch(String lastName) { return Database.query('SELECT Id, FirstName, LastName FROM Contact WHERE LastName Like \\'%'+lastName+'%\\''); } What are two ways the developer can update the method to prevent a SOQL injection attack? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use variable binding and replace the dynamic query with a static SOQL."
+          },
+          {
+            "id": "B",
+            "text": "Use the escapeSingleQuotes method to sanitize the parameter before its use."
+          },
+          {
+            "id": "C",
+            "text": "Use the Readonly annotation and the with sharing keyword on the class."
+          },
+          {
+            "id": "D",
+            "text": "Use a regular expression on the parameter to remove special characters."
+          }
+        ],
+        "correct": ["A", "B"],
+        "explanation": "Variable binding (A): Use static SOQL with bind variable like [SELECT Id FROM Contact WHERE LastName LIKE :searchTerm] where searchTerm = '%'+lastName+'%'. Treats input as data not code. String.escapeSingleQuotes() (B) sanitizes input in dynamic queries by escaping quotes that could break query syntax. Option C wrong: 'with sharing' enforces sharing rules not SOQL injection prevention. Option D wrong: regex not reliable for sanitization.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q105",
+        "text": "The Job_Application__c custom object has a field that is a master-detail relationship to the Contact object, where the Contact object is the master. As part of a feature implementation, a developer needs to retrieve a list containing all Contact records where the related Account Industry is 'Technology', while also retrieving the Contact's Job_Application__c records. Based on the object's relationships, what is the most efficient statement to retrieve the list of Contacts?",
+        "options": [
+          {
+            "id": "A",
+            "text": "[SELECT Id, (SELECT Id FROM Job_Applications__r) FROM Contact WHERE Accounts.Industry = 'Technology']"
+          },
+          {
+            "id": "B",
+            "text": "[SELECT Id, (SELECT Id FROM Job_Application__c) FROM Contact WHERE Accounts.Industry = 'Technology']"
+          },
+          {
+            "id": "C",
+            "text": "[SELECT Id, (SELECT Id FROM Job_Application__c) FROM Contact WHERE Account.Industry = 'Technology']"
+          },
+          {
+            "id": "D",
+            "text": "[SELECT Id, (SELECT Id FROM Job_Applications__r) FROM Contact WHERE Account.Industry = 'Technology']"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Parent-to-child subquery uses relationship name Job_Applications__r (pluralized custom object name with __r). Parent field reference uses singular Account.Industry (Contact's lookup to Account). Option A wrong: 'Accounts' invalid (should be 'Account'). Options B/C wrong: 'Job_Application__c' is object name not relationship name - must use 'Job_Applications__r' for subquery.",
+        "category": ["Data Modeling and Management", "Logic and Process Automation"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q106",
+        "text": "A developer is creating a Lightning web component to show a list of sales records. The Sales Representative user should be able to see the commission field on each record. The Sales Assistant user should be able to see all fields on the record except the commission field. How should this be enforced so that the component works for both users without showing any errors?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use WITH SECURITY_ENFORCED in the SOQL that fetches the data for the component."
+          },
+          {
+            "id": "B",
+            "text": "Use Security.stripInaccessible to remove fields inaccessible to the current user."
+          },
+          {
+            "id": "C",
+            "text": "Use Lightning Locker Service to enforce sharing rules and field-level security."
+          },
+          {
+            "id": "D",
+            "text": "Use Lightning Data Service to get the collection of sales records."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Security.stripInaccessible removes inaccessible fields based on user's FLS before returning data, preventing errors when users lack access to specific fields. Works seamlessly for both user types without throwing exceptions. Option A (WITH SECURITY_ENFORCED) throws exception when inaccessible fields queried. Option C (Locker Service) provides component isolation, not FLS enforcement. Option D (LDS) enforces FLS but for single records, not bulk queries.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q107",
+        "text": "A developer must provide custom user interfaces when users edit a Contact in either Salesforce Classic or Lightning Experience. What should the developer use to override the Contact's Edit button and provide this functionality?",
+        "options": [
+          {
+            "id": "A",
+            "text": "A Lightning component in Salesforce Classic and a Lightning component in Lightning Experience"
+          },
+          {
+            "id": "B",
+            "text": "A Lightning page in Salesforce Classic and a Visualforce page in Lightning Experience"
+          },
+          {
+            "id": "C",
+            "text": "A Visualforce page in Salesforce Classic and a Lightning page in Lightning Experience"
+          },
+          {
+            "id": "D",
+            "text": "A Visualforce page in Salesforce Classic and a Lightning component in Lightning Experience"
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Button overrides require different technologies per interface: Visualforce page for Classic (still supported), Lightning component (Aura or LWC) for Lightning Experience. Each interface requires its own override configuration. Options A, B wrong: Lightning components/pages cannot override buttons in Classic. Option C wrong: Lightning pages are for app building, not button overrides.",
+        "category": ["User Interface"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q108",
+        "text": "A developer is asked to prevent anyone other than a user with Sales Manager profile from changing the Opportunity Status to Closed Lost if the lost reason is blank. Which automation allows the developer to satisfy this requirement in the most efficient manner?",
+        "options": [
+          {
+            "id": "A",
+            "text": "An Apex trigger on the Opportunity object"
+          },
+          {
+            "id": "B",
+            "text": "An error condition formula on a validation rule on Opportunity"
+          },
+          {
+            "id": "C",
+            "text": "A record trigger flow on the Opportunity object"
+          },
+          {
+            "id": "D",
+            "text": "An approval process on the Opportunity object"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Validation rule is most efficient declarative solution: formula checks if StageName='Closed Lost' AND Lost_Reason__c is blank AND $Profile.Name != 'Sales Manager', displaying error. No code needed, enforced at database level. Option A (trigger) programmatic overkill. Option C (Flow) less efficient for field validation. Option D (approval process) for routing approvals, not field validation.",
+        "category": ["Logic and Process Automation", "Data Modeling and Management"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q109",
+        "text": "A developer has identified a method in an Apex class that performs resource intensive actions in memory by iterating over the result set of a SOQL statement on the account. The method also performs a DML statement to save the changes to the database. Which two techniques should the developer implement as a best practice to ensure transaction control and avoid exceeding governor limits? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the @ReadOnly annotation to bypass the number of rows returned by a SOQL."
+          },
+          {
+            "id": "B",
+            "text": "Use partial DML statements to ensure only valid data is committed."
+          },
+          {
+            "id": "C",
+            "text": "Use the System.Limits class to monitor the current CPU governor limit consumption."
+          },
+          {
+            "id": "D",
+            "text": "Use the Database.Savepoint method to enforce database integrity."
+          }
+        ],
+        "correct": ["B", "D"],
+        "explanation": "Database.insert(records, false) allows partial success with allOrNone=false parameter, committing valid records while identifying failures (B). Database.Savepoint enables transaction rollback to specific point if errors occur, maintaining data integrity (D). Option A (@ReadOnly) increases query limits but prohibits DML. Option C (System.Limits) monitors limits but doesn't control transactions.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q110",
+        "text": "A developer created a new after insert trigger on the Lead object that creates Task records for each Lead. After deploying to production, an existing outside integration that inserts Lead records in batches to Salesforce is occasionally reporting total batch failures being caused by the Task insert statement. This causes the integration process in the outside system to stop, requiring a manual restart. Which change should the developer make to allow the integration to continue when some records in a batch cause failures due to the Task insert statement, so that manual restarts are not needed?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the Database method with allOrNone set to false."
+          },
+          {
+            "id": "B",
+            "text": "Deactivate the trigger before the integration runs."
+          },
+          {
+            "id": "C",
+            "text": "Remove the Apex class from the integration user's profile."
+          },
+          {
+            "id": "D",
+            "text": "Use a try-catch block after the insert statement."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Try-catch block around Task insert prevents trigger failure from rolling back entire Lead batch. Catch exception, log error for later review, allow batch processing to continue. Option A (Database with allOrNone=false) would help but answer D specifically mentions try-catch which is more comprehensive. Option B (deactivate trigger) disrupts business logic. Option C (remove class) doesn't address the issue.",
+        "category": ["Logic and Process Automation", "Testing, Debugging and Deployment"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q111",
+        "text": "A developer must perform a complex SOQL query that joins two objects in a Lightning component. How can the Lightning component execute the query?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Write the query in a custom Lightning web component wrapper and invoke from the Lightning component."
+          },
+          {
+            "id": "B",
+            "text": "Invoke an Apex class with the method annotated as @AuraEnabled to perform the query."
+          },
+          {
+            "id": "C",
+            "text": "Use the Salesforce Streaming API to perform the SOQL query."
+          },
+          {
+            "id": "D",
+            "text": "Create a flow to execute the query and invoke from the Lightning component."
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Lightning components (Aura/LWC) cannot execute SOQL directly - must call server-side Apex controller with @AuraEnabled annotation. @AuraEnabled methods are accessible from client-side JavaScript, perform SOQL query, return data to component. Option A wrong: LWC wrappers still need Apex for SOQL. Option C (Streaming API) for real-time events, not ad-hoc queries. Option D (Flow) unnecessary complexity.",
+        "category": ["User Interface", "Logic and Process Automation"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q112",
+        "text": "A custom Visualforce controller calls the ApexPages.addMessage() method, but no messages are rendering on the page. Which component should be added to the Visualforce page to display the message?",
+        "options": [
+          {
+            "id": "A",
+            "text": "<apex:message for=\"info\"/>"
+          },
+          {
+            "id": "B",
+            "text": "<apex:pageMessages />"
+          },
+          {
+            "id": "C",
+            "text": "<apex:pageMessage severity=\"info\" />"
+          },
+          {
+            "id": "D",
+            "text": "<apex:facet name=\"messages\" />"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "<apex:pageMessages /> component displays all messages added to ApexPages message collection via addMessage() method. Automatically renders messages with appropriate styling (error, warning, info, success). Option A (<apex:message>) displays field-specific validation errors. Option C (<apex:pageMessage>) displays single static message with fixed text. Option D (<apex:facet>) defines component sections, not messages.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q113",
+        "text": "Universal Containers has a support process that allows users to request support from its engineering team using a custom object, Engineering_Support__c. Users should be able to associate multiple Engineering_Support__c records to a single Opportunity record. Additionally, aggregate information about the Engineering_Support__c records should be shown on the Opportunity record. Which relationship field should be implemented to support these requirements?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Lookup field from Opportunity to Engineering_Support__c"
+          },
+          {
+            "id": "B",
+            "text": "Master-detail field from Engineering_Support__c to Opportunity"
+          },
+          {
+            "id": "C",
+            "text": "Master-detail field from Opportunity to Engineering_Support__c"
+          },
+          {
+            "id": "D",
+            "text": "Lookup field from Engineering_Support__c to Opportunity"
+          }
+        ],
+        "correct": ["B"],
+        "explanation": "Master-detail from Engineering_Support__c (child) to Opportunity (master) allows multiple child records per parent and enables roll-up summary fields on Opportunity to aggregate data (count, sum, min, max). Master-detail provides tight coupling and cascading delete. Option A wrong: relationship direction reversed. Option C wrong: would make Opportunity child (impossible - standard objects cannot be detail). Option D (lookup) doesn't support roll-up summaries.",
+        "category": ["Data Modeling and Management"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q114",
+        "text": "What are three considerations when using the @InvocableMethod annotation in Apex? Choose 3 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Only one method using the @InvocableMethod annotation can be defined per Apex class."
+          },
+          {
+            "id": "B",
+            "text": "A method using the @InvocableMethod annotation can have multiple input parameters."
+          },
+          {
+            "id": "C",
+            "text": "A method using the @InvocableMethod annotation must be declared as static."
+          },
+          {
+            "id": "D",
+            "text": "A method using the @InvocableMethod annotation must define a return value."
+          },
+          {
+            "id": "E",
+            "text": "A method using the @InvocableMethod annotation can be declared as Public or Global."
+          }
+        ],
+        "correct": ["A", "C", "E"],
+        "explanation": "@InvocableMethod limitations: only one per class (A), must be static for Flow invocation (C), can be public or global for appropriate accessibility (E). Option B wrong: accepts single parameter only (must be List type for bulkification). Option D wrong: return value optional - can be void for actions without return data.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q115",
+        "text": "Which two are phases in the Aura application event propagation framework? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Control"
+          },
+          {
+            "id": "B",
+            "text": "Default"
+          },
+          {
+            "id": "C",
+            "text": "Bubble"
+          },
+          {
+            "id": "D",
+            "text": "Emit"
+          }
+        ],
+        "correct": ["B", "C"],
+        "explanation": "Aura event propagation has three phases: Capture (parent to child - not listed), Bubble (child to parent up component hierarchy), and Default (catch-all after other phases). Application events use Bubble phase. Component events can use Capture. Option A (Control) not a phase. Option D (Emit) is how component events are fired (component.getEvent().fire()), not a propagation phase.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q116",
+        "text": "What can be used to override the Account's standard Edit button for Lightning Experience?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Lightning action"
+          },
+          {
+            "id": "B",
+            "text": "Lightning page"
+          },
+          {
+            "id": "C",
+            "text": "Lightning component"
+          },
+          {
+            "id": "D",
+            "text": "Lightning flow"
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "Lightning action (Quick Action) can override standard buttons in Lightning Experience. Configure as Object-specific action, then navigate to object's Buttons, Links, and Actions to set as override for Edit button. Lightning component wrapped in action enables custom UI. Option B (Lightning page) for app building, not button overrides. Option C (Lightning component) needs action wrapper. Option D (Flow) can be invoked by action but action itself is the override mechanism.",
+        "category": ["User Interface", "Developer Fundamentals"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q117",
+        "text": "The following code is executed, and a DML exception is thrown. How should a developer modify the code to ensure exceptions are handled gracefully?\n\n```apex\npublic static void insertAccounts(List<Account> theseAccounts) {\n    for (Account thisAccount : theseAccounts) {\n        if (thisAccount.website == null) {\n            thisAccount.website = 'https://www.demo.com';\n        }\n    }\n    update theseAccounts;\n}\n```",
+        "options": [
+          {
+            "id": "A",
+            "text": "Implement the upsert DML statement."
+          },
+          {
+            "id": "B",
+            "text": "Implement Change Data Capture."
+          },
+          {
+            "id": "C",
+            "text": "Implement a try/catch block for the DML."
+          },
+          {
+            "id": "D",
+            "text": "Remove null items from the list of Accounts."
+          }
+        ],
+        "correct": ["C"],
+        "explanation": "Try/catch block captures DML exceptions (validation errors, required fields, duplicate rules) preventing transaction failure. Wrap update statement in try block, catch DmlException to log error and continue processing. Option A (upsert) doesn't handle exceptions - would still throw on validation failures. Option B (Change Data Capture) event-driven architecture for tracking changes, unrelated to exception handling. Option D (remove nulls) doesn't address DML exceptions from validation rules or constraints.",
+        "category": ["Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 5
+      },
+      {
+        "id": "pd1_q118",
+        "text": "Where are two locations a developer can look to find information about the status of batch or future methods? Choose 2 answers",
+        "options": [
+          {
+            "id": "A",
+            "text": "Developer Console"
+          },
+          {
+            "id": "B",
+            "text": "Apex Jobs"
+          },
+          {
+            "id": "C",
+            "text": "Paused Flow Interviews component"
+          },
+          {
+            "id": "D",
+            "text": "Apex Flex Queue"
+          }
+        ],
+        "correct": ["A", "B"],
+        "explanation": "Developer Console shows execution logs with debug information for batch and future methods via Logs tab (A). Apex Jobs page (Setup → Environments → Jobs → Apex Jobs) displays status, queued time, completed records for all async jobs including batch and future (B). Option C (Paused Flow Interviews) only for paused flows, not Apex async methods. Option D (Apex Flex Queue) manages batch job execution order, doesn't show future methods and is for reordering queued batches.",
+        "category": ["Testing, Debugging and Deployment", "Logic and Process Automation"],
+        "difficulty": 4
+      },
+      {
+        "id": "pd1_q119",
+        "text": "While developing an Apex class with custom search functionality that will be launched from a Lightning Web Component, how can the developer ensure only records accessible to the currently logged in user are displayed?",
+        "options": [
+          {
+            "id": "A",
+            "text": "Use the WITH SECURITY_ENFORCED clause within the SOQL."
+          },
+          {
+            "id": "B",
+            "text": "Use the inherited sharing keyword."
+          },
+          {
+            "id": "C",
+            "text": "Use the with sharing keyword."
+          },
+          {
+            "id": "D",
+            "text": "Use the without sharing keyword."
+          }
+        ],
+        "correct": ["A"],
+        "explanation": "WITH SECURITY_ENFORCED enforces both object-level security (CRUD) and field-level security (FLS) in SOQL queries, throwing QueryException if user lacks access to queried fields/objects. Ensures LWC displays only accessible data. Option B (inherited sharing) inherits sharing from calling class but doesn't enforce FLS. Option C (with sharing) enforces record-level sharing rules only, not FLS. Option D (without sharing) runs in system context, showing all records regardless of user permissions.",
+        "category": ["User Interface", "Logic and Process Automation", "Developer Fundamentals"],
+        "difficulty": 6
+      },
+      {
+        "id": "pd1_q120",
+        "text": "What is the result of the following code snippet?\n\n```apex\npublic void doWork(Account acct) {\n    for (Integer i = 0; i <= 200; i++) {\n        insert acct;\n    }\n}\n```",
+        "options": [
+          {
+            "id": "A",
+            "text": "0 Accounts are inserted."
+          },
+          {
+            "id": "B",
+            "text": "1 Account is inserted."
+          },
+          {
+            "id": "C",
+            "text": "200 Accounts are inserted."
+          },
+          {
+            "id": "D",
+            "text": "201 Accounts are inserted."
+          }
+        ],
+        "correct": ["D"],
+        "explanation": "Loop condition i <= 200 executes when i equals 0 through 200 inclusive, totaling 201 iterations. Each iteration inserts the same Account record creating 201 duplicate Account records in database. Loop runs: i=0, 1, 2, ... 199, 200 (201 times). Option A wrong: loop executes. Option B wrong: not single insertion. Option C wrong: condition is <= not <, so includes 200.",
+        "category": ["Developer Fundamentals", "Logic and Process Automation"],
+        "difficulty": 3
+      }
+    ]
+  }
+}

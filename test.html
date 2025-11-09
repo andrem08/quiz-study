@@ -47,20 +47,21 @@
     // Check if files are loading
     console.log('Script loaded!');
     
-    // Try to load questions.json
-    fetch('questions.json')
-      .then(r => {
-        console.log('Fetch response:', r);
-        return r.json();
-      })
-      .then(json => {
-        console.log('Questions loaded:', json);
-        alert('Questions loaded successfully! Found ' + json.certifications.length + ' certifications with ' + json.certifications[0].questions.length + ' questions');
-      })
-      .catch(err => {
-        console.error('Error loading questions:', err);
+    // Try to load certification from new structure
+    async function testLoad() {
+      try {
+        const response = await fetch('questions/jsdev1.json');
+        console.log('Fetch response:', response);
+        const json = await response.json();
+        console.log('Certification loaded:', json);
+        alert('Certification loaded successfully! Found ' + json.certification.questions.length + ' questions for ' + json.certification.name);
+      } catch (err) {
+        console.error('Error loading certification:', err);
         alert('ERROR: ' + err.message + '\n\nPlease check the browser console (F12) for more details.');
-      });
+      }
+    }
+    
+    testLoad();
   </script>
 </body>
 </html>

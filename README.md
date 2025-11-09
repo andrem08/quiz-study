@@ -18,10 +18,12 @@ Estrutura:
 - `index.html` — UI principal
 - `styles.css` — estilos
 - `app.js` — lógica JavaScript
-- `data/questions.json` — perguntas por certificação
+- `questions/` — pasta com arquivos JSON individuais para cada certificação
+  - `jsdev1.json` — JavaScript Developer I (186 perguntas)
 
 Observações:
-- As perguntas são carregadas de `data/questions.json` (simula API local).
+- As perguntas são carregadas da pasta `questions/` (arquivos JSON modulares).
+- Cada certificação tem arquivo próprio com metadados (tempo recomendado, número de questões, etc.).
 - Melhorias possíveis: salvar progresso no localStorage, timer, banco de questões, modo mobile.
 
 Desenvolvido como protótipo para uso local.

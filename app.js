@@ -32,17 +32,28 @@ themeToggle.addEventListener("click", () => {
   localStorage.setItem("theme", isDark ? "dark" : "light");
 });
 
-// Load data
-fetch("questions.json")
-  .then((r) => r.json())
-  .then((d) => {
-    data = d;
+// Load data from questions folder
+async function loadCertifications() {
+  try {
+    // List of certification files to load
+    const certFiles = ['jsdev1', 'pd1'];
+    
+    const certifications = [];
+    for (const certId of certFiles) {
+      const response = await fetch(`questions/${certId}.json`);
+      const certData = await response.json();
+      certifications.push(certData.certification);
+    }
+    
+    data = { certifications };
     renderCertifications();
-  })
-  .catch((e) => {
+  } catch (e) {
     document.getElementById("cert-list").innerHTML =
       '<p style="color:red;padding:20px">Erro: ' + e.message + "</p>";
-  });
+  }
+}
+
+loadCertifications();
 
 function renderCertifications() {
   const html = data.certifications
@@ -81,11 +92,26 @@ function showModeSelection(certId) {
   document.getElementById(
     "full-quiz-count"
   ).textContent = `${cert.questions.length} perguntas`;
+  
+  // Use recommended questions as default, or fallback to 20
+  const defaultQuestionCount = cert.recommendedQuestions || 20;
   document.getElementById("random-count").value = Math.min(
-    20,
+    defaultQuestionCount,
     cert.questions.length
   );
   document.getElementById("random-count").max = cert.questions.length;
+
+  // Use recommended time as default (convert minutes to hours and minutes)
+  if (cert.recommendedTime) {
+    const hours = Math.floor(cert.recommendedTime / 60);
+    const minutes = cert.recommendedTime % 60;
+    document.getElementById("time-hours").value = hours;
+    document.getElementById("time-minutes").value = minutes;
+  } else {
+    // Fallback to no time limit
+    document.getElementById("time-hours").value = 0;
+    document.getElementById("time-minutes").value = 0;
+  }
 
   document.getElementById("selection").classList.add("hidden");
   document.getElementById("mode-selection").classList.remove("hidden");
