@@ -757,6 +757,244 @@ body.dark-mode .summary-question-box.unanswered {
   to { transform: translateY(0); opacity: 1; }
 }
 
+/* ============== Accessibility Improvements ============== */
+
+/* Keyboard shortcuts help button */
+.shortcuts-help-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--blue-primary);
+  color: #fff;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcuts-help-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  background: var(--blue-hover);
+}
+
+.shortcuts-help-btn:focus {
+  outline: 3px solid var(--blue-primary);
+  outline-offset: 3px;
+}
+
+/* Keyboard shortcut display */
+kbd {
+  display: inline-block;
+  padding: 4px 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 0 var(--border-color);
+  min-width: 40px;
+  text-align: center;
+}
+
+/* Focus styles for better keyboard navigation - WCAG AAA */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+a:focus-visible,
+.cert-card:focus-visible,
+.mode-card:focus-visible,
+.option:focus-visible,
+.summary-question-box:focus-visible,
+.category-card:focus-visible {
+  outline: 3px solid var(--blue-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Remove default focus for mouse users (only show for keyboard) */
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* High contrast mode improvements */
+@media (prefers-contrast: high) {
+  :root {
+    --border-color: #000;
+    --text-primary: #000;
+    --text-secondary: #333;
+  }
+  
+  body.dark-mode {
+    --border-color: #fff;
+    --text-primary: #fff;
+    --text-secondary: #ccc;
+  }
+  
+  .btn {
+    border-width: 2px;
+  }
+  
+  .option {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Better color contrast for WCAG AAA compliance */
+body.dark-mode {
+  /* Improved contrast ratios for dark mode */
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-tertiary: #2a2a2a;
+  --bg-card: #1e1e1e;
+  --border-color: #4a4a4a;
+}
+
+/* Enhanced link visibility */
+a {
+  color: var(--blue-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--blue-hover);
+  text-decoration-thickness: 3px;
+}
+
+/* Skip to content link for screen readers */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--blue-primary);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  z-index: 9999;
+  font-weight: 600;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+/* Improved table styles for shortcuts modal */
+.modal-content table {
+  color: var(--text-primary);
+}
+
+.modal-content table td {
+  color: var(--text-primary);
+}
+
+/* Better disabled state visibility */
+button:disabled,
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+}
+
+/* Ensure sufficient color contrast for status colors */
+.stat-correct {
+  color: #0d9e4a; /* Darker green for better contrast */
+  font-weight: 700;
+}
+
+body.dark-mode .stat-correct {
+  color: #4ade80; /* Lighter green for dark mode */
+}
+
+.stat-incorrect {
+  color: #c72c38; /* Darker red for better contrast */
+  font-weight: 700;
+}
+
+body.dark-mode .stat-incorrect {
+  color: #f87171; /* Lighter red for dark mode */
+}
+
+.stat-unanswered {
+  color: #d97706; /* Darker yellow for better contrast */
+  font-weight: 700;
+}
+
+body.dark-mode .stat-unanswered {
+  color: #fbbf24; /* Lighter yellow for dark mode */
+}
+
+/* Loading state accessibility */
+.loading::after {
+  content: 'Carregando...';
+  position: absolute;
+  left: -9999px;
+}
+
+/* Ensure interactive elements are large enough (44x44px minimum) */
+.btn-small {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 16px;
+}
+
+.theme-toggle {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Enhanced modal accessibility */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal[aria-hidden="true"] {
+  display: none;
+}
+
+/* Announce changes to screen readers */
+[role="status"],
+[role="alert"] {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 /* ============== Summary Score Styles ============== */
 .summary-score-main {
   padding: 20px;

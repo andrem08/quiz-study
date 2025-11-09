@@ -122,7 +122,7 @@
   <!-- Time Over Modal -->
   <div id="time-over-modal" class="modal hidden">
     <div class="modal-content">
-      <h2>⏰ Tempo Esgotado!</h2>
+      <h2 id="time-over-title">⏰ Tempo Esgotado!</h2>
       <p>O tempo limite para este teste acabou.</p>
       <p>Você pode continuar respondendo, mas o tempo será registrado como excedido.</p>
       <button class="btn primary" onclick="document.getElementById('time-over-modal').classList.add('hidden')">Continuar</button>
@@ -132,7 +132,7 @@
   <!-- Confirm All Modal -->
   <div id="confirm-all-modal" class="modal hidden">
     <div class="modal-content">
-      <h2>⚠️ Confirmar Tudo</h2>
+      <h2 id="confirm-all-title">⚠️ Confirmar Tudo</h2>
       <p>Você está prestes a finalizar o teste e ver o resumo completo.</p>
       <p><strong>Tem certeza que deseja continuar?</strong></p>
       <div style="display:flex;gap:12px;justify-content:center;margin-top:20px">
@@ -141,6 +141,11 @@
       </div>
     </div>
   </div>
+
+  <!-- Keyboard Shortcuts Help -->
+  <button id="shortcuts-help" class="shortcuts-help-btn" title="Atalhos de teclado (pressione ?)">
+    ⌨️
+  </button>
 
   <script src="app.js"></script>
 </body>
