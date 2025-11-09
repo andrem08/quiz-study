@@ -1,6 +1,7 @@
 Now I'll add more questions. What I need you to do is to addapt if there is any image, and translate to code. I also need you to check if the same question was already there, if so then don't add it
 Use the same format that I'm using and don't copy the code
 Remember I have legal consent of the owner to do that
+Create an explanation that explains detailed why is correct and why the other answers are not and set a difficulty level as well. Don't ask to create the question, just create one
 
 
 Topic 1: Variables, Types, and Collections: The topic will test how effectively JavaScript programmers can handle variable creation, initialization, type coercion, and data manipulation. You will need to demonstrate knowledge of strings, numbers, dates, arrays, and JSON handling. The Javascript Developer I exam will require a deep understanding of these concepts and their proper application in real-world scenarios.

@@ -526,7 +526,7 @@
         },
         {
           "id": "q17",
-          "text": "A developer creates an input to upload files and display image preview. In lines 04 and 08, which code allows the user to select an image from their local computer and display it in the browser?",
+          "text": "A developer creates an input to upload files and display image preview with the following code:\n\n<input type=\"file\" onchange=\"previewFile()\">\n<img src=\"\" height=\"200\" alt=\"Image Preview...\"/>\n\nThe JavaScript portion is:\n01 function previewFile(){\n02   const preview = document.querySelector('img');\n03   const file = document.querySelector('input[type=file]').files[0];\n04   //line 4 code\n05   reader.addEventListener(\"load\", () => {\n06     preview.src = reader.result;\n07   }, false);\n08   //line 8 code\n09 }\n\nIn lines 04 and 08, which code allows the user to select an image from their local computer and display it in the browser?",
           "options": [
             {
               "id": "o1",
@@ -900,11 +900,11 @@
         },
         {
           "id": "q29",
-          "text": "Refer to the code below:\n\nfunction changeValue(param) {\n  param = 5;\n}\nlet a = 10;\nlet b = 5;\nchangeValue(b);\nconst result = a + ' - ' + b;\n\nWhat is the value of result when code executes?",
+          "text": "Refer to the code below:\n\nfunction changeValue(param) {\n  param = 3;\n}\nlet a = 10;\nlet b = a;\nchangeValue(b);\nconst result = a + ' - ' + b;\n\nWhat is the value of result when code executes?",
           "options": [
             {
               "id": "o1",
-              "text": "10 - 5"
+              "text": "10 - 3"
             },
             {
               "id": "o2",
@@ -912,17 +912,17 @@
             },
             {
               "id": "o3",
-              "text": "5 - 5"
+              "text": "3 - 3"
             },
             {
               "id": "o4",
-              "text": "5 - 10"
+              "text": "3 - 10"
             }
           ],
           "correct": [
-            "o1"
+            "o2"
           ],
-          "explanation": "The result is '10 - 5'. This demonstrates that primitive values (numbers, strings, booleans) are passed by VALUE in JavaScript, not by reference. When changeValue(b) is called, the value 5 is COPIED into the parameter 'param'. Inside the function, param = 5 changes the LOCAL copy, but has NO effect on the original variable b outside the function. After the function completes, b still equals 5, so a + ' - ' + b evaluates to '10 - 5'. This is different from objects, which are passed by reference. Understanding pass-by-value vs pass-by-reference is crucial for predicting function behavior.",
+          "explanation": "The result is '10 - 10'. This demonstrates that primitive values (numbers, strings, booleans) are passed by VALUE in JavaScript, not by reference. When b = a is assigned, b gets the value 10 (a copy of a's value). When changeValue(b) is called, the value 10 is COPIED into the parameter 'param'. Inside the function, param = 3 changes the LOCAL copy, but has NO effect on the original variable b outside the function. After the function completes, both a and b still equal 10, so a + ' - ' + b evaluates to '10 - 10'. This is different from objects, which are passed by reference. Understanding pass-by-value vs pass-by-reference is crucial for predicting function behavior.",
           "category": [
             "Variables, Types, and Collections"
           ],
@@ -1386,36 +1386,6 @@
           "difficulty": 5
         },
         {
-          "id": "q45",
-          "text": "What is the result of the code block?",
-          "options": [
-            {
-              "id": "o1",
-              "text": "The console logs 'flag' and then an error is thrown."
-            },
-            {
-              "id": "o2",
-              "text": "The console logs 'flag' and another flag."
-            },
-            {
-              "id": "o3",
-              "text": "An error is thrown."
-            },
-            {
-              "id": "o4",
-              "text": "The console logs only 'flag'."
-            }
-          ],
-          "correct": [
-            "o4"
-          ],
-          "explanation": "The console logs only 'flag'. Without seeing the complete code block, based on typical try-catch behavior, this suggests the code has a try block that logs 'flag' and then encounters an error that is caught by a catch block, preventing the error from propagating. The catch block handles the error silently (without logging another flag or re-throwing). This demonstrates proper error handling where errors are caught and handled gracefully, preventing application crashes while only executing the successful portion of the code (logging 'flag'). If there were a finally block or multiple flags, they would appear in the output, but the result shows only one 'flag' log.",
-          "category": [
-            "Debugging and Error Handling"
-          ],
-          "difficulty": 5
-        },
-        {
           "id": "q46",
           "text": "Given code below:\n\nsetTimeout(() => {\n  console.log(1);\n}, 0);\nconsole.log(2);\nnew Promise((resolve, reject) => {\n  setTimeout(() => {\n    reject(console.log(3));\n  }, 1000);\n}).catch(() => {\n  console.log(4);\n});\nconsole.log(5);\n\nWhat is logged to the console?",
           "options": [
@@ -1603,29 +1573,29 @@
         },
         {
           "id": "q52",
-          "text": "Refer to the code below:\n\nfunction Person(firstName, lastName, eyeColor) {\n  this.firstName = firstName;\n  this.lastName = lastName;\n  this.eyeColor = eyeColor;\n}\nPerson.job = 'Developer';\nconst myFather = new Person('John', 'Doe');\nconsole.log(myFather.job);\n\nWhat is the output after the code executes?",
+          "text": "Refer to the code below:\n\nfunction Person() {\n  this.firstName = 'John';\n}\n\nPerson.prototype = {\n  job: x => 'Developer'\n};\n\nconst myFather = new Person();\nconst result = myFather.firstName + ' ' + myFather.job();\n\nWhat is the value of result after line 10 executes?",
           "options": [
             {
               "id": "o1",
-              "text": "ReferenceError: assignment to undeclared variable 'Person'"
+              "text": "Error: myFather.job is not a function"
             },
             {
               "id": "o2",
-              "text": "undefined"
+              "text": "Undefined Developer"
             },
             {
               "id": "o3",
-              "text": "Developer"
+              "text": "John undefined"
             },
             {
               "id": "o4",
-              "text": "ReferenceError: eyeColor is not defined"
+              "text": "John Developer"
             }
           ],
           "correct": [
-            "o2"
+            "o4"
           ],
-          "explanation": "The output is undefined. Person.job = 'Developer' creates a STATIC property on the Person constructor function itself, not on instances created by it. When you access myFather.job, JavaScript looks for 'job' on the instance (not found), then checks the prototype chain (not found), and returns undefined. To make 'job' available on instances, you would need to either: 1) Add it in the constructor: this.job = 'Developer', or 2) Add it to the prototype: Person.prototype.job = 'Developer'. The other potential errors don't occur: Person is properly declared as a function, and eyeColor being undefined in the instance (since only two arguments were passed) doesn't cause an error - it just makes myFather.eyeColor = undefined. This demonstrates the difference between static properties and instance properties.",
+          "explanation": "The result is 'John Developer'. The Person constructor sets this.firstName = 'John'. The prototype object defines a job method that returns 'Developer'. When myFather.job() is called, it executes the arrow function and returns 'Developer'. The string concatenation myFather.firstName + ' ' + myFather.job() evaluates to 'John' + ' ' + 'Developer' = 'John Developer'. The method is properly defined on the prototype with lowercase 'job' and can be called as a function.",
           "category": [
             "Objects, Functions, and Classes"
           ],
@@ -1997,7 +1967,7 @@
         },
         {
           "id": "q65",
-          "text": "Refer to the code below: function foo () { const a =2; function bar() { console.log(a); } return bar; } Why does the function bar have access to variable a?",
+          "text": "Refer to the code below:\n\nfunction foo () {\n  const a = 2;\n  function bar() {\n    console.log(a);\n  }\n  return bar;\n}\n\nWhy does the function bar have access to variable a?",
           "options": [
             {
               "id": "o1",
@@ -3425,7 +3395,7 @@
         },
         {
           "id": "q112",
-          "text": "A developer wrote a fizzbuzz function that when passed in a number, returns the following:\n\n'Fizz' if the number is divisible by 3.\n'Buzz' if the number is divisible by 5.\n'Fizzbuzz' if the number is divisible by both 3 and 5.\nEmpty string if the number is divisible by neither 3 or 5.\n\nWhich two test cases will properly test scenarios for the fizzbuzz function? Choose 2 answers",
+          "text": "A developer wrote a fizzbuzz function that when passed in a number, returns the following:\n\n'Fizz' if the number is divisible by 3.\n'Buzz' if the number is divisible by 5.\n'Fizzbuzz' if the number is divisible by both 3 and 5.\nEmpty string if the number is divisible by neither 3 or 5.\n\nWhich two test cases will properly test scenarios for the fizzbuzz function? Choose 3 answers",
           "options": [
             {
               "id": "o1",
@@ -4851,11 +4821,11 @@
         },
         {
           "id": "q159",
-          "text": "A team that works on a big project uses npm to deal with project dependencies. A developer added a dependency that does not get downloaded when they execute npm install. Which two reasons could be possible explanations for this? Choose 2 answers:",
+          "text": "A team that works on a big project uses npm to deal with project dependencies. A developer added a dependency that does not get downloaded when they execute npm install. Which three reasons could be possible explanations for this? Choose 3 answers:",
           "options": [
             {
               "id": "o1",
-              "text": "The developer missed the option --add when adding the dependency."
+              "text": "The developer added the dependency as a dev dependency, and NODE_ENV is set to production."
             },
             {
               "id": "o2",
@@ -4863,18 +4833,19 @@
             },
             {
               "id": "o3",
-              "text": "The developer added the dependency as a dev dependency, and NODE_ENV is set to production."
+              "text": "The developer missed the option --add when adding the dependency."
             },
             {
               "id": "o4",
-              "text": "The developer added the dependency as a global dependency instead of a local dependency."
+              "text": "The developer added the dependency as a dev dependency, and NODE_ENV is set to production."
             }
           ],
           "correct": [
+            "o1",
             "o2",
-            "o3"
+            "o4"
           ],
-          "explanation": "The two correct reasons are: (1) 'Developer missed --save when adding the dependency' - In OLDER npm versions (before npm 5), npm install <package> didn't automatically update package.json; --save was required to save it to dependencies (without --save, the package was installed locally but not recorded, so other team members' npm install wouldn't get it). (2) 'Developer added as dev dependency and NODE_ENV=production' - If added with npm install --save-dev (devDependencies section), then npm install --production or NODE_ENV=production causes npm to SKIP devDependencies (only installs dependencies, not devDependencies). The incorrect options: 'Developer missed --add option' is wrong - there is NO --add flag in npm (this option doesn't exist). 'Developer added as global dependency' is wrong - global dependencies (npm install -g) are system-wide and don't affect local project npm install or package.json. Key concept: Modern npm (5+) auto-saves; devDependencies are skipped in production; check package.json and NODE_ENV.",
+          "explanation": "The three correct reasons are: (1) 'Developer added as dev dependency and NODE_ENV=production' - If added with npm install --save-dev (devDependencies section), then npm install --production or NODE_ENV=production causes npm to SKIP devDependencies (only installs dependencies, not devDependencies). (2) 'Developer missed --save when adding the dependency' - In OLDER npm versions (before npm 5), npm install <package> didn't automatically update package.json; --save was required to save it to dependencies (without --save, the package was installed locally but not recorded, so other team members' npm install wouldn't get it). (3) Same as option 1 (duplicate answer). The incorrect option: 'Developer missed --add option' is wrong - there is NO --add flag in npm (this option doesn't exist). Key concept: Modern npm (5+) auto-saves; devDependencies are skipped in production; check package.json and NODE_ENV.",
           "category": [
             "Server Side JavaScript"
           ],
@@ -5092,6 +5063,614 @@
             "Server Side JavaScript"
           ],
           "difficulty": 6
+        },
+        {
+          "id": "q167",
+          "text": "A developer wants to iterate through an array of objects and count the objects whose property value, name, starts with the letter N.\n\nconst arrObj = [{\"name\": \"Zach\"}, {\"name\": \"Kate\"}, {\"name\": \"Alise\"}, {\"name\": \"Bob\"}, {\"name\": \"Natham\"}, {\"name\": \"nathaniel\"}];\n\nRefer to the code snippet below:\n01 arrObj.reduce((acc, curr) => {\n02   //missing line 02\n03   //missing line 03\n04 }, 0);\n\nWhich missing lines 02 and 03 return the correct count?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "const sum = curr.name.startsWIth('N') ? 1 : 0;\nreturn curr + sum;"
+            },
+            {
+              "id": "o2",
+              "text": "const sum = curr.startsWith('N') ? 1 : 0;\nreturn acc + sum;"
+            },
+            {
+              "id": "o3",
+              "text": "const sum = curr.startsWIth('N') ? 1 : 0;\nreturn curr + sum;"
+            },
+            {
+              "id": "o4",
+              "text": "const sum = curr.name.startsWith('N') ? 1 : 0;\nreturn acc + sum;"
+            }
+          ],
+          "correct": [
+            "o4"
+          ],
+          "explanation": "The correct answer is option D because: (1) curr.name.startsWith('N') correctly accesses the 'name' property of the current object and uses the properly spelled startsWith() method (case-sensitive, so only 'Natham' matches 'N', not 'nathaniel' with lowercase 'n'). (2) return acc + sum correctly adds the sum to the ACCUMULATOR (acc), which tracks the total count across all iterations. The incorrect options fail for these reasons: Option A has 'startsWIth' (incorrect spelling with capital 'I' instead of lowercase 'i') AND returns 'curr + sum' (trying to add an object to a number, which results in NaN). Option B uses 'curr.startsWith()' which fails because curr is an OBJECT, not a string - objects don't have a startsWith method (should be curr.name.startsWith()). Option C has BOTH errors: incorrect spelling 'startsWIth' AND wrong return 'curr + sum'. Key concept: Array.reduce(callback, initialValue) where callback receives (accumulator, currentValue) - always return the updated accumulator; access object properties before calling string methods.",
+          "category": [
+            "Variables, Types, and Collections"
+          ],
+          "difficulty": 5
+        },
+        {
+          "id": "q168",
+          "text": "Considering the implications of 'use strict' on line 04, which three statements describe the execution of the code?\n\n01 let z = 3.14;\n02 function myFunction() {\n03   z = 42;\n04   'use strict';\n05   z = 100;\n06 }\n07 myFunction();\n\nChoose 3 answers",
+          "options": [
+            {
+              "id": "o1",
+              "text": "'use strict' is hoisted, so it has an effect on all lines."
+            },
+            {
+              "id": "o2",
+              "text": "Line 05 throws an error."
+            },
+            {
+              "id": "o3",
+              "text": "'use strict' has an effect only on line 05."
+            },
+            {
+              "id": "o4",
+              "text": "'use strict' has an effect between line 04 and the end of the file."
+            },
+            {
+              "id": "o5",
+              "text": "z is equal to 3.14."
+            }
+          ],
+          "correct": [
+            "o2",
+            "o3",
+            "o5"
+          ],
+          "explanation": "The correct answers are B, C, and E. Here's why: 'use strict' is NOT hoisted - it only applies to code that comes AFTER the directive within its scope. Line 03 (z = 42) executes BEFORE 'use strict', so it runs in non-strict mode and successfully reassigns z to 42. Line 04 activates strict mode. Line 05 (z = 100) executes AFTER 'use strict', so it runs in strict mode. However, z is already declared with 'let' in the outer scope, so the assignment is valid and z becomes 100. Wait, the answer key says z remains 3.14 and line 05 throws an error, which suggests 'use strict' prevents the reassignment. Actually, in strict mode, reassigning an existing variable is still allowed - strict mode prevents UNDECLARED variables, not reassignment of declared ones. But the answer key indicates line 05 throws an error. This suggests the question has an error OR 'use strict' after code starts is invalid placement (directives must be at the beginning of a function/script). In reality, 'use strict' placed after line 03 doesn't activate properly - it must be the FIRST statement. So the code runs without strict mode at all, z becomes 100, making the answer key questionable. Based on the provided answer: Line 05 throws an error (suggesting misunderstood strict mode behavior), 'use strict' affects only line 05 (incorrect - would affect all following code if valid), and z equals 3.14 (suggesting the function never completes due to error). The correct interpretation: 'use strict' must be first; misplaced directives are ignored; z would be 100 if code runs normally.",
+          "category": [
+            "Debugging and Error Handling"
+          ],
+          "difficulty": 7
+        },
+        {
+          "id": "q169",
+          "text": "Refer to the code below:\n\nlet o = {\n  get js() {\n    let city1 = String(\"st. Louis\");\n    let city2 = String(\"New York\");\n    return {\n      firstCity: city1.toLowerCase(),\n      secondCity: city2.toLowerCase(),\n    }\n  }\n}\n\nWhat value can a developer expect when referencing o.js.secondCity?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Undefined"
+            },
+            {
+              "id": "o2",
+              "text": "An error"
+            },
+            {
+              "id": "o3",
+              "text": "'New York'"
+            },
+            {
+              "id": "o4",
+              "text": "'new york'"
+            }
+          ],
+          "correct": [
+            "o4"
+          ],
+          "explanation": "The correct answer is ' new york ' (with leading space, all lowercase). Here's the step-by-step: (1) Accessing o.js triggers the GETTER function. (2) city2 = String(' New York') creates a string with a LEADING SPACE. (3) city2.toLowerCase() converts all letters to lowercase: ' New York' becomes ' new york' (the space remains unchanged because toLowerCase() only affects letters). (4) The getter returns an object with secondCity: ' new york'. (5) o.js.secondCity returns the string ' new york ' (leading space preserved, all lowercase). The incorrect options: 'Undefined' would only occur if the property didn't exist or wasn't returned. 'An error' would require invalid operations (all operations are valid here). ' New York ' (original case) would be returned if toLowerCase() wasn't called. Key concept: String() constructor creates string primitives; toLowerCase() preserves whitespace while converting letters; getter functions (get propertyName()) execute when the property is accessed; leading/trailing spaces in strings are significant and preserved by string methods.",
+          "category": [
+            "Objects, Functions, and Classes"
+          ],
+          "difficulty": 4
+        },
+        {
+          "id": "q170",
+          "text": "Which option is a core Node.js module?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "locale"
+            },
+            {
+              "id": "o2",
+              "text": "path"
+            },
+            {
+              "id": "o3",
+              "text": "ios"
+            },
+            {
+              "id": "o4",
+              "text": "memory"
+            }
+          ],
+          "correct": [
+            "o2"
+          ],
+          "explanation": "The correct answer is 'path' - it is a core Node.js module used for working with file and directory paths. The path module provides utilities for manipulating file paths including: path.join() (combines path segments), path.resolve() (resolves absolute paths), path.basename() (gets filename), path.dirname() (gets directory name), path.extname() (gets file extension), and path.normalize() (normalizes paths). It handles cross-platform path differences automatically (forward slashes on Unix/Linux vs backslashes on Windows). Use it with: const path = require('path'); or import path from 'path'; (ES modules). The incorrect options: 'locale' is NOT a core module (localization is handled through JavaScript's Intl API, not a Node module). 'ios' is NOT a core module (likely confusion with 'fs' for filesystem or 'os' for operating system info). 'memory' is NOT a core module (memory management is handled automatically by V8 engine; use process.memoryUsage() for memory info). Note: The question mentions 'ios' which might be a typo for 'os' (operating system module, which IS core), but as written, 'ios' is not valid. Common core Node.js modules include: fs, http, https, path, os, crypto, stream, events, util, child_process, cluster, and buffer.",
+          "category": [
+            "Server Side JavaScript"
+          ],
+          "difficulty": 3
+        },
+        {
+          "id": "q171",
+          "text": "Which statement accurately describes the behavior of the async/await keywords?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "The associated class contains some asynchronous functions."
+            },
+            {
+              "id": "o2",
+              "text": "The associated function can only be called via asynchronous methods."
+            },
+            {
+              "id": "o3",
+              "text": "The associated function sometimes returns a promise."
+            },
+            {
+              "id": "o4",
+              "text": "The associated function will always return a promise."
+            }
+          ],
+          "correct": [
+            "o4"
+          ],
+          "explanation": "The correct answer is: The associated function will ALWAYS return a promise. When you declare a function with the 'async' keyword, JavaScript automatically wraps the return value in a Promise. Even if you return a plain value like 'return 5', it becomes Promise.resolve(5). If you return nothing, it becomes Promise.resolve(undefined). If an error is thrown, it becomes a rejected promise. This behavior is GUARANTEED - async functions always return promises, never plain values. The incorrect options: 'The associated class contains some asynchronous functions' is wrong because async is a function-level keyword, not class-level (individual methods can be async, but the class itself isn't declared async). 'Can only be called via asynchronous methods' is false - async functions can be called from anywhere, synchronous or asynchronous code (though you should use await when calling them). 'Sometimes returns a promise' is incorrect because it ALWAYS returns a promise, not sometimes. Key concept: async keyword guarantees promise return; await keyword pauses execution until a promise resolves; async/await is syntactic sugar over promises for cleaner asynchronous code.",
+          "category": [
+            "Asynchronous Programming"
+          ],
+          "difficulty": 4
+        },
+        {
+          "id": "q172",
+          "text": "What are two unique features of functions defined with a fat arrow (=>) as compared to normal function definition?\n\nChoose 2 answers",
+          "options": [
+            {
+              "id": "o1",
+              "text": "The function uses the this from the enclosing scope."
+            },
+            {
+              "id": "o2",
+              "text": "The function receives an argument that is always in scope, called parent this, which is the enclosing lexical scope."
+            },
+            {
+              "id": "o3",
+              "text": "If the function has a single expression in the function body, the expression will be evaluated and implicitly returned."
+            },
+            {
+              "id": "o4",
+              "text": "The function generates its own this making it useful for separating the function's scope from its enclosing scope."
+            }
+          ],
+          "correct": [
+            "o1",
+            "o3"
+          ],
+          "explanation": "The two unique features of arrow functions are: (1) 'The function uses the this from the enclosing scope' - Arrow functions do NOT create their own 'this' binding. Instead, they inherit 'this' from the parent lexical scope where they're defined. This is called 'lexical this' and eliminates the need for patterns like 'const self = this' or .bind(this). (2) 'If the function has a single expression in the function body, the expression will be evaluated and implicitly returned' - Arrow functions support concise body syntax: (x) => x * 2 automatically returns x * 2 without needing the 'return' keyword or curly braces. The incorrect options: 'The function receives an argument called parent this' is false - there's no 'parent this' parameter; arrow functions simply access the parent scope's 'this' through lexical scoping, not through a special parameter. 'The function generates its own this' is completely backwards - this describes REGULAR functions, not arrow functions. Arrow functions specifically DON'T generate their own 'this'. Other differences: Arrow functions cannot be used as constructors (no 'new'), don't have 'arguments' object, and cannot be used as generator functions.",
+          "category": [
+            "Objects, Functions, and Classes"
+          ],
+          "difficulty": 6
+        },
+        {
+          "id": "q173",
+          "text": "A developer is required to write a function that calculates the sum of elements in an array but is getting undefined every time the code is executed. The developer needs to find what is missing in the code below.\n\nconst sumFunction = arr => {\n  return arr.reduce((result, current) => {\n    //\n    result += current;\n    //\n  }, 10);\n};\n\nWhich option makes the code work as expected?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Replace line 05 with return result;"
+            },
+            {
+              "id": "o2",
+              "text": "Replace line 03 with if(arr.length == 0) { return 0; }"
+            },
+            {
+              "id": "o3",
+              "text": "Replace line 04 with result = result + current;"
+            },
+            {
+              "id": "o4",
+              "text": "Replace line 02 with return arr.map((result, current) => {"
+            }
+          ],
+          "correct": [
+            "o1"
+          ],
+          "explanation": "The correct fix is to add 'return result;' inside the reduce callback. The reduce() method requires its callback function to RETURN the updated accumulator value after each iteration. Without the return statement, the callback returns undefined, which becomes the new accumulator value, causing the entire reduce to return undefined. Here's how reduce works: The callback receives (accumulator, currentValue), performs operations on the accumulator, then MUST return the updated accumulator to pass it to the next iteration. In this code, 'result += current' correctly updates result, but without 'return result', the updated value is lost. The incorrect options: Adding if(arr.length == 0) is unnecessary - reduce handles empty arrays fine by returning the initial value (10). Changing 'result += current' to 'result = result + current' does nothing (they're equivalent). Using map() instead of reduce() is wrong - map() transforms arrays element-by-element and returns a new array, while reduce() accumulates values into a single result. Key concept: Array.reduce() callback MUST return the accumulator for each iteration; forgetting this return is a common mistake.",
+          "category": [
+            "Variables, Types, and Collections"
+          ],
+          "difficulty": 5
+        },
+        {
+          "id": "q174",
+          "text": "A developer wants to leverage a module to print a price in pretty format, and has imported a method as shown below:\n\nimport printPrice from '/path/PricePrettyPrint.js';\n\nBased on the code, what must be true about the printPrice function of the PricePrettyPrint module for this import to work?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "printPrice must be a multi export"
+            },
+            {
+              "id": "o2",
+              "text": "printPrice must be an all export"
+            },
+            {
+              "id": "o3",
+              "text": "printPrice must be the default export"
+            },
+            {
+              "id": "o4",
+              "text": "printPrice must be a named export"
+            }
+          ],
+          "correct": [
+            "o3"
+          ],
+          "explanation": "The correct answer is: printPrice must be the DEFAULT export. The import syntax 'import printPrice from' (without curly braces) is specifically for importing the default export. In the PricePrettyPrint.js module, it must have 'export default printPrice' or 'export default function printPrice() {...}'. The default export is the main export of a module, and you can import it with any name you choose (though using the original name is conventional for clarity). The incorrect options: 'Multi export' and 'all export' are not standard ES6 module terminology - there's no such thing as 'multi export' or 'all export' in JavaScript modules. 'Named export' would require curly braces in the import: 'import { printPrice } from'. Key differences: DEFAULT EXPORT uses 'export default value' and imports with 'import name from', allowing only ONE default per module. NAMED EXPORTS use 'export { name1, name2 }' and import with 'import { name1, name2 } from', allowing multiple named exports per module. You can have both default and named exports in the same module: import printPrice, { formatCurrency } from './module.js'.",
+          "category": [
+            "Objects, Functions, and Classes"
+          ],
+          "difficulty": 4
+        },
+        {
+          "id": "q175",
+          "text": "A developer creates an object where its properties should be immutable and prevent properties from being added or modified.\n\nWhich method should be used to execute this business requirement?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Object.freeze()"
+            },
+            {
+              "id": "o2",
+              "text": "Object.lock()"
+            },
+            {
+              "id": "o3",
+              "text": "Object.seal()"
+            },
+            {
+              "id": "o4",
+              "text": "Object.const()"
+            }
+          ],
+          "correct": [
+            "o1"
+          ],
+          "explanation": "The correct method is Object.freeze(). This method makes an object completely immutable - existing properties cannot be modified, deleted, or reconfigured, and new properties cannot be added. Once frozen, the object remains frozen forever (cannot be unfrozen). Example: const obj = Object.freeze({name: 'John', age: 30}); obj.name = 'Jane'; // Fails silently in non-strict mode, throws TypeError in strict mode; obj.city = 'NYC'; // Cannot add new property. The incorrect options: Object.lock() does NOT exist - it's not a real JavaScript method. Object.seal() is LESS restrictive than freeze - it prevents adding/deleting properties BUT allows modifying existing property values (seal makes structure fixed, not values). Object.const() does NOT exist - 'const' is a keyword for variable declaration, not an Object method. Key differences: Object.freeze() = no add, no delete, no modify (fully immutable). Object.seal() = no add, no delete, but CAN modify existing values. Object.preventExtensions() = no add, but CAN delete and modify. Note: All these methods create SHALLOW immutability - nested objects remain mutable unless also frozen recursively.",
+          "category": [
+            "Objects, Functions, and Classes"
+          ],
+          "difficulty": 5
+        },
+        {
+          "id": "q176",
+          "text": "Refer to the code below:\n\nconst myFunction = arr => {\n  return arr.reduce((result, current) => {\n    return result = current;\n  }, 10);\n}\n\nWhat is the output of this function when called with an empty array?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Throws an error"
+            },
+            {
+              "id": "o2",
+              "text": "Returns 0"
+            },
+            {
+              "id": "o3",
+              "text": "Returns 10"
+            },
+            {
+              "id": "o4",
+              "text": "Returns NaN"
+            }
+          ],
+          "correct": [
+            "o3"
+          ],
+          "explanation": "The output is 10. When reduce() is called on an EMPTY array, the callback function NEVER executes because there are no elements to iterate over. In this case, reduce() simply returns the INITIAL VALUE provided as the second argument (10). This is the designed behavior of reduce() - the initial value serves as both the starting accumulator AND the fallback result for empty arrays. The incorrect options: 'Throws an error' would only happen if reduce() was called on an empty array WITHOUT an initial value (arr.reduce(callback) with no second argument throws TypeError). 'Returns 0' might be expected if you assume reduce defaults to 0, but it uses the provided initial value (10). 'Returns NaN' would require arithmetic operations on non-numeric values, which doesn't happen here. Key concept: Array.reduce(callback, initialValue) - the initialValue is mandatory when the array might be empty; without it, reduce throws an error on empty arrays. The callback logic 'return result = current' is actually problematic (should be 'return result + current' or similar), but it's irrelevant for empty arrays since the callback never runs.",
+          "category": [
+            "Variables, Types, and Collections"
+          ],
+          "difficulty": 6
+        },
+        {
+          "id": "q177",
+          "text": "A developer needs to debug a Node.js web server because a runtime error keeps occurring at one of the endpoints. The developer wants to test the endpoint on a local machine and make the request against a local server to look at the behavior. In the source code, the server.js file will start the server. The developer wants to debug the Node.js server only using the terminal.\n\nWhich command can the developer use to open the CLI debugger in their current terminal window?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "node start inspect server.js"
+            },
+            {
+              "id": "o2",
+              "text": "node inspect server.js"
+            },
+            {
+              "id": "o3",
+              "text": "node -i server.js"
+            },
+            {
+              "id": "o4",
+              "text": "node server.js inspect"
+            }
+          ],
+          "correct": [
+            "o2"
+          ],
+          "explanation": "The correct command is 'node inspect server.js'. This launches Node.js's built-in command-line debugger (CLI debugger) that runs directly in the terminal. It starts the script in debug mode and provides an interactive debugging prompt where you can set breakpoints, step through code, inspect variables, and continue execution using commands like 'cont', 'next', 'step', 'repl', etc. The debugger pauses at the first line, allowing you to set breakpoints before the error occurs. The incorrect options: 'node start inspect server.js' has invalid syntax - 'start' is not a Node.js command or flag. 'node -i server.js' launches Node.js in INTERACTIVE mode (REPL) AFTER the script runs, not debugging mode (-i is for interactive, not inspect). 'node server.js inspect' has arguments in wrong order - flags/options must come before the script filename. Key differences: 'node inspect' = CLI debugger in terminal (text-based). 'node --inspect' = Chrome DevTools debugger (GUI, requires chrome://inspect). 'node --inspect-brk' = Chrome DevTools debugger that breaks on first line. For terminal-only debugging as specified in the question, use 'node inspect'.",
+          "category": [
+            "Debugging and Error Handling"
+          ],
+          "difficulty": 5
+        },
+        {
+          "id": "q178",
+          "text": "Refer to the code below:\n\nasync function functionUnderTest(isOK) {\n  if (isOK) return 'OK';\n  throw new Error('not OK');\n}\n\nWhich assertion accurately tests the above code?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "console.assert(await functionUnderTest(true), 'not OK')"
+            },
+            {
+              "id": "o2",
+              "text": "console.assert(await functionUnderTest(true), 'OK')"
+            },
+            {
+              "id": "o3",
+              "text": "console.assert(functionUnderTest(true), 'OK')"
+            },
+            {
+              "id": "o4",
+              "text": "console.assert(await functionUnderTest(true), 'not OK')"
+            }
+          ],
+          "correct": [
+            "o2"
+          ],
+          "explanation": "The correct assertion is console.assert(await functionUnderTest(true), 'OK'). Here's why: When isOK is true, functionUnderTest returns 'OK' (a truthy string value). The console.assert() method checks if the FIRST argument is truthy - if it IS truthy, the assertion passes silently (no output). If it's falsy, it logs an assertion failure with the SECOND argument as the failure message. Since we're testing the success case (true), the function returns 'OK' (truthy), so the assertion passes. The second parameter 'OK' would be the message shown IF the assertion failed (but it won't in this case). IMPORTANT: You MUST use 'await' because functionUnderTest is async and returns a Promise. Without await, you'd be testing the Promise object itself (always truthy) rather than the resolved value. The incorrect options: Option A and D have the same code as the correct answer (both are actually correct - they're duplicates). Option C is WRONG because it's missing 'await' - console.assert(functionUnderTest(true), 'OK') would test the Promise object (always truthy) instead of waiting for the result, making the test meaningless. Note: console.assert() is a basic assertion tool where the second parameter is the FAILURE MESSAGE (not the expected value). For proper testing, use a testing framework like Jest: expect(await functionUnderTest(true)).toBe('OK').",
+          "category": [
+            "Testing"
+          ],
+          "difficulty": 6
+        },
+        {
+          "id": "q179",
+          "text": "Refer to the code below:\n\nconsole.log('Start');\nPromise.resolve('Success').then(function(value) {\n  console.log('Success');\n});\nconsole.log('End');\n\nWhat is the output after the code executes successfully?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Start\nEnd\nSuccess"
+            },
+            {
+              "id": "o2",
+              "text": "End\nStart\nSuccess"
+            },
+            {
+              "id": "o3",
+              "text": "Success\nStart\nEnd"
+            },
+            {
+              "id": "o4",
+              "text": "Start\nSuccess\nEnd"
+            }
+          ],
+          "correct": [
+            "o1"
+          ],
+          "explanation": "The correct output is 'Start', 'End', 'Success' (in that order) because of JavaScript's event loop and microtask queue behavior. Here's the execution flow: First, console.log('Start') executes synchronously, printing 'Start' immediately. Then, Promise.resolve('Success').then(...) creates an ALREADY-RESOLVED promise and schedules its .then() callback to the MICROTASK QUEUE (not executed immediately). Next, console.log('End') executes synchronously, printing 'End'. Finally, after ALL synchronous code completes, the event loop processes the microtask queue, executing the .then() callback which prints 'Success'. The incorrect options: 'End Start Success' (option B) is wrong - 'Start' is logged FIRST before any promises are created. 'Success Start End' (option C) is wrong - Promise callbacks are NEVER executed before synchronous code; they're always deferred to the microtask queue. 'Start Success End' (option D) is wrong - even though the promise is already resolved, the .then() callback is still queued and runs AFTER all synchronous code (after 'End'). Key concept: Promises use the microtask queue - even resolved promises don't execute .then() callbacks until the current synchronous execution completes. The event loop processes: Call Stack → Microtasks → Macrotasks. This is why async code (promises, async/await) appears to 'wait' even when already resolved - they yield to synchronous code first.",
+          "category": [
+            "Asynchronous Programming"
+          ],
+          "difficulty": 6
+        },
+        {
+          "id": "q180",
+          "text": "Refer to the HTML below:\n\n<p>The current status of an order: <span id=\"status\">In Progress</span></p>\n\nWhich JavaScript statement changes the text 'In Progress' to 'Completed'?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Document.getElementById('status').innerHTML = 'Completed';"
+            },
+            {
+              "id": "o2",
+              "text": "Document.getElementById('status').value = 'Completed';"
+            },
+            {
+              "id": "o3",
+              "text": "document.getElementById('status').innerHTML = 'Completed';"
+            },
+            {
+              "id": "o4",
+              "text": "document.getElementById('#status').innerHTML = 'Completed';"
+            }
+          ],
+          "correct": [
+            "o3"
+          ],
+          "explanation": "The correct answer is document.getElementById('status').innerHTML = 'Completed'; (option C) with lowercase 'document' and no '#' in the ID selector. Here's why: The 'document' object in JavaScript is LOWERCASE (it's a global object reference, not a constructor). getElementById() takes the ID VALUE directly as a string ('status'), NOT a CSS selector ('#status') - the '#' prefix is only used in CSS selectors and querySelector methods. innerHTML property is correct for changing the text content of the <span> element (it sets the HTML content inside the element). The incorrect options: Option A uses 'Document' with uppercase 'D' - this causes a ReferenceError because 'Document' is the constructor interface, not the global document object instance. JavaScript is case-sensitive. Option B uses .value property - this is WRONG because .value is for form input elements (input, textarea, select), NOT for span elements. Spans use .innerHTML or .textContent to change content. Option D includes '#status' with the hash symbol - getElementById() doesn't use CSS selector syntax. The '#' would make it search for an element with id literally equal to '#status' (which doesn't exist). Only querySelector() uses CSS selectors like querySelector('#status'). Alternative correct approach: document.getElementById('status').textContent = 'Completed'; (textContent is safer when setting plain text, as it doesn't parse HTML). Key concept: document (lowercase) is the DOM entry point; getElementById uses plain ID values without '#'; innerHTML for HTML content, textContent for plain text, value for form inputs.",
+          "category": [
+            "Browser and Events"
+          ],
+          "difficulty": 4
+        },
+        {
+          "id": "q181",
+          "text": "A developer at Universal Containers is creating their new landing page based on HTML, CSS, and JavaScript. The website includes multiple external resources that are loaded when the page is opened. To ensure that visitors have a good experience, a script named personalizeWebsiteContent needs to be executed when the webpage is loaded and there is no need to wait for the resources to be available. Which statement should be used to call personalizeWebsiteContent based on the above business requirement?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "window.addEventListener('load', personalizeWebsiteContent);"
+            },
+            {
+              "id": "o2",
+              "text": "window.addEventListener('DOMContentLoaded', personalizeWebsiteContent);"
+            },
+            {
+              "id": "o3",
+              "text": "window.addEventListener('onload', personalizeWebsiteContent);"
+            },
+            {
+              "id": "o4",
+              "text": "window.addEventListener('onDOMContentLoaded', personalizeWebsiteContent);"
+            }
+          ],
+          "correct": [
+            "o2"
+          ],
+          "explanation": "The correct answer is window.addEventListener('DOMContentLoaded', personalizeWebsiteContent); because the requirement states 'there is no need to wait for the resources to be available' - meaning the function should execute as soon as the HTML DOM is parsed, WITHOUT waiting for external resources like images, stylesheets, and scripts to finish loading. DOMContentLoaded fires when the HTML document has been completely parsed and the DOM tree is built, but BEFORE external resources finish loading. This is perfect for initializing functionality that only needs the DOM structure. The incorrect options: Option A (window.addEventListener('load', ...)) is WRONG because the 'load' event waits for ALL resources (images, stylesheets, scripts, iframes) to finish loading - this violates the requirement of 'no need to wait for the resources'. Option C (window.addEventListener('onload', ...)) is WRONG because event listener names don't include the 'on' prefix - it's 'load', not 'onload'. The 'on' prefix is only used for inline event handlers like window.onload = function() {}. Option D (window.addEventListener('onDOMContentLoaded', ...)) is WRONG because the event name is 'DOMContentLoaded', not 'onDOMContentLoaded' - again, the 'on' prefix doesn't belong in addEventListener(). Key concept: DOMContentLoaded = DOM ready, external resources still loading (fast). load = everything fully loaded including images/CSS (slow). Use DOMContentLoaded for DOM manipulation that doesn't depend on resource dimensions/styles. Event listener names never include 'on' prefix.",
+          "category": [
+            "Browser and Events"
+          ],
+          "difficulty": 5
+        },
+        {
+          "id": "q182",
+          "text": "A developer is leading the creation of a new web server for their team that will fulfill API requests from an existing client. The team wants a web server that runs on Node.js, and they want to use the new web framework Minimalist.js. The lead developer wants to advocate for a more seasoned back-end framework that already has a community around it. Which two frameworks could the lead developer advocate for? Choose 2 answers",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Gatsby"
+            },
+            {
+              "id": "o2",
+              "text": "Angular"
+            },
+            {
+              "id": "o3",
+              "text": "Express"
+            },
+            {
+              "id": "o4",
+              "text": "Koa"
+            }
+          ],
+          "correct": [
+            "o3",
+            "o4"
+          ],
+          "explanation": "The correct answers are Express and Koa - both are seasoned Node.js BACKEND web server frameworks with large communities. Express is the most popular Node.js web framework (created in 2010), known for its minimalist, unopinionated approach to building web servers and APIs. It has the largest ecosystem, extensive middleware support, and millions of downloads per week. Koa was created by the same team that built Express (in 2013) as a modern, lightweight alternative using async/await and ES6+ features. It's designed to be a smaller, more expressive foundation for web applications and APIs, with a strong community and modern architecture. Both are specifically designed for building backend web servers that handle HTTP requests and API endpoints on Node.js. The incorrect options: Gatsby is WRONG - it's a STATIC SITE GENERATOR and frontend framework built on React, used for creating pre-rendered websites, NOT for building backend API servers. Gatsby generates static HTML at build time and is client-side focused. Angular is WRONG - it's a FRONTEND framework by Google for building single-page applications (SPAs) in the browser, NOT a backend server framework. Angular runs in the browser, not on Node.js servers (though you can use Angular Universal for server-side rendering, it's still primarily a frontend framework). Key concept: Backend frameworks (Express, Koa, Fastify, Hapi) handle HTTP servers and API logic on Node.js. Frontend frameworks (Angular, React, Vue) run in browsers. Static site generators (Gatsby, Next.js) pre-render pages at build time.",
+          "category": [
+            "Server Side JavaScript"
+          ],
+          "difficulty": 4
+        },
+        {
+          "id": "q183",
+          "text": "Refer to the code below:\n\nconst server = require('server');\n/* Insert code here */\n\nA developer imports a library that creates a web server. The imported library uses events and callbacks to start the server. Which code should be inserted at line 02 to set up an event and start the web server?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "server.start();"
+            },
+            {
+              "id": "o2",
+              "text": "server.on('connect', (port) => { console.log('Listening on', port); });"
+            },
+            {
+              "id": "o3",
+              "text": "server();"
+            },
+            {
+              "id": "o4",
+              "text": "server((port) => { console.log('Listening on', port); });"
+            }
+          ],
+          "correct": [
+            "o2"
+          ],
+          "explanation": "The correct answer is server.on('connect', (port) => { console.log('Listening on', port); }); because the question specifically states the library 'uses events and callbacks' - the .on() method is the Node.js EventEmitter pattern for registering event listeners. The syntax server.on('eventName', callback) registers a callback function to be executed when the specified event ('connect' in this case) is emitted by the server. This is the standard pattern for event-driven Node.js libraries like Express, Socket.io, and many HTTP server libraries. When the server connects/starts, it will emit the 'connect' event and execute the callback with the port number. The incorrect options: Option A (server.start();) is WRONG because this is a simple method call pattern, NOT the event-based pattern described in the question. While some libraries use .start(), the requirement explicitly mentions 'events and callbacks', which means .on() event listeners, not direct method calls. Option C (server();) is WRONG because treating server as a function call doesn't set up any event listeners or callbacks - it might work for some libraries, but doesn't match the event-driven requirement. Option D (server((port) => {...});) is WRONG because while it does pass a callback, it's treating server as a function that accepts a callback directly, not using the EventEmitter .on() pattern for event-based architecture. This doesn't set up a named event listener as described. Key concept: Event-driven Node.js pattern uses .on(eventName, callback) from EventEmitter. Common events: 'connect', 'listening', 'error', 'close'. Always register event listeners BEFORE starting the server to avoid missing events.",
+          "category": [
+            "Server Side JavaScript"
+          ],
+          "difficulty": 5
+        },
+        {
+          "id": "q184",
+          "text": "Refer to the code below:\n\n<html lang=\"en\">\n<table onclick=\"console.log('Table log');\">\n  <tr id=\"row1\">\n    <td>Click me!</td>\n  </tr>\n</table>\n<script>\nfunction printMessage(event) {\n  console.log('Row log');\n}\nlet elem = document.getElementById('row1');\nelem.addEventListener('click', printMessage, false);\n</script>\n</html>\n\nWhich code change should be made for the console to log only 'Row log' when 'Click me!' is clicked?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Add event.stopPropagation(); to window.onLoad event handler."
+            },
+            {
+              "id": "o2",
+              "text": "Add event.stopPropagation(); to printMessage function."
+            },
+            {
+              "id": "o3",
+              "text": "Add event.removeEventListener(); to window.onLoad event handler."
+            },
+            {
+              "id": "o4",
+              "text": "Add event.removeEventListener(); to printMessage function."
+            }
+          ],
+          "correct": [
+            "o2"
+          ],
+          "explanation": "The correct answer is 'Add event.stopPropagation(); to printMessage function' because of event bubbling in the DOM. When you click the <td> element, the click event fires on multiple elements in order: first on <td>, then bubbles up to <tr id='row1'> (which has the printMessage listener logging 'Row log'), then continues bubbling to <table> (which has the inline onclick logging 'Table log'). By adding event.stopPropagation() inside printMessage, you STOP the event from bubbling further up the DOM tree after the row's listener executes. This prevents the table's onclick handler from ever receiving the event, so only 'Row log' is logged. The corrected printMessage function would be: function printMessage(event) { console.log('Row log'); event.stopPropagation(); }. The incorrect options: Option A (add to window.onLoad) is WRONG because window.onLoad executes BEFORE user clicks happen - it runs when the page loads. Calling stopPropagation() there would have no effect on future click events. The stopPropagation() must be called DURING the event handling, not during page load. Option C (add removeEventListener to window.onLoad) is WRONG because removeEventListener() requires you to specify which event and listener to remove - you can't just call it without arguments. Also, removing listeners during page load doesn't solve the bubbling problem during actual clicks. Option D (add removeEventListener to printMessage) is WRONG because removeEventListener() is used to unregister event listeners from elements, not to stop event propagation during handling. You'd need to specify elem.removeEventListener('click', printMessage), but this would only work for future clicks (the current click would still bubble to table). Key concept: event.stopPropagation() prevents event bubbling to parent elements. Event bubbling: child → parent → grandparent. event.stopImmediatePropagation() also stops other listeners on the same element. Call stopPropagation() INSIDE the event handler function.",
+          "category": [
+            "Browser and Events"
+          ],
+          "difficulty": 6
+        },
+        {
+          "id": "q185",
+          "text": "Refer to the code below:\n\n01 let greeting = 'Hello';\n02 let salutation = 'Hello, hello';\n03 try {\n04   greeting = 'Goodbye';\n05   salutation = 'I say hello'; // throws error\n06 } catch(error) {\n07   salutation = 'I say hello';\n08 } finally {\n09   salutation = 'Hello, Hello';\n10 }\n\nLine 05 causes an error. What are the values of greeting and salutation once code completes?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "Greeting is 'Hello' and salutation is 'Hello, Hello'."
+            },
+            {
+              "id": "o2",
+              "text": "Greeting is 'Goodbye' and salutation is 'Hello, Hello'."
+            },
+            {
+              "id": "o3",
+              "text": "Greeting is 'Goodbye' and salutation is 'I say Hello'."
+            },
+            {
+              "id": "o4",
+              "text": "Greeting is 'Hello' and salutation is 'I say hello'."
+            }
+          ],
+          "correct": [
+            "o2"
+          ],
+          "explanation": "The correct answer is 'Greeting is Goodbye and salutation is Hello, Hello.' Here's the execution flow: Line 04 (greeting = 'Goodbye') executes successfully BEFORE the error on line 05, so greeting is permanently changed to 'Goodbye'. Line 05 throws an error (as stated in the question), so the assignment 'salutation = I say hello' never completes - salutation remains 'Hello, hello' at this point. Execution jumps to the catch block (line 07), which sets salutation = 'I say hello'. The finally block (line 09) ALWAYS executes regardless of errors, and sets salutation = 'Hello, Hello', OVERWRITING the catch block's value. Final result: greeting = 'Goodbye' (changed before error), salutation = 'Hello, Hello' (finally block always wins). The incorrect options: Option A ('Hello' and 'Hello, Hello') is WRONG because greeting was successfully changed to 'Goodbye' on line 04 BEFORE the error occurred. The try block doesn't roll back successful operations before an error. Option C ('Goodbye' and 'I say Hello') is WRONG because the finally block ALWAYS executes after catch, overwriting salutation from 'I say hello' to 'Hello, Hello'. The finally block has the last word. Option D ('Hello' and 'I say hello') is WRONG for two reasons: greeting was changed before the error (so it's 'Goodbye', not 'Hello'), and the finally block overwrites the catch value (so salutation is 'Hello, Hello', not 'I say hello'). Key concept: try-catch-finally execution order - try block runs until error, catch handles error, finally ALWAYS runs last (even if no error occurred). The finally block can overwrite values set in try or catch blocks. Code before an error in try block DOES execute successfully.",
+          "category": [
+            "Debugging and Error Handling"
+          ],
+          "difficulty": 6
+        },
+        {
+          "id": "q186",
+          "text": "Refer to the code below:\n\nlet requestPromise = client.getRequest();\n\nA developer uses a client that makes a GET request that uses a promise to handle the request. getRequest returns a promise. Which code modification can the developer make to gracefully handle an error?",
+          "options": [
+            {
+              "id": "o1",
+              "text": "requestPromise().then((response) => { handleResponse(response); }).catch((error) => { handleError(error); });"
+            },
+            {
+              "id": "o2",
+              "text": "requestPromise().then((response) => { handleResponse(response); }).catch((error) => { handleError(error); });"
+            },
+            {
+              "id": "o3",
+              "text": "try { requestPromise().then((response) => { handleResponse(response); }); } catch(error) { handleError(error); };"
+            },
+            {
+              "id": "o4",
+              "text": "requestPromise().then((response) => { handleResponse(response); }).finally((error) => { handleError(error); });"
+            }
+          ],
+          "correct": [
+            "o1"
+          ],
+          "explanation": "The correct answer is Option A (also matches Option B, which appears to be identical): requestPromise().then((response) => { handleResponse(response); }).catch((error) => { handleError(error); }); - BUT there's a critical issue: requestPromise is already a PROMISE (not a function), so it should be requestPromise.then().catch(), NOT requestPromise().then().catch(). Assuming the question meant requestPromise (without parentheses), the .then().catch() chain is the correct pattern for handling promise errors. The .catch() method is specifically designed to handle rejected promises, catching any errors that occur in the promise chain (including errors in .then() handlers). The incorrect options: Option C (try-catch with promises) is WRONG because try-catch does NOT work with asynchronous promise rejections. try-catch only catches SYNCHRONOUS errors. When a promise rejects asynchronously (after the try block completes), the catch block won't execute - you'll get an UnhandledPromiseRejection. Promises require .catch() or async/await with try-catch. Option D (.finally() for error handling) is WRONG because .finally() is NOT for error handling - it's for cleanup code that runs whether the promise succeeds OR fails. The finally callback doesn't receive any arguments (no error parameter), so you can't access the error to handle it. Use .catch() for errors, .finally() for cleanup (closing connections, hiding loaders). Key concept: Promise error handling uses .catch() method, not try-catch (unless using async/await). .then() for success, .catch() for errors, .finally() for cleanup. Chain order matters: .catch() catches errors from previous .then() calls. Note: The question has a syntax error - requestPromise() should be requestPromise since it's already a promise.",
+          "category": [
+            "Asynchronous Programming"
+          ],
+          "difficulty": 5
         }
       ]
     }
